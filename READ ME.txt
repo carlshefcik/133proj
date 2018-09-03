@@ -1,0 +1,11 @@
+I can make a file that does all this if needed but its a good learning exersize
+
+First time setup:
+use your console/terminal to cd into the directory and run "npm i"
+
+Starting the server:
+once it has finished installing, you can run "node app.js" to initialize the application.
+
+
+the app with be running if no errors, then go to the site displayed in the console/terminal
+
