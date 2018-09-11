@@ -1,33 +1,54 @@
 var express = require('express');
 var bodyParser = require ('body-parser');
 var path = require('path');
-var firebase = require("firebase-admin");
+const admin = require('firebase-admin');
 
+var serviceAccount = require("./serviceAccountKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
+var db = admin.firestore();
+
+
+  
 var app = express();
-var serivceAccount = require("./serviceAccountKey.json");
+//var serivceAccount = require("./serviceAccountKey.json");
 
-firebase.initializeApp({
-    credential: firebase.credential.cert(serivceAccount),
-    databaseURL: "https://testing-island.firebaseio.com"
+//var db = firebase.database();
+//var ref = db.ref("restricted_access/secret_document");
+//ref.on("value", function(snapshot) {
+//    console.log(snapshot.val());
+//  }, function (errorObject) {
+//    console.log("The read failed: " + errorObject.code);
+//});
+
+
+var docRef = db.collection('users').doc('alovelace');
+
+var setAda = docRef.set({
+  first: 'Ada',
+  last: 'Lovelace',
+  born: 1815
 });
 
-var db = firebase.database();
-var ref = db.ref("restricted_access/secret_document");
-ref.once("value", function(snapshot) {
-  console.log(snapshot.val());
-});
+var test = db.collection("items").doc("dairy");
+var test2 = test.set({
+    name: 'Milk',
+    desc: 'From cow',
+    exp: 2023
+  });
 
-var usersRef = ref.child("users");
-usersRef.set({
-  alanisawesome: {
-    date_of_birth: "June 23, 1912",
-    full_name: "Alan Turing"
-  },
-  gracehop: {
-    date_of_birth: "December 9, 1906",
-    full_name: "Grace Hopper"
-  }
-});
+  db.collection('items').get()
+    .then((snapshot) => {
+      snapshot.forEach((doc) => {
+        console.log(doc.id, '=>', doc.data());
+      });
+    })
+    .catch((err) => {
+      console.log('Error getting documents', err);
+    });
 
 // Body-parser middleware
 app.use(bodyParser.json());
@@ -51,7 +72,27 @@ app.get('/', (req, res)=>{
 });
 
 app.get('/get_sales', (req,res)=>{
-    res.send(usersRef);
+    res.send(sale);
+});
+
+app.get('/get_inventory', (req,res)=>{
+    var items = [];
+    db.collection('items').get()
+    .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          console.log("Test " + doc.id, '=>', doc.data());
+          var tmp = doc.data();
+          console.log("Here before " + items[0]);
+          items.push(tmp);
+          res.send(items);
+          console.log("Here after " + JSON.stringify(items[0]));
+        });
+      })
+      .catch((err) => {
+        console.log('Error getting documents', err);
+        res.send(items);
+      });
+    //res.send(items);
 });
 
 const port = process.env.PORT || 8000;
