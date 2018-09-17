@@ -1,0 +1,15 @@
+.thumbnail {
+    height: auto;
+    width: auto;
+    max-width: 300px;
+    max-height: 300px;
+    margin-bottom: 10px !important;
+}
+
+.page-header {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #625a51;
+    font-size: 36px;
+}
