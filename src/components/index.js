@@ -10,10 +10,16 @@ $(document).ready(() => {
                 console.log(data) // log data to console
                 let items = []; // create temp array
                 data.forEach((e) => {
-                    items.push(""+e.item +" on sale for "+ e.percent + "% off") // parses json and 
+                    items.push("" + e.item + " on sale for " + e.percent + "% off") // parses json and
                 });
                 document.getElementById('sales').innerText = items; // sets the items in the document
             }
         })
     })
+});
+
+$(function(){
+    $('#registerButton').click(function(){
+        window.location='register.html'
+    });
 });
