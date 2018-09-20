@@ -20,6 +20,9 @@ $(document).ready(() => {
 
 $(function(){
     $('#registerButton').click(function(){
-        window.location='register.html'
+        console.log("click");
+        window.location='../register.html'
     });
 });
+
+

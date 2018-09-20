@@ -1,8 +1,16 @@
-var express = require('express');
-var bodyParser = require ('body-parser');
-var path = require('path');
+const express = require('express');
+const bodyParser = require ('body-parser');
+const path = require('path');
+const admin = require('firebase-admin');
+const serviceAccount = require("./serviceAccountKey.json");
 
 var app = express();
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
+var db = admin.firestore();
 
 // Body-parser middleware
 app.use(bodyParser.json());
@@ -27,6 +35,17 @@ app.get('/', (req, res)=>{
 
 app.get('/get_sales', (req,res)=>{
     res.send(sale);
+});
+
+app.post('/register_user', (req,res)=>{
+    let email = req.body.email;
+    let password = req.body.password;
+    var link = db.collection("Customer").doc();
+    var insert = link.set({
+        name: email,
+        password: password
+    });
+    console.log(email + " " + password);
 });
 
 const port = process.env.PORT || 8000;
