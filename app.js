@@ -35,7 +35,7 @@ app.get('/', (req, res)=>{
 });
 
 app.post('/register_user', (req,res)=>{
-    let email = req.body.email;
+    let email = req.body.username;
     let password = req.body.password;
 
     if(emailRegex.test(email) && password.length >= 6){
@@ -51,7 +51,26 @@ app.post('/register_user', (req,res)=>{
         console.log("success");
     } else {
         console.log("fail");
-        alert('Either email nor password is invalid.');
+        //alert('Either email nor password is invalid.');
+        return;
+    }
+    
+});
+
+app.post('/login_user', (req,res)=>{
+    console.log(req.body);
+    let email = req.body.username;
+    console.log("here is email: " + email);
+    let password = req.body.password;
+    console.log("here is password: " + password);
+
+    if(emailRegex.test(email) && password.length >= 6){
+        firebaseAuth.signInWithEmailAndPassword(email, password);
+        res.send(email);
+        console.log("login successed");
+    } else {
+        console.log("login failed");
+        //alert('Either email nor password is invalid.');
         return;
     }
     
