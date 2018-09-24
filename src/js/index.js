@@ -20,7 +20,6 @@ $(document).ready(() => {
 
 $(function(){
     $('#registerButton').click(function(){
-        console.log("click");
         window.location='../register.html'
     });
 });
@@ -46,7 +45,6 @@ $(function(){
             
         console.log("aye");
     })
-    console.log("click");
     // window.location='../index.html'
     // if logged in
     
