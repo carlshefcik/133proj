@@ -25,4 +25,33 @@ $(function(){
     });
 });
 
+$(function(){
+    $('#loginButton').click(function(event){
+        event.preventDefault();
+        console.log($("#inputEmail"));
+        let info = {
+            username: document.getElementById('inputEmail').value,
+            password: document.getElementById('inputPassword').value
+        }
+
+        $.ajax({
+            url: '/login_user',
+            type: 'POST',
+            datatype: 'json',
+            data: info,
+            success: (data) =>{           
+                $("#user").text(data);
+            }
+        })
+            
+        console.log("aye");
+    })
+    console.log("click");
+    // window.location='../index.html'
+    // if logged in
+    
+});
+
+
+
 
