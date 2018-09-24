@@ -3,7 +3,7 @@ const bodyParser = require ('body-parser');
 const path = require('path');
 const firebase = require('firebase');
 const serviceAccount = require("./serviceAccountKey.json");
-const emailRegex = new RegExp(/@gmail.com|@yahoo.com|@hotmail.com|@icloud.com|@aol.com|@msn.com/);
+const emailRegex = new RegExp(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/);
 
 var app = express();
 
