@@ -11,6 +11,10 @@
     font-size: 36px;
 }
 
+.modal-content {
+    margin-top: 200px;
+}
+
 #cart-summary-box {
     position: absolute;
     width: 22%;
@@ -42,4 +46,18 @@
 .quantity-box {
     position: relative
     border: solid 1px #595959;
+}
+
+.col-lg-6 {
+    max-width: 25%;
+    margin-right: -25px;
+}
+
+.input-group>.form-control:not(:last-child) {
+    margin-right: -3px;
+}
+
+#go-button {
+    border: 1px solid #ced4da;
+    margin-right: 10px;
 }
