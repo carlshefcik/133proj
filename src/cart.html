@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<nav id="nav-bar"></nav>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="css/app.css" />
+
+    <!-- index js -->
+    <script src="js/index.js"></script>
+
+    <title>MiniSafeway</title>
+</head>
+
+<body>
+<br>
+<hr>
+<div style="position: relative; left: 6%">
+    <h1>My Cart</h1>
+    <!-- add the amount in cart here -->
+</div>
+<div class="row">
+    <div class="container">
+        <div id="cart-box">
+            <hr>
+            <div class="row" style="position: relative; left: 3%">
+                <div class="col-sm-2">Item
+                </div>
+                <div class="col-sm-5">
+                </div>
+                <div class="col-sm-2">Price
+                </div>
+                <div class="col-sm-2">Quantity
+                </div>
+            </div>
+            <hr>
+            </br>
+            <!--Item listing-->
+            <div class="row" style="position: relative; left: 3%">
+                <div class="col-sm-2"><img src="res\bottle_water.png" alt="ARROWHEAD Mountain Water"></br>
+                </div>
+                <div class="col-sm-3" style="padding-left: 5%"><b>ARROWHEAD Mountain Spring Water - 24-16.9 Fl. Oz.</b> <br>($0.01/fl.oz)   </br>
+                </div>
+                <div class="col-sm-2">
+                </div>
+                <div class="col-sm-2" style="padding-left: 1%"><b>$5.59</b></br>
+                </div>
+                <div class="col-sm-3">
+                    <div class="quantity-box">
+                        <button style="position:relative; left:0%;background-color: #FF0401; border-color: transparent;">-</button>
+                        <input type="text" name="quantity" value="1" style="padding-left: 12%;width: 30%">
+                        <button style="position:relative; right:0%;background-color: #FF0401; border-color: transparent;">+</button>
+                    </div>
+                    </br>
+                    <button style="background-color: transparent; border-color: transparent;">
+                        <img src="res\remove.png"> Remove
+                    </button>
+                </div>
+            </div>
+            <hr>
+            </br>
+            <!--Listing2-->
+            <div class="row" style="position: relative; left: 3%">
+                <div class="col-sm-2" name="itemPicture"><img src="res\distilled_water.png" alt="ARROWHEAD Mountain Water"></br>
+                </div>
+                <div class="col-sm-3" name="itemName" style="padding-left: 5%"><b>Refreshe Distilled Drinking Water - 1 Gallon </b> <br>($0.01/fl.oz)   </br>
+                </div>
+                <div class="col-sm-2">
+                </div>
+                <div class="col-sm-2" name="pricing" style="padding-left: 1%"><b>$1.09</b></br>
+                </div>
+                <div class="col-sm-3">
+                    <div class="quantity-box">
+                        <button style="position:relative; left:0%;background-color: #FF0401; border-color: transparent;">-</button>
+                        <input type="text" name="quantity" value="1" style="padding-left: 12%;width: 30%">
+                        <button style="position:relative; right:0%;background-color: #FF0401; border-color: transparent;">+</button>
+                    </div>
+                    </br>
+                    <button style="background-color: transparent; border-color: transparent;">
+                        <img src="res\remove.png"> Remove
+                    </button>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+    </br>
+</div>
+<div class="row">
+    <div id="cart-summary-box">
+        <font color="#595959">
+            <div id="cart-summary-box-style">
+                <div id= cartSummaryHeading style="font-size: 24px">
+                    <h2>Cart Summary</h2>
+                </div>
+                </br>
+                <div id = cartSummaryInfo>
+                    <b>
+                        Items(<!--Number of items-->) <span id=itemSubtotal style="position: absolute; right:15px">$12.27 </span>
+                    </b>
+                    </br>
+                    <hr>
+                    </br>
+                    <b>Estimated Total <span id=itemTotal style="position: absolute; right:15px">$12.27 </span></b></br>
+                    Add
+                    <b>
+                        $17.73<!--Amount needed to reach order minimum-->
+                    </b>
+                    to reach order minimum </br></br>
+                    <button style="background-color: #929191; border-color:transparent; width: 97%">CHECKOUT</button></br>
+                </div>
+            </div>
+            <div id=discountDisclaimer style="padding-bottom: 100px"><b>The total above excludes discounts from coupons you clipped and Buy One, Get One deals, which will appear on your receipt at delivery/pickup.</b></div>
+        </font>
+    </div>
+</div>
+<!-- <div class="col-cart-summary">
+    <p>Here is a button demonstratin</p>
+
+    <button class="btn btn-secondary" id="get-sale-btn">Get Sale</button>
+    <br/><br/>
+    <p id="sales"></p>
+    </div> -->
+</body>
+</html>

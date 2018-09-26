@@ -1,52 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-        <a href="http://localhost:8000/#home">
-            <img src="res/SafewayLogo.png" style="width:364px;height:128px;"> 
-            </a>
-            <div>
-                <b>Welcome, Guest!</b> 
-            </div>
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #db1c1c;">
-    <a class="navbar-brand" href=''>MiniSafeway</a>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-            <a class="nav-link" href="#Shop">Shop <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#Aisles" target="register">Aisles</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#Sales">Sales</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#History">History</a>
-            </li>
-        </li>
-            <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown link
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-            </li>
-        </ul>
-
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-        </form>
-
-    </div>
-</nav>
-
+<nav id="nav-bar"></nav>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,7 +13,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
     <!-- custom css -->
-    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="css/app.css" />
 
     <!-- index js -->
     <script src="js/index.js"></script>
@@ -67,29 +21,27 @@
     <title>MiniSafeway</title>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>
-                    <div class="page-header">
-                        <b>My Account - Summary</b>
-                    </div>
-                </h1>
-            </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h1>
+                <div class="page-header" style="text-align: left; margin-left: 25px">
+                    <b>My Account - Summary</b>
+                </div>
+            </h1>
         </div>
+    </div>
 
-        <div class="row">
-            <ul class="thumbnails">
-                    <div class="thumbnail">
-                        <h3>Account Info:</h3>
-                        <p> Name: <br/> 
-                           Email Address: <br/>
-                           Address: <br/>
-                           Card Number: <br/>
-                        </p>
-                    </div>
-            </ul>
-        </div>
+    <div class="row">
+        <ul class="thumbnails">
+            <div class="thumbnail">
+                <h3>Account Info:</h3>
+                <p> Name: <br/>
+                   Email Address: <br/>
+                   Address: <br/>
+                   Card Number: <br/>
+                </p>
+            </div>
+        </ul>
     </div>
 </body>
 </html>

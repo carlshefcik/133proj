@@ -1,5 +1,7 @@
 $(document).ready(() => {
 
+    $('#nav-bar').load('/nav-bar.html');
+
     // when the button is clicked sends an ajax request to express to retrive data
     $('#get-sale-btn').click((e)=>{
         $.ajax({
