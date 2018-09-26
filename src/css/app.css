@@ -3,10 +3,19 @@
     max-height: 250px;
 }
 
-.page-header {
+.home-header {
     margin-top: 15px;
     margin-bottom: 15px;
     text-align: center;
+    color: #625a51;
+    font-size: 36px;
+}
+
+.contact-header {
+    margin-top: 15px;
+    margin-left: 30px;
+    margin-bottom: 15px;
+    text-align: left;
     color: #625a51;
     font-size: 36px;
 }
