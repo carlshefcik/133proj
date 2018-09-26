@@ -19,14 +19,19 @@
     <script src="js/index.js"></script>
 
     <title>MiniSafeway</title>
+    <style>
+        .thumbnail {
+            width:100%;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container" style="max-width: 1400px;">
+    <div class="container" style="text-align: center;">
         <div class="row">
             <div class="col-md-12">
-                <h1>
-                    <div class="home-header" style="color: #645A50; text-align: center; margin-top: 15px; margin-bottom: 20px">
+                <h1 style="color: #645A50;">
+                    <div class="home-header">
                         <strong>What would you like to do?</strong>
                     </div>
                 </h1>
@@ -34,43 +39,35 @@
         </div>
 
         <div class="row">
-            <ul class="thumbnails">
-                <div class="thumbnail">
-                    <a href="items.html">
-                        <img src="res/items.jpg" alt = "" style="margin-bottom: 10px">
-                    </a>
-                    <h3>Items</h3>
-                    <p>View all items MiniSafeway has to offer.</p>
-                </div>
-            </ul>
-            <ul class="thumbnails">
-                <div class="thumbnail">
-                    <a href="sales.html">
-                        <img src="res/sales.jpg" alt = "" style="margin-bottom: 10px">
-                    </a>
-                    <h3>Sales</h3>
-                    <p>View all the current ongoing sales!</p>
-                </div>
-            </ul>
-            <ul class="thumbnails">
-                <div class="thumbnail">
-                    <a href="history.html">
-                        <img src="res/history.jpg" alt = "" style="margin-bottom: 10px">
-                    </a>
-                    <h3>History</h3>
-                    <p>Forgot something? Check your shopping history.</p>
-                </div>
-            </ul>
-            <ul class="thumbnails">
-                <div class="thumbnail">
-                    <a href="cart.html">
-                        <img src="res/cart.jpg" alt = "" style="margin-bottom: 10px">
-                    </a>
-                    <h3>View Cart</h3>
-                    <p>Ready to make a purchase?</p>
-                </div>
-            </ul>
-        </div>
+            <div class="col-md-3">
+                <a href="items.html">
+                    <img class="thumbnail" src="res/items.jpg">
+                </a>
+                <h3>Items</h3>
+                <p>View all items MiniSafeway has to offer.</p>
+            </div>
+            <div class="col-md-3">
+                <a href="sales.html">
+                    <img class="thumbnail" src="res/sales.jpg">
+                </a>
+                <h3>Sales</h3>
+                <p>View all the current ongoing sales!</p>
+            </div>
+            <div class="col-md-3">
+                <a href="history.html">
+                    <img class="thumbnail" src="res/history.jpg">
+                </a>
+                <h3>History</h3>
+                <p>Forgot something? Check your shopping history.</p>
+            </div>
+            <div class="col-md-3">
+                <a href="cart.html">
+                    <img class="thumbnail" src="res/cart.jpg">
+                </a>
+                <h3>View Cart</h3>
+                <p>Ready to make a purchase?</p>
+            </div>
+        </div> 
     </div>
 </body>
 </html>
