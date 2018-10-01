@@ -70,3 +70,14 @@
     border: 1px solid #ced4da;
     margin-right: 10px;
 }
+
+.account-box {
+    border: 1px solid #ced4da;
+    border-radius: 15px;
+    padding: 15px;
+    width: 84%;
+}
+
+.account-heading {
+    font-size: 24px;
+}
