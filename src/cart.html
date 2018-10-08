@@ -56,13 +56,13 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="quantity-box">
-                        <button style="position:relative; left:0%;background-color: #FF0401; border-color: transparent;">-</button>
+                        <button style="position:relative; left:0%;background-color: #FF0401; border-color: transparent" onclick="">-</button>
                         <input type="text" name="quantity" value="1" style="padding-left: 12%;width: 30%">
-                        <button style="position:relative; right:0%;background-color: #FF0401; border-color: transparent;">+</button>
+                        <button style="position:relative; right:0%;background-color: #FF0401; border-color: transparent" onclick="">+</button>
                     </div>
                     </br>
                     <button style="background-color: transparent; border-color: transparent;">
-                        <img src="res\remove.png"> Remove
+                        <img src="res\remove.png" onclick=""> Remove
                     </button>
                 </div>
             </div>
@@ -72,7 +72,7 @@
             <div class="row" style="position: relative; left: 3%">
                 <div class="col-sm-2" name="itemPicture"><img src="res\distilled_water.png" alt="ARROWHEAD Mountain Water"></br>
                 </div>
-                <div class="col-sm-3" name="itemName" style="padding-left: 5%"><b>Refreshe Distilled Drinking Water - 1 Gallon </b> <br>($0.01/fl.oz)   </br>
+                <div class="col-sm-3" name="itemName" style="padding-left: 5%" ><b>Refreshe Distilled Drinking Water - 1 Gallon </b> <br>($0.01/fl.oz)   </br>
                 </div>
                 <div class="col-sm-2">
                 </div>
@@ -80,13 +80,13 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="quantity-box">
-                        <button style="position:relative; left:0%;background-color: #FF0401; border-color: transparent;">-</button>
+                        <button style="position:relative; left:0%;background-color: #FF0401; border-color: transparent" onclick="">-</button>
                         <input type="text" name="quantity" value="1" style="padding-left: 12%;width: 30%">
-                        <button style="position:relative; right:0%;background-color: #FF0401; border-color: transparent;">+</button>
+                        <button style="position:relative; right:0%;background-color: #FF0401; border-color: transparent"onclick="">+</button>
                     </div>
                     </br>
                     <button style="background-color: transparent; border-color: transparent;">
-                        <img src="res\remove.png"> Remove
+                        <img src="res\remove.png" onclick=""> Remove
                     </button>
                 </div>
             </div>
@@ -116,7 +116,7 @@
                         $17.73<!--Amount needed to reach order minimum-->
                     </b>
                     to reach order minimum </br></br>
-                    <button style="background-color: #929191; border-color:transparent; width: 97%">CHECKOUT</button></br>
+                    <button style="background-color: #929191; border-color:transparent; width: 97%" onclick="">CHECKOUT</button></br>
                 </div>
             </div>
             <div id=discountDisclaimer style="padding-bottom: 100px"><b>The total above excludes discounts from coupons you clipped and Buy One, Get One deals, which will appear on your receipt at delivery/pickup.</b></div>
@@ -131,4 +131,35 @@
     <p id="sales"></p>
     </div> -->
 </body>
+
+
+<script type="text/javascript">
+var amount = 1;
+
+
+function decreaseAmount(){
+    if(typeof(Storage) !== "undefined")
+    {
+        if (sessionStorage.amount)
+        {sessionStorage.amount = Number(sessionStorage.amount)-1
+
+        }
+    }
+}
+
+
+function increaseAmount(){
+    if(typeof(Storage) !== "undefined")
+    {
+        if (sessionStorage.amount)
+        {sessionStorage.amount = Number(sessionStorage.amount)+1
+
+        }
+    }
+}
+
+
+
+
+</script>
 </html>
