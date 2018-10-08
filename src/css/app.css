@@ -91,3 +91,16 @@
 .account-heading {
     font-size: 24px;
 }
+
+.aisle-flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .aisle-img {
+    max-width: 184px;
+    max-height: 184px;
+}
