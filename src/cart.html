@@ -13,7 +13,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
     <!-- custom css -->
-    <link rel="stylesheet" href="css/app.css" />
+    <!-- <link rel="stylesheet" href="css/app.css" /> -->
 
     <!-- index js -->
     <script src="js/index.js"></script>
@@ -28,101 +28,105 @@
     <h1>My Cart</h1>
     <!-- add the amount in cart here -->
 </div>
-<div class="row">
-    <div class="container">
-        <div id="cart-box">
-            <hr>
-            <div class="row" style="position: relative; left: 3%">
-                <div class="col-sm-2">Item
-                </div>
-                <div class="col-sm-5">
-                </div>
-                <div class="col-sm-2">Price
-                </div>
-                <div class="col-sm-2">Quantity
-                </div>
-            </div>
-            <hr>
-            </br>
-            <!--Item listing-->
-            <div class="row" style="position: relative; left: 3%">
-                <div class="col-sm-2"><img src="res\bottle_water.png" alt="ARROWHEAD Mountain Water"></br>
-                </div>
-                <div class="col-sm-3" style="padding-left: 5%"><b>ARROWHEAD Mountain Spring Water - 24-16.9 Fl. Oz.</b> <br>($0.01/fl.oz)   </br>
-                </div>
-                <div class="col-sm-2">
-                </div>
-                <div class="col-sm-2" style="padding-left: 1%"><b>$5.59</b></br>
-                </div>
-                <div class="col-sm-3">
-                    <div class="quantity-box">
-                        <button style="position:relative; left:0%;background-color: #FF0401; border-color: transparent" onclick="">-</button>
-                        <input type="text" name="quantity" value="1" style="padding-left: 12%;width: 30%">
-                        <button style="position:relative; right:0%;background-color: #FF0401; border-color: transparent" onclick="">+</button>
+<div class="container-fluid" >
+    <div class="row" >
+        <div class="col-md-9">
+            <div id="cart-box">
+                <hr>
+                <div class="row" style="position: relative; left: 3%">
+                    <div class="col-sm-2">Item
                     </div>
-                    </br>
-                    <button style="background-color: transparent; border-color: transparent;">
-                        <img src="res\remove.png" onclick=""> Remove
-                    </button>
-                </div>
-            </div>
-            <hr>
-            </br>
-            <!--Listing2-->
-            <div class="row" style="position: relative; left: 3%">
-                <div class="col-sm-2" name="itemPicture"><img src="res\distilled_water.png" alt="ARROWHEAD Mountain Water"></br>
-                </div>
-                <div class="col-sm-3" name="itemName" style="padding-left: 5%" ><b>Refreshe Distilled Drinking Water - 1 Gallon </b> <br>($0.01/fl.oz)   </br>
-                </div>
-                <div class="col-sm-2">
-                </div>
-                <div class="col-sm-2" name="pricing" style="padding-left: 1%"><b>$1.09</b></br>
-                </div>
-                <div class="col-sm-3">
-                    <div class="quantity-box">
-                        <button style="position:relative; left:0%;background-color: #FF0401; border-color: transparent" onclick="">-</button>
-                        <input type="text" name="quantity" value="1" style="padding-left: 12%;width: 30%">
-                        <button style="position:relative; right:0%;background-color: #FF0401; border-color: transparent"onclick="">+</button>
+                    <div class="col-sm-5">
                     </div>
-                    </br>
-                    <button style="background-color: transparent; border-color: transparent;">
-                        <img src="res\remove.png" onclick=""> Remove
-                    </button>
+                    <div class="col-sm-2">Price
+                    </div>
+                    <div class="col-sm-2">Quantity
+                    </div>
                 </div>
+                <hr>
+                </br>
+                <!--Item listing-->
+                <div class="row" style="position: relative; left: 3%">
+                    <div class="col-sm-2"><img src="res\bottle_water.png" alt="ARROWHEAD Mountain Water"></br>
+                    </div>
+                    <div class="col-sm-3" style="padding-left: 5%"><b>ARROWHEAD Mountain Spring Water - 24-16.9 Fl. Oz.</b> <br>($0.01/fl.oz)   </br>
+                    </div>
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-2" style="padding-left: 1%"><b>$5.59</b></br>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="quantity-box">
+                            <button style="position:relative; left:0%;background-color: #FF0401; border-color: transparent" onclick="">-</button>
+                            <input type="text" name="quantity" value="1" style="padding-left: 12%;width: 30%">
+                            <button style="position:relative; right:0%;background-color: #FF0401; border-color: transparent" onclick="">+</button>
+                        </div>
+                        </br>
+                        <button style="background-color: transparent; border-color: transparent;">
+                            <img src="res\remove.png" onclick=""> Remove
+                        </button>
+                    </div>
+                </div>
+                <hr>
+                </br>
+                <!--Listing2-->
+                <div class="row" style="position: relative; left: 3%">
+                    <div class="col-sm-2" name="itemPicture"><img src="res\distilled_water.png" alt="ARROWHEAD Mountain Water"></br>
+                    </div>
+                    <div class="col-sm-3" name="itemName" style="padding-left: 5%" ><b>Refreshe Distilled Drinking Water - 1 Gallon </b> <br>($0.01/fl.oz)   </br>
+                    </div>
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-2" name="pricing" style="padding-left: 1%"><b>$1.09</b></br>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="quantity-box">
+                            <button style="position:relative; left:0%;background-color: #FF0401; border-color: transparent" onclick="">-</button>
+                            <input type="text" name="quantity" value="1" style="padding-left: 12%;width: 30%">
+                            <button style="position:relative; right:0%;background-color: #FF0401; border-color: transparent"onclick="">+</button>
+                        </div>
+                        </br>
+                        <button style="background-color: transparent; border-color: transparent;">
+                            <img src="res\remove.png" onclick=""> Remove
+                        </button>
+                    </div>
+                </div>
+                <hr>
             </div>
-            <hr>
+        </div>
+    
+        <div class="col-md-3">
+            <div id="cart-summary-box">
+                <font color="#595959">
+                    <div id="cart-summary-box-style">
+                        <div id= cartSummaryHeading style="font-size: 24px">
+                            <h2>Cart Summary</h2>
+                        </div>
+                        </br>
+                        <div id = cartSummaryInfo>
+                            <b>
+                                Items(<!--Number of items-->) <span id=itemSubtotal style="position: absolute; right:15px">$12.27 </span>
+                            </b>
+                            </br>
+                            <hr>
+                            </br>
+                            <b>Estimated Total <span id=itemTotal style="position: absolute; right:15px">$12.27 </span></b></br>
+                            Add
+                            <b>
+                                $17.73<!--Amount needed to reach order minimum-->
+                            </b>
+                            to reach order minimum </br></br>
+                            <button style="background-color: #929191; border-color:transparent; width: 97%" onclick="">CHECKOUT</button></br>
+                        </div>
+                    </div>
+                    <div id=discountDisclaimer style="padding-bottom: 100px"><b>The total above excludes discounts from coupons you clipped and Buy One, Get One deals, which will appear on your receipt at delivery/pickup.</b></div>
+                </font>
+            </div>
         </div>
     </div>
-    </br>
 </div>
-<div class="row">
-    <div id="cart-summary-box">
-        <font color="#595959">
-            <div id="cart-summary-box-style">
-                <div id= cartSummaryHeading style="font-size: 24px">
-                    <h2>Cart Summary</h2>
-                </div>
-                </br>
-                <div id = cartSummaryInfo>
-                    <b>
-                        Items(<!--Number of items-->) <span id=itemSubtotal style="position: absolute; right:15px">$12.27 </span>
-                    </b>
-                    </br>
-                    <hr>
-                    </br>
-                    <b>Estimated Total <span id=itemTotal style="position: absolute; right:15px">$12.27 </span></b></br>
-                    Add
-                    <b>
-                        $17.73<!--Amount needed to reach order minimum-->
-                    </b>
-                    to reach order minimum </br></br>
-                    <button style="background-color: #929191; border-color:transparent; width: 97%" onclick="">CHECKOUT</button></br>
-                </div>
-            </div>
-            <div id=discountDisclaimer style="padding-bottom: 100px"><b>The total above excludes discounts from coupons you clipped and Buy One, Get One deals, which will appear on your receipt at delivery/pickup.</b></div>
-        </font>
-    </div>
-</div>
+
+
 <!-- <div class="col-cart-summary">
     <p>Here is a button demonstratin</p>
 

@@ -24,6 +24,13 @@
     margin-top: 200px;
 }
 
+.container-fluid {
+    padding-right:0;
+    padding-left:0;
+    margin-right:auto;
+    margin-left:auto
+ }
+
 #cart-summary-box {
     position: absolute;
     width: 22%;
@@ -38,6 +45,9 @@
     position: relative;
     background-color: #F6F6F6;
     padding: 15px 15px 20px 15px;
+}
+.col-md-9{
+    
 }
 
 #cart-box {
