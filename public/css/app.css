@@ -1,3 +1,7 @@
+body, html { 
+    overflow-x: hidden; 
+}
+
 .thumbnail {
     max-width: 250px;
     max-height: 250px;
@@ -63,7 +67,7 @@
 }
 
 .quantity-box {
-    position: relative
+    position: relative;
     border: solid 1px #595959;
 }
 

@@ -1,15 +1,13 @@
-//***********************************************************/
-// THIS IS THE OUTDATED SERVER: USE SERVER IN FUNCTIONS FOLER
-//***********************************************************/
+const functions = require('firebase-functions');
 const express = require('express');
+
 const bodyParser = require ('body-parser');
 const path = require('path');
 const firebase = require('firebase');
-const firestore = require('@firebase/firestore');
 const serviceAccount = require("./serviceAccountKey.json");
 const emailRegex = new RegExp(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/);
 
-var app = express();
+const app = express();
 
 var config = {
     apiKey: "AIzaSyDS9owx0q_Eq96Cs2T-xD0s_cEHi4AxrEI",
@@ -34,10 +32,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false})); //hook up with your app
 
 // Set static path
-app.use(express.static(path.join(__dirname, 'public'))); //initializing the app with the directory of the app.js
+//app.use(express.static(path.join(__dirname, 'src'))); //initializing the app with the directory of the app.js
 
 app.get('/', (req, res)=>{
     res.send('Hello');
+});
+
+app.get('/hi', (req,res)=>{
+    res.send("Hello World!");
 });
 
 //returns a json of element names of the aisles and the groups as corresponding arrays
@@ -66,16 +68,14 @@ app.post('/add_item', (req,res) =>{
     //upload image to storage and save url to store in item data
 
     //create new item in the correct aisle collection with a uid store isle address and uid for item page
-    firebaseFirestore.collection('Aisles').doc(itemData.Aisle).collection(itemData.Group)
 
     //create new item in the items collection
     firebaseFirestore.collection('Items').add({
         name: itemData.Name,
         country: 'Japan'
-    }).then(ref => {
+      }).then(ref => {
         console.log('Added document with ID: ', ref.id);
-    })
-
+      });
     res.send(itemData)
 })
 
@@ -136,16 +136,12 @@ app.get('/get_cart', (req,res)=>{
 });
 
 app.get('/get_inventory', (req,res)=>{
-
     let items = [];
     //var ref_inventory = firebaseFirestore.collection('Aisles').doc("Bakery/Bread");
-
     firebaseFirestore.collection("Aisles").get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             var tmp = doc.id;
             items.push(tmp);
-            //console.log(items);
-            
         });
         console.log(items);
         //send items before error handling
@@ -155,7 +151,8 @@ app.get('/get_inventory', (req,res)=>{
     });
 });
 
-const port = process.env.PORT || 8000;
-app.listen(port, () => {
-    console.log(`server started at http://localhost:${port}/`); //boots up node.js server
-});
+// // Create and Deploy Your First Cloud Functions
+// // https://firebase.google.com/docs/functions/write-firebase-functions
+//
+
+exports.app = functions.https.onRequest(app);
