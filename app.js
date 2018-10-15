@@ -21,6 +21,8 @@ var firebaseAuth = firebaseService.auth();
 // var firebaseStorage = firebaseService.storage(); This is be use later
 var firebaseDatabase = firebaseService.database();
 var firebaseFirestore = firebaseService.firestore();
+const settings = {timestampsInSnapshots: true};
+firebaseFirestore.settings(settings);
 // var firebaseMessaging = firebaseService.messaging(); This is be use later
 
 // Body-parser middleware
@@ -74,6 +76,40 @@ app.post('/login_user', (req,res)=>{
         return;
     }
     
+});
+
+app.get('/get_cart', (req,res)=>{
+    console.log("test");
+    var ref = firebaseFirestore.collection('Aisles').doc('Bakery').collection('Bread');
+    ref.get()
+    .then((snapshot) => {
+      snapshot.forEach((doc) => {
+        console.log(doc.id, '=>', doc.data());
+      });
+    })
+    .catch((err) => {
+      console.log('Error getting documents', err);
+    });
+});
+
+app.get('/get_inventory', (req,res)=>{
+
+    let items = [];
+    //var ref_inventory = firebaseFirestore.collection('Aisles').doc("Bakery/Bread");
+
+    firebaseFirestore.collection("Aisles").get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            var tmp = doc.id;
+            items.push(tmp);
+            //console.log(items);
+            
+        });
+        console.log(items);
+        //send items before error handling
+        res.send(items);
+    }).catch(function(error){
+        console.log(error);
+    });
 });
 
 const port = process.env.PORT || 8000;
