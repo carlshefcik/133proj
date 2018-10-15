@@ -85,3 +85,15 @@
 #fieldQues {
     height: 100px;
 }
+
+.page-footer {
+    background-color: #37474F;
+    color: white;
+    margin-top: 50px;
+    bottom: -250px;
+    width: 100%;
+}
+
+#footer-content {
+    margin-left: 28%;
+}
