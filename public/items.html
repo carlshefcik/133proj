@@ -21,6 +21,11 @@
     <script src="js/inventory.js"></script>
 
     <title>MiniSafeway</title>
+    <style>
+        ul {
+            list-style: none;
+        }
+    </style>
 
 </head>
 
@@ -31,44 +36,61 @@
                 <h1 style="color: #645A50;">
                     <div class="home-header">
                         <strong>Browse Items</strong>
+                        <p id="getitems"></p>
                     </div>
-                    <p id="getitems"></p>
                 </h1>
             </div>
         </div>
 
         <div class="row">
-            <div class="col">
-                <a href="">
-                    <img src="res/bananas.jpg" alt="">
-                </a>
-                <h3>Bananas</h3>
-                <p>$0.79/lb</p>
-            </div>
-            <div class="col">
-                <a href="">
-                    <img src="res/oranges.jpg" alt="">
-                </a>
-                <h3>Oranges</h3>
-                <p>$1.99/lb</p>
-            </div>
-            <div class="col">
-                <a href="">
-                    <img src="res/heineken.jpg" alt="">
-                </a>
-                <h3>6 Pack of Heineken</h3>
-                <p>$8.99</p>
-            </div>
-            <div class="col">
-                <a href="">
-                    <img src="res/hennessyvs.jpg" alt="">
-                </a>
-                <h3>Hennessy VS 750mL</h3>
-                <p>$35</p>
-            </div>
+            <ul class="thumbnails">
+                <li class="span4">
+                    <div class="thumbnail">
+                        <a href="">
+                            <img src="res/bananas.jpg" alt="">
+                        </a>
+                        <h3>Bananas</h3>
+                        <p>$0.79/lb</p>
+                    </div>
+                </li>
+            </ul>
+            <ul class="thumbnails">
+                <li class="span4">
+                    <div class="thumbnail">
+                        <a href="">
+                            <img src="res/oranges.jpg" alt="">
+                        </a>
+                        <h3>Oranges</h3>
+                        <p>$1.99/lb</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <ul class="thumbnails">
+                <li class="span4">
+                    <div class="thumbnail">
+                        <a href="">
+                            <img src="res/heineken.jpg" alt="">
+                        </a>
+                        <h3>6 Pack of Heineken</h3>
+                        <p>$8.99</p>
+                    </div>
+                </li>
+            </ul>
+            <ul class="thumbnails">
+                <li class="span4">
+                    <div class="thumbnail">
+                        <a href="">
+                            <img src="res/hennessyvs.jpg" alt="">
+                        </a>
+                        <h3>Hennessy VS 750mL</h3>
+                        <p>$35</p>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
 </body>
-
+<footer id="page-footer"></footer>
 </html>

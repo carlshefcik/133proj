@@ -102,9 +102,20 @@ body, html {
     align-content: space-between;
     justify-content: center;
     align-items: flex-end;
-  }
+}
 
-  .aisle-img {
-    max-width: 184px;
-    max-height: 184px;
+.aisle-img {
+    width: 100%;
+}
+
+.page-footer {
+    background-color: #37474F;
+    color: white;
+    margin-top: 50px;
+    bottom: -250px;
+    width: 100%;
+}
+
+#footer-content {
+    margin-left: 28%;
 }

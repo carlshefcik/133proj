@@ -6,10 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <!-- icon for the website -->
-    <link rel="shortcut icon" href="favicon.ico">     
-
-
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -43,35 +39,83 @@
         </div>
 
         <div class="row">
-            <div class="col-md-3">
-                <a href="items.html">
+            <div class="col-sm-6 col-md-3">
+                <a href="aisles.html">
                     <img class="thumbnail" src="res/items.jpg">
                 </a>
-                <h3>Items</h3>
+                <h3 style="margin-top: 10px;">Items</h3>
                 <p>View all items MiniSafeway has to offer.</p>
             </div>
-            <div class="col-md-3">
+            <div class="col-sm-6 col-md-3">
                 <a href="sales.html">
                     <img class="thumbnail" src="res/sales.jpg">
                 </a>
-                <h3>Sales</h3>
+                <h3 style="margin-top: 10px;">Sales</h3>
                 <p>View all the current ongoing sales!</p>
             </div>
-            <div class="col-md-3">
+            <div class="col-sm-6 col-md-3">
                 <a href="history.html">
                     <img class="thumbnail" src="res/history.jpg">
                 </a>
-                <h3>History</h3>
+                <h3 style="margin-top: 10px;">History</h3>
                 <p>Forgot something? Check your shopping history.</p>
             </div>
-            <div class="col-md-3">
+            <div class="col-sm-6 col-md-3">
                 <a href="cart.html">
                     <img class="thumbnail" src="res/cart.jpg">
                 </a>
-                <h3>View Cart</h3>
+                <h3 style="margin-top: 10px;">View Cart</h3>
                 <p>Ready to make a purchase?</p>
             </div>
-        </div> 
+        </div>
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="res/slide1.jpg" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="res/slide2.jpg" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="res/slide3.jpg" alt="Third slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="res/slide4.jpg" alt="Third slide">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+        <div class = "row" style="margin-top: 30px;">
+            <div class = "col-sm-6 col-md-4">
+                <img src = "res/ad1.jpg" alt = "Ad 1" style="width:100%;">
+                <h3 style="margin-top: 10px;">View weekly ads</h3>
+            </div>
+
+            <div class = "col-sm-6 col-md-4">
+                <img src = "res/ad2.jpg" alt = "Ad 2" style="width:100%;">
+                <h3 style="margin-top: 10px;">View deals</h3>
+            </div>
+
+            <div class = "col-sm-6 col-md-4">
+                <img src = "res/ad3.jpg" alt = "Ad 3" style="width:100%;">
+                <h3 style="margin-top: 10px;">Special savings!</h3>
+            </div>
+        </div>
     </div>
 </body>
+<footer id="page-footer"></footer>
 </html>
