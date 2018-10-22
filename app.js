@@ -80,6 +80,7 @@ app.post('/add_item', (req,res) =>{
 })
 
 app.post('/register_user', (req,res)=>{
+    console.log('going')
     let email = req.body.username;
     let password = req.body.password;
 
