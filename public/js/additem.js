@@ -56,7 +56,6 @@ $(document).ready(() => {
         //removes previous options from the group select
         let itemGroupSelect = document.getElementById('itemGroup')
         for(let i = itemGroupSelect.length-1; i >= 0 ; i--){ //clears all items in options
-            console.log('something')
             itemGroupSelect.options.remove(i)
         }
 
@@ -73,16 +72,17 @@ $(document).ready(() => {
     //adds item in the selected fieds
     $('#addItemButton').click((e)=>{
         console.log('clicked')
-        let itemData = {Aisle:null, Group:null, Name:null, Image:null, Quantity:null, Sale:null, SalePercent:null, Info:null}
+        let itemData = {
+            Aisle: document.getElementById("itemAisle").value,
+            Group: document.getElementById("itemGroup").value, 
+            Name: document.getElementById("itemName").value, 
+            Image: document.getElementById("itemImage").value, 
+            Quantity: document.getElementById("itemQuantity").value, 
+            Sale: document.getElementById("itemSale").checked, 
+            SalePercent: document.getElementById("itemSalePercent").value, 
+            Info: document.getElementById("itemInfo").value
+        }
 
-        itemData.Aisle = document.getElementById("itemAisle").value
-        itemData.Group = document.getElementById("itemGroup").value
-        itemData.Name = document.getElementById("itemName").value
-        itemData.Image = document.getElementById("itemImage").value
-        itemData.Quantity = document.getElementById("itemQuantity").value
-        itemData.Sale = document.getElementById("itemSale").checked
-        itemData.SalePercent = document.getElementById("itemSalePercent").value
-        itemData.Info = document.getElementById("itemInfo").value
         console.log(itemData)
         addItem(itemData)
     })
@@ -94,9 +94,19 @@ $(document).ready(() => {
             datatype: 'json',
             data: itemData,
             success: (data) =>{
-                console.log("sucess") // log data to console
-                console.log(data)
+                if(data){
+                    console.log("Sucessfully added document with id: "+ data) // log data to console
+                }
             }
         })
     }
+
+    function toggleAlert(){
+        $(".alert").toggleClass('show out'); 
+        return false; // Keep close.bs.alert event from removing from DOM
+    }
+    
+    $("#btn").on("click", toggleAlert);
+    $('#badItemAlert').on('close.bs.alert', toggleAlert)
+
 })

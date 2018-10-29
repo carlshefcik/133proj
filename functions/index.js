@@ -60,23 +60,70 @@ app.get('/aisles_and_groups', (req,res)=>{
     });
 })
 
+//gets the aisles and their ing urls
+app.get('/load_aisles', (req,res) => {
+    let aisles = {}
+    firebaseFirestore.collection("Aisles").get().then((coll) =>{
+        coll.forEach((doc) =>{
+            let tmp = doc.id
+            aisles[tmp] = []
+            aisles[tmp].push(tmp)
+            aisles[tmp].push(doc.data()['imgURL'])
+        })
+        res.send(aisles)
+    }).catch(function(error){
+        console.log(error)
+    })
+})
+
+//loads all items from requested aisle
+app.get('/load_items', (req,res) => {
+    let items = []
+    let aisleName = Object.keys(req.query)[0]
+    console.log(aisleName)
+    firebaseFirestore.collection("Aisles").doc(aisleName).get().then((doc) =>{
+        let groups = doc.data()["subCollections"]
+        groups.forEach((groupName) =>{
+            firebaseFirestore.collection("Aisles").doc(aisleName).collection(groupName).get().then((coll) =>{
+                coll.forEach((doc) =>{
+                    items.push(doc.data()["name"])
+                })
+            }).catch(function(error){
+                console.log(error)
+            }).then(e =>{
+                res.send(items) // this gives a error because its returning before the execution but it gives the correct results somehow?
+            })
+        })
+    })
+})
+
 //adds a new item to the database
 app.post('/add_item', (req,res) =>{
     //verifies that the user is an admin
-    let itemData = req.body;
-    console.log(itemData)
-    //upload image to storage and save url to store in item data
-
-    //create new item in the correct aisle collection with a uid store isle address and uid for item page
-
-    //create new item in the items collection
-    firebaseFirestore.collection('Items').add({
+    let itemData = req.body
+    // console.log(itemData)
+    let itemid
+    let itemProperties = {
         name: itemData.Name,
-        country: 'Japan'
-      }).then(ref => {
-        console.log('Added document with ID: ', ref.id);
-      });
-    res.send(itemData)
+        aisle: itemData.Aisle,
+        group: itemData.Group,
+        quantity: itemData.Quantity, 
+        sale: itemData.Sale, 
+        salePercent: itemData.SalePercent, 
+        info: itemData.Info,
+        imgURL: ""
+    }
+
+    // create new item in the items collection
+    firebaseFirestore.collection('Items').add(itemProperties).then(ref => {
+        console.log('Added document with ID: ', ref.id)
+        itemid = ref.id
+
+        //create new item in the correct aisle collection with a uid store isle address and uid for item page
+        firebaseFirestore.collection('Aisles').doc(itemData.Aisle).collection(itemData.Group).doc(itemid).set(itemProperties)
+        res.send(itemid)
+    });
+
 })
 
 app.post('/register_user', (req,res)=>{

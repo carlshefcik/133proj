@@ -6,6 +6,7 @@ const bodyParser = require ('body-parser');
 const path = require('path');
 const firebase = require('firebase');
 const firestore = require('@firebase/firestore');
+const storage = require('@firebase/storage');
 const serviceAccount = require("./serviceAccountKey.json");
 const emailRegex = new RegExp(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/);
 
@@ -22,11 +23,12 @@ var config = {
 const firebaseService = firebase.initializeApp(config);
 
 var firebaseAuth = firebaseService.auth();
-// var firebaseStorage = firebaseService.storage(); This is be use later
-var firebaseDatabase = firebaseService.database();
+var firebaseStorage = firebase.storage()
+// var firebaseDatabase = firebaseService.database();
 var firebaseFirestore = firebaseService.firestore();
 const settings = {timestampsInSnapshots: true};
 firebaseFirestore.settings(settings);
+
 // var firebaseMessaging = firebaseService.messaging(); This is be use later
 
 // Body-parser middleware
@@ -58,25 +60,116 @@ app.get('/aisles_and_groups', (req,res)=>{
     });
 })
 
+//gets the aisles and their img urls
+app.get('/load_aisles', (req,res) => {
+    let aisles = {}
+    firebaseFirestore.collection("Aisles").get().then((coll) =>{
+        coll.forEach((doc) =>{
+            let tmp = doc.id
+            aisles[tmp] = []
+            aisles[tmp].push(tmp)
+            aisles[tmp].push(doc.data()['imgURL'])
+        })
+        res.send(aisles)
+    }).catch(function(error){
+        console.log(error)
+    })
+})
+
+//loads all items from requested aisle
+app.get('/load_items', (req,res) => {
+    let items = []
+    let aisleName = Object.keys(req.query)[0]
+    console.log(aisleName)
+    firebaseFirestore.collection("Aisles").doc(aisleName).get().then((doc) =>{
+        let groups = doc.data()["subCollections"]
+        groups.forEach((groupName) =>{
+            firebaseFirestore.collection("Aisles").doc(aisleName).collection(groupName).get().then((coll) =>{
+                coll.forEach((doc) =>{
+                    items.push(doc.data()["name"])
+                })
+            }).catch(function(error){
+                console.log(error)
+            }).then(e =>{
+                res.send(items) // this gives a error because its returning before the execution but it gives the correct results somehow?
+            })
+        })
+    })
+})
+
 //adds a new item to the database
 app.post('/add_item', (req,res) =>{
     //verifies that the user is an admin
-    let itemData = req.body;
-    console.log(itemData)
-    //upload image to storage and save url to store in item data
 
-    //create new item in the correct aisle collection with a uid store isle address and uid for item page
-    firebaseFirestore.collection('Aisles').doc(itemData.Aisle).collection(itemData.Group)
 
-    //create new item in the items collection
-    firebaseFirestore.collection('Items').add({
+    let itemData = req.body
+    // console.log(itemData)
+    let itemid
+    let itemProperties = {
         name: itemData.Name,
-        country: 'Japan'
-    }).then(ref => {
-        console.log('Added document with ID: ', ref.id);
-    })
+        aisle: itemData.Aisle,
+        group: itemData.Group,
+        quantity: itemData.Quantity, 
+        sale: itemData.Sale, 
+        salePercent: itemData.SalePercent, 
+        info: itemData.Info,
+        imgURL: ""
+    }
 
-    res.send(itemData)
+    // create new item in the items collection
+    firebaseFirestore.collection('Items').add(itemProperties).then(ref => {
+        console.log('Added document with ID: ', ref.id)
+        itemid = ref.id
+
+        //create new item in the correct aisle collection with a uid store isle address and uid for item page
+        firebaseFirestore.collection('Aisles').doc(itemData.Aisle).collection(itemData.Group).doc(itemid).set(itemProperties)
+        res.send(itemid)
+    });
+
+    // Image upload snippett
+    {
+    // console.log("uploading image")
+    // // Create file metadata including the content type
+    // var metadata = { contentType: 'image/jpeg' };
+    // // Upload the file and metadata
+    // var uploadTask = firebaseStorage.ref().child("Aisles/Bakery/Bread/default.jpg").put(itemData.Image, metadata)
+
+    // // Register three observers:
+    // // 1. 'state_changed' observer, called any time the state changes
+    // // 2. Error observer, called on failure
+    // // 3. Completion observer, called on successful completion
+    // uploadTask.on('state_changed', function(snapshot){
+    //     // Observe state change events such as progress, pause, and resume
+    //     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+    //     var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    //     console.log('Upload is ' + progress + '% done');
+    //     switch (snapshot.state) {
+    //     case firebase.storage.TaskState.PAUSED: // or 'paused'
+    //         console.log('Upload is paused');
+    //         break;
+    //     case firebase.storage.TaskState.RUNNING: // or 'running'
+    //         console.log('Upload is running');
+    //         break;
+    //     }
+    // }, function(error) {
+    //     // Handle unsuccessful uploads
+    //     console.log("didnt upload")
+    // }, function() {
+    //     // Handle successful uploads on complete
+    //     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+    //     uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+    //         console.log('File available at', downloadURL);
+    //         itemProperties.imgURL = downloadURL
+    //     });
+    // });
+    }
+
+    // //add imgURL to original item document
+    // firebaseFirestore.collection('Items').doc(itemid).set({
+    //     imgURL: itemProperties.imgURL
+    // }).then(ref => {
+    //     console.log('Added changed imgurl of: ', ref.id)
+    // })
 })
 
 app.post('/register_user', (req,res)=>{

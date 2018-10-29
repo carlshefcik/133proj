@@ -50,9 +50,6 @@ body, html {
     background-color: #F6F6F6;
     padding: 15px 15px 20px 15px;
 }
-.col-md-9{
-    
-}
 
 #cart-box {
     position: absolute;
@@ -113,9 +110,4 @@ body, html {
     color: white;
     margin-top: 50px;
     bottom: -250px;
-    width: 100%;
-}
-
-#footer-content {
-    margin-left: 28%;
 }
