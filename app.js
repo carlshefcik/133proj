@@ -91,9 +91,11 @@ app.get('/load_items', (req,res) => {
             }).catch(function(error){
                 console.log(error)
             }).then(e =>{
-                res.send(items) // this gives a error because its returning before the execution but it gives the correct results somehow?
+                 // this gives a error because its returning before the execution but it gives the correct results somehow?
             })
         })
+    }).then(e =>{
+        res.send(items)
     })
 })
 
