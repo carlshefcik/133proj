@@ -8,7 +8,6 @@
 
 .contact-header {
     margin-top: 15px;
-    margin-left: 30px;
     margin-bottom: 15px;
     color: #625a51;
     font-size: 36px;
@@ -103,6 +102,17 @@ body {font-family: "Lato", sans-serif;}
     width: 30%;
 }
 
+.sales-p{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.sales-scrollMenuHeader{
+    margin-bottom: 0px;
+    text-align: center;
+
+}
+
 /* Style the buttons inside the tab */
 .tab button {
     display: block;
@@ -152,9 +162,14 @@ div.scrollmenu a {
     display: inline-block;
     color: #000000;
     text-align: center;
-    padding: 14px;
+    padding: 5px;
+    padding-bottom: 0px;
     text-decoration: none;
     text-align: center;
+}
+div.scrollmenu a:hover{
+    color: #ffe8ea;
+    background-color: #8e4144;
 }
 
 .box{
@@ -173,36 +188,11 @@ div.scrollmenu a {
 
 body { font-family: sans-serif; }
 
-.gallery {
-    background: #EEE;
-}
-
-.gallery-cell {
-    width: 28%;
-    height: 200px;
-    margin-right: 10px;
-    background: #8C8;
-    counter-increment: gallery-cell;
-}
-
-.gallery-cell.is-selected {
-    background: #ED2;
-}
-
-/* cell number */
-.gallery-cell:before {
-    display: block;
-    text-align: center;
-    content: counter(gallery-cell);
-    line-height: 200px;
-    font-size: 80px;
-    color: white;
-}
-
 .caption
 {
     align-content: center;
     text-align: center;
+    padding-bottom: 5px;
 }
 
 .sales.row{
@@ -217,7 +207,6 @@ sales.row{
 .glyphicon { margin-right:5px; }
 .thumbnail
 {
-    padding: 10px;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     border-radius: 0px;
@@ -227,6 +216,11 @@ sales.row{
 {
     width: 50px;
 }
+
+.sales-img{
+    width: 100px;
+}
+
 .item.list-group-item
 {
     float: none;
