@@ -169,7 +169,7 @@ div.scrollmenu a {
 }
 div.scrollmenu a:hover{
     color: #ffe8ea;
-    background-color: #8e4144;
+    background-color: #DB1C1C;
 }
 
 .box{
@@ -218,7 +218,7 @@ sales.row{
 }
 
 .sales-img{
-    width: 100px;
+    width: 250px;
 }
 
 .item.list-group-item
