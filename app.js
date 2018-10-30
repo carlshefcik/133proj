@@ -155,6 +155,18 @@ app.get('/get_inventory', (req,res)=>{
     });
 });
 
+app.post('send_reset_password', (req,res)=>{
+
+    let resetEmail = req.body.requestEmail;
+
+    firebaseAuth.sendPasswordResetEmail(resetEmail).then(function(){
+
+    }).catch(function(error)
+    {
+
+    });
+});
+
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
     console.log(`server started at http://localhost:${port}/`); //boots up node.js server
