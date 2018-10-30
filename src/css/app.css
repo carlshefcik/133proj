@@ -1,8 +1,3 @@
-.thumbnail {
-    max-width: 250px;
-    max-height: 250px;
-}
-
 .home-header {
     margin-top: 15px;
     margin-bottom: 15px;
@@ -15,7 +10,6 @@
     margin-top: 15px;
     margin-left: 30px;
     margin-bottom: 15px;
-    text-align: left;
     color: #625a51;
     font-size: 36px;
 }
@@ -143,4 +137,140 @@ body {font-family: "Lato", sans-serif;}
     border: 1px solid #ccc;
     width: 70%;
     border-left: none;
+    text-align: center;
+}
+
+div.scrollmenu {
+    background-color: #F6F6F6;
+    overflow: auto;
+    white-space: nowrap;
+    align-content: center;
+    height: auto;
+}
+
+div.scrollmenu a {
+    display: inline-block;
+    color: #000000;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.box{
+    width:100px;
+    height:180px;
+    background-color: red;
+    margin:10px;
+    display:inline-block;
+    text-align: center;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body { font-family: sans-serif; }
+
+.gallery {
+    background: #EEE;
+}
+
+.gallery-cell {
+    width: 28%;
+    height: 200px;
+    margin-right: 10px;
+    background: #8C8;
+    counter-increment: gallery-cell;
+}
+
+.gallery-cell.is-selected {
+    background: #ED2;
+}
+
+/* cell number */
+.gallery-cell:before {
+    display: block;
+    text-align: center;
+    content: counter(gallery-cell);
+    line-height: 200px;
+    font-size: 80px;
+    color: white;
+}
+
+.caption
+{
+    align-content: center;
+    text-align: center;
+}
+
+.sales.row{
+    align-content: center;
+    text-align: center;
+}
+
+sales.row{
+    align-content: center;
+    text-align: center;
+}
+.glyphicon { margin-right:5px; }
+.thumbnail
+{
+    padding: 10px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    text-align: center;
+}
+.sales.thumbnail.list-group-image
+{
+    width: 50px;
+}
+.item.list-group-item
+{
+    float: none;
+    width: 100%;
+    background-color: #fff;
+}
+.item.list-group-item:nth-of-type(odd):hover,.item.list-group-item:hover
+{
+    background: #428bca;
+}
+
+.item.list-group-item .list-group-image
+{
+
+    align-content: center;
+}
+.item.list-group-item .thumbnail
+{
+    margin-bottom: 0px;
+}
+.item.list-group-item .caption
+{
+    padding: 10px;
+}
+.item.list-group-item:nth-of-type(odd)
+{
+    background: #eeeeee;
+}
+
+.item.list-group-item:before, .item.list-group-item:after
+{
+    display: inline-block;
+    content: " ";
+}
+
+.item.list-group-item img
+{
+    float: left;
+}
+.item.list-group-item:after
+{
+    clear: both;
+}
+.list-group-item-text
+{
+    margin: 0 0 11px;
 }
