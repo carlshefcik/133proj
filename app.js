@@ -99,6 +99,24 @@ app.get('/load_items', (req,res) => {
     })
 })
 
+app.get('/search_items', (req,res)=>{
+    // does db query for all the items
+    // returns resulting items
+    let items = [1]
+    res.send(items)
+})
+
+app.get('/get_popular', (req,res)=>{
+    let popular = {
+        "test1": ["id1", "name1", 1, "image1"],
+        "test3": ["id3", "name3", 2, "image3"],
+        "test2": ["id2", "name2", 3, "image2"],
+        "test4": ["id4", "name4", 4, "image4"],
+        "test5": ["id5", "name5", 5, "image5"]
+    }
+    res.send(popular)
+})
+
 //adds a new item to the database
 app.post('/add_item', (req,res) =>{
     //verifies that the user is an admin
