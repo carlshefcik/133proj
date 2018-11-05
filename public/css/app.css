@@ -163,7 +163,6 @@ div.scrollmenu a {
     color: #000000;
     text-align: center;
     padding: 5px;
-    padding-bottom: 0px;
     text-decoration: none;
     text-align: center;
 }
@@ -218,7 +217,7 @@ sales.row{
 }
 
 .sales-img{
-    width: 250px;
+    width: 200px;
 }
 
 .item.list-group-item

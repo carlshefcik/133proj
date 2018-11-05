@@ -1,5 +1,6 @@
 $(document).ready(() => {
 
+    loadSaleItems()
     $('#nav-bar').load('/nav-bar.html');
     $('#page-footer').load('/page-footer.html');
 
@@ -27,6 +28,47 @@ $(function(){
     });
 });
 
+function loadSaleItems(){
+    $.ajax({
+        type: 'Get',
+        datatype: 'json',
+        success: (data) =>{
+            for (var property in data) {
+                addElement(data[property])
+            }
+        }
+    })
+}
+
+//creates an appropriate aisle element from the given aisle element
+function addElement(element){
+    let containerFluid = document.createElement("div")
+
+    let row = document.createElement("div")
+    row.classList.add("row")
+    row.classList.add("flex-row")
+    row.classList.add("flex-nowrap")
+    row.classList.add("align-items-center")
+    containerFluid.appendChild(row)
+
+    let thumbnail = document.createElement("div")
+    row.appendChild(thumbnail)
+
+    let atag = document.createElement("a")
+    atag.href = "/item.html?id="+element[0]
+    thumbnail.append(atag)
+
+    let image = document.createElement("img")
+    image.classList.add("aisle-img")
+    image.src = element[1]
+    atag.appendChild(image)
+
+    let ptext = document.createElement("p")
+    ptext.innerHTML = element[0]
+    atag.appendChild(ptext)
+
+    document.getElementById('MeatScrollBar').appendChild(aisleNode)
+}
 
 
 $(function(){
