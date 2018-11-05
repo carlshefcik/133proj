@@ -103,7 +103,7 @@ function processItemData(element){
     let btnCol = document.createElement("td")
 
     let itemATag = document.createElement("a") // link to item page
-    itemATag.href = "/item?id="+ element[0]
+    itemATag.href = "/item.html?id="+ element[0]
     btnCol.appendChild(itemATag)
 
     let itemButton = document.createElement("button") // button

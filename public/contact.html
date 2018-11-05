@@ -14,6 +14,7 @@
 
     <!-- custom css -->
     <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/contact.css" />
 
     <!-- index js -->
     <script src="js/index.js"></script>
@@ -25,57 +26,418 @@
         }
     </style>
 </head>
-<div class="mx-auto" style="width: 200px;">
-<div class="contact-header">
-    <h3>Contact Us</h3>
-</div>
-</div>
+<body>
 <div class="contact" style="margin-left:30px">
-<h4>Send Us your Questions or Concerns</h4>
-<form class="formContactUs" role="form" onsubmit="consoleFunction()">
-	
-	<input type="hidden" name="_csrf" value="{{csrf}}">
-	
-	<div class="form-group">
-		<div class="col-sm-4">
-		<label for="helpSelect">What can we help you with?</label>
-		<select class="form-control" id="helpSelect">
-			<option>Select a Topic</option>
-			<option>Comments</option>
-			<option>Technical Issues</option>
-			<option>Order Issues</option>
-			<option>Account Issues</option>
-			<option>General Help</option>
-		</select>
-	</div>
-	</div>
 
-	<div class="form-group">
-		<div class="col-sm-4">
-		<label for="fieldEmail">Email address</label>
-		  <input type="email" class="form-control" id="fieldEmail" aria-describedby="emailHelp" placeholder="Enter your email address">
-		  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <div class="container">
+		<div class="row">
+			<div class="col">
+				<br>
+				<h3>Contact Us</h3>
+				<hr>
+			</div>
 		</div>
-	</div> <!--End of form group -->
-	
-	<div class="form-group">
-		<div class="col-sm-4">
-	  <label for="fieldQues">Details</label>
-	    <textarea class="form-control" rows="5" id="fieldQues" placeholder="What seems to be the problem?"></textarea> 
-	  </div>
-	</div>
-	
-	<div class="form-group">
-		<div class="col-sm-4">
-			<button type="submit" class="btn btn-outline-primary">Submit</button>
-		</div>
-	</div>
-</form>
+        <div class="row">
+			
+            <div class="col-md-5">
+                <form class="formContactUs" role="form" onsubmit="consoleFunction()">
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <h4>Send Us your Questions or Concerns</h4>
+                    <hr>
+                    <div class="form-group">
+                        <label for="helpSelect2">What can we help you with?</label>
+                        <select class="form-control" id="helpSelect2">
+                            <option>Select a Topic</option>
+                            <option>Comments</option>
+                            <option>Technical Issues</option>
+                            <option>Order Issues</option>
+                            <option>Account Issues</option>
+                            <option>General Help</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fieldEmail">Email address</label>
+                        <input type="email" class="form-control" id="fieldEmail" aria-describedby="emailHelp" placeholder="Enter your email address">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="fieldQues2">Details</label>
+                        <textarea class="form-control" rows="5" id="fieldQues2" placeholder="What seems to be the problem?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class = "col-md-7">
+                <div class = "contain">
+                    <div class = "row">
+                        <div class="col-md-12">
+                            <h4>FAQs</h4>
+                            <hr>
+                        </div>
+
+                        <body>
+                        <div class="tab">
+                            <button class="tablinks" type="button" onclick="openTab(event, 'Account')" id="defaultOpen">Account</button>
+                            <button class="tablinks" type="button" onclick="openTab(event, 'Sign In')">Sign In</button>
+                            <button class="tablinks" type="button" onclick="openTab(event, 'Shop')">Shop</button>
+                            <button class="tablinks" type="button" onclick="openTab(event, 'Aisles')">Aisles</button>
+                            <button class="tablinks" type="button" onclick="openTab(event, 'Sales')">Sales</button>
+                            <button class="tablinks" type="button" onclick="openTab(event, 'History')">History</button>
+                            <button class="tablinks" type="button" onclick="openTab(event, 'CheckOut')">CheckOut</button>
+
+
+                        </div>
+                        <div id="Account" class="tabcontent">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr>
+                                    <h4>Account</h4>
+                                    <hr>
+                                </div>
+                            </div>
+                            <form>
+                                <div class="tab-pane" role="tabpanel" aria-labelledby="tab1">
+                                    <div class="accordion" id="accordion-tab-111">
+                                        <div class="card">
+                                            <div class="card-header" id="accordion-tab-111-heading-1">
+                                                <h5>
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-111-content-1" aria-expanded="false" aria-controls="accordion-tab-111-content-1">What if I forget my password?</button>
+                                                </h5>
+                                            </div>
+                                            <div class="collapse" id="accordion-tab-111-content-1" aria-labelledby="accordion-tab-111-heading-1" data-parent="#accordion-tab-111">
+                                                <div class="card-body">
+                                                    <p>When you forget your password, we know that you want to get back into your account as quickly as possible. Enter your email address below, and enter submit. You will get a link to reset your password.</p>
+                                                    <div class="form-group">
+                                                        <label for="fieldEmail">Enter E-mail address associated with your account:</label>
+                                                        <input type="email" class="form-control" id="resetEmail" aria-describedby="emailHelp" placeholder="Email address">
+                                                        <small id="resetEmailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <button type="submit" id = "sendResetLinkButton" class="btn btn-outline-primary">Send Reset Link</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" role="tabpanel" aria-labelledby="tab1">
+                                    <div class="accordion" id="accordion-tab-112">
+                                        <div class="card">
+                                            <div class="card-header" id="accordion-tab-112-heading-1">
+                                                <h5>
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-112-content-1" aria-expanded="false" aria-controls="accordion-tab-112-content-1">What is my username?</button>
+                                                </h5>
+                                            </div>
+                                            <div class="collapse" id="accordion-tab-112-content-1" aria-labelledby="accordion-tab-112-heading-1" data-parent="#accordion-tab-112">
+                                                <div class="card-body">
+                                                    <p>Simple, your <strong>username</strong> is the email used during signup.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" role="tabpanel" aria-labelledby="tab1">
+                                    <div class="accordion" id="accordion-tab-113">
+                                        <div class="card">
+                                            <div class="card-header" id="accordion-tab-113-heading-1">
+                                                <h5>
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-113-content-1" aria-expanded="false" aria-controls="accordion-tab-113-content-1">What if I think my account was hacked?</button>
+                                                </h5>
+                                            </div>
+                                            <div class="collapse" id="accordion-tab-113-content-1" aria-labelledby="accordion-tab-113-heading-1" data-parent="#accordion-tab-113">
+                                                <div class="card-body">
+                                                    <p>We take security very seriously, and will let you know if we see anything suspicious on your account.</p>
+                                                    <p>Keep checking your account and if there is unusual activity on your account, please write to us.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" role="tabpanel" aria-labelledby="tab1">
+                                    <div class="accordion" id="accordion-tab-114">
+                                        <div class="card">
+                                            <div class="card-header" id="accordion-tab-114-heading-1">
+                                                <h5>
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-114-content-1" aria-expanded="false" aria-controls="accordion-tab-114-content-1">Do I have to provide an email address?</button>
+                                                </h5>
+                                            </div>
+                                            <div class="collapse" id="accordion-tab-114-content-1" aria-labelledby="accordion-tab-114-heading-1" data-parent="#accordion-tab-114">
+                                                <div class="card-body">
+                                                    <p><strong>Yes!</strong> We require all customers to provide an email (regardless of user
+                                                    or guest). Our team needs to be able to contact you and keep track of your order.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="Sign In" class="tabcontent">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr>
+                                    <h4>Sign In</h4>
+                                    <hr>
+                                </div>
+                            </div>
+                            <form>
+                                <div class="tab-pane" role="tabpanel" aria-labelledby="tab1">
+                                    <div class="accordion" id="accordion-tab-121">
+                                        <div class="card">
+                                            <div class="card-header" id="accordion-tab-121-heading-1">
+                                                <h5>
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-121-content-1" aria-expanded="false" aria-controls="accordion-tab-121-content-1">How do I sign up for a MiniSafeway account?</button>
+                                                </h5>
+                                            </div>
+                                            <div class="collapse" id="accordion-tab-121-content-1" aria-labelledby="accordion-tab-121-heading-1" data-parent="#accordion-tab-121">
+                                                <div class="card-body">
+                                                    <p>You can use your email address to sign up, we'll help you create a new MiniSafeway Account.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion" id="accordion-tab-122">
+                                        <div class="card">
+                                            <div class="card-header" id="accordion-tab-122-heading-1">
+                                                <h5>
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-122-content-1" aria-expanded="false" aria-controls="accordion-tab-122-content-1">Do I need to enter credit card info at sign up?</button>
+                                                </h5>
+                                            </div>
+                                            <div class="collapse" id="accordion-tab-122-content-1" aria-labelledby="accordion-tab-122-heading-1" data-parent="#accordion-tab-122">
+                                                <div class="card-body">
+                                                    <p>No, you do not need to enter your credit card information when signing up.
+                                                        But when you are making a purchase, you will need to enter your credit card information.</p>
+                                                    <p>If you are a guest, then your credit card information will not be stored anywhere after transaction is complete.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="Shop" class="tabcontent">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr>
+                                    <h4>Shop</h4>
+                                    <hr>
+                                </div>
+                            </div>
+                            <form>
+                                <div class="tab-pane" role="tabpanel" aria-labelledby="tab1">
+                                    <div class="accordion" id="accordion-tab-131">
+                                        <div class="card">
+                                            <div class="card-header" id="accordion-tab-131-heading-1">
+                                                <h5>
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-131-content-1" aria-expanded="false" aria-controls="accordion-tab-131-content-1">What to do in Shop tab?</button>
+                                                </h5>
+                                            </div>
+                                            <div class="collapse" id="accordion-tab-131-content-1" aria-labelledby="accordion-tab-131-heading-1" data-parent="#accordion-tab-131">
+                                                <div class="card-body">
+                                                    <p>
+                                                        In the Shop tab, you can:
+                                                    </p>
+                                                    <p><strong>1)</strong> Browse all items from MiniSafeway Store.</p>
+                                                    <p><strong>2)</strong> Add items to cart.</p>
+                                                    <p><strong>3)</strong> Click on item to learn more about product.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="Aisles" class="tabcontent">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr>
+                                    <h4>Aisles</h4>
+                                    <hr>
+                                </div>
+                            </div>
+                            <form>
+                                <div class="tab-pane" role="tabpanel" aria-labelledby="tab1">
+                                    <div class="accordion" id="accordion-tab-141">
+                                        <div class="card">
+                                            <div class="card-header" id="accordion-tab-141-heading-1">
+                                                <h5>
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-141-content-1" aria-expanded="false" aria-controls="accordion-tab-141-content-1">What to do in Aisles tab?</button>
+                                                </h5>
+                                            </div>
+                                            <div class="collapse" id="accordion-tab-141-content-1" aria-labelledby="accordion-tab-141-heading-1" data-parent="#accordion-tab-141">
+                                                <div class="card-body">
+                                                    <p>
+                                                        In the Aisles tab, you can:
+                                                    </p>
+                                                    <p><strong>1)</strong> Browse all the categories of MiniSafeway has to offer.</p>
+                                                    <p><strong>2)</strong> Click on a category to display all items in that category.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="Sales" class="tabcontent">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr>
+                                    <h4>Sales</h4>
+                                    <hr>
+                                </div>
+                            </div>
+                            <form>
+                                <div class="tab-pane" role="tabpanel" aria-labelledby="tab1">
+                                    <div class="accordion" id="accordion-tab-151">
+                                        <div class="card">
+                                            <div class="card-header" id="accordion-tab-151-heading-1">
+                                                <h5>
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-151-content-1" aria-expanded="false" aria-controls="accordion-tab-151-content-1">What to do in Sales tab?</button>
+                                                </h5>
+                                            </div>
+                                            <div class="collapse" id="accordion-tab-151-content-1" aria-labelledby="accordion-tab-151-heading-1" data-parent="#accordion-tab-151">
+                                                <div class="card-body">
+                                                    <p>
+                                                        In the Sales tab, you can see:
+                                                    </p>
+                                                    <p><strong>1)</strong> All the sales happening for the current week.</p>
+                                                    <p><strong>2)</strong> The old and new price of the products.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="History" class="tabcontent">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr>
+                                    <h4>History</h4>
+                                    <hr>
+                                </div>
+                            </div>
+                            <form>
+                                <div class="tab-pane" role="tabpanel" aria-labelledby="tab1">
+                                    <div class="accordion" id="accordion-tab-161">
+                                        <div class="card">
+                                            <div class="card-header" id="accordion-tab-161-heading-1">
+                                                <h5>
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-161-content-1" aria-expanded="false" aria-controls="accordion-tab-161-content-1">What to do in History tab?</button>
+                                                </h5>
+                                            </div>
+                                            <div class="collapse" id="accordion-tab-161-content-1" aria-labelledby="accordion-tab-161-heading-1" data-parent="#accordion-tab-161">
+                                                <div class="card-body">
+                                                    <p>
+                                                        For the history tab to be active, you need to be signed in. Now you can see:
+                                                    </p>
+                                                    <p><strong>1)</strong> All the products you have viewed.</p>
+                                                    <p><strong>2)</strong> Add products previously viewed directly to your cart.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="CheckOut" class="tabcontent">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr>
+                                    <h4>CheckOut</h4>
+                                    <hr>
+                                </div>
+                            </div>
+                            <form>
+                                <div class="tab-pane" role="tabpanel" aria-labelledby="tab1">
+                                    <div class="accordion" id="accordion-tab-171">
+                                        <div class="card">
+                                            <div class="card-header" id="accordion-tab-171-heading-1">
+                                                <h5>
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-171-content-1" aria-expanded="false" aria-controls="accordion-tab-171-content-1">What to do in Checkout tab?</button>
+                                                </h5>
+                                            </div>
+                                            <div class="collapse" id="accordion-tab-171-content-1" aria-labelledby="accordion-tab-171-heading-1" data-parent="#accordion-tab-171">
+                                                <div class="card-body">
+                                                    <p>
+                                                        After you have added all the items you would like, the checkout function allows
+                                                        you to purchase all the items in your cart after reviewing and adjusting the
+                                                        quantity of the items you would like.
+                                                    </p>
+                                                    <p>
+                                                        This page also calculates your grand total, and
+                                                        directs you to a page where you will be required to enter your:
+                                                    </p>
+                                                    <p>
+                                                        1) Card information (to check out as guest).
+                                                    </p>
+                                                    <p>
+                                                        2) Login information (to check out as a member).
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+
+
+                        <div id="Check" class="tabcontent">
+                            <h3>Tokyo</h3>
+                            <p>Tokerwrwdsyo is the capital of Japan.</p>
+                        </div>
+                        <div id="Check2" class="tabcontent">
+                            <h3>Tokyo</h3>
+                            <p>Tokyerwqwo is the capital of Japan.</p>
+                        </div>
+                        <div id="Point" class="tabcontent">
+                            <h3>Tokyo</h3>
+                            <p>Tokyqweqwo is the capital of Japan.</p>
+                        </div>
+                        <div id="Bon" class="tabcontent">
+                            <h3>Tokyo</h3>
+                            <p>Tokyso is the capital of Japan.</p>
+                        </div>
+
+                        <script>
+                            function openTab(evt, cityName) {
+                                var i, tabcontent, tablinks;
+                                tabcontent = document.getElementsByClassName("tabcontent");
+                                for (i = 0; i < tabcontent.length; i++) {
+                                    tabcontent[i].style.display = "none";
+                                }
+                                tablinks = document.getElementsByClassName("tablinks");
+                                for (i = 0; i < tablinks.length; i++) {
+                                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                                }
+                                document.getElementById(cityName).style.display = "block";
+                                evt.currentTarget.className += " active";
+                            }
+                            // Get the element with id="defaultOpen" and click on it
+                            document.getElementById("defaultOpen").click();
+                        </script>
+
+                        </body>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-	function consoleFunction() {
-		console.log("hey");
-	}
+    function consoleFunction() {
+        console.log("hey");
+    }
 </script>
 </div>
+</body>
 <footer id="page-footer"></footer>
 </html>

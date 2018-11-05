@@ -80,23 +80,27 @@ app.get('/load_aisles', (req,res) => {
 app.get('/load_items', (req,res) => {
     let items = []
     let aisleName = Object.keys(req.query)[0]
+    let groups
     console.log(aisleName)
-    firebaseFirestore.collection("Aisles").doc(aisleName).get().then((doc) =>{
-        let groups = doc.data()["subCollections"]
-        groups.forEach((groupName) =>{
-            firebaseFirestore.collection("Aisles").doc(aisleName).collection(groupName).get().then((coll) =>{
-                coll.forEach((doc) =>{
-                    items.push(doc.data()["name"])
+
+    getItems()
+
+
+    function getItems() {
+        firebaseFirestore.collection("Aisles").doc(aisleName).get().then((doc) =>{
+            groups = doc.data()["subCollections"]
+        }).then((data) =>{
+            groups.forEach((groupName) =>{
+                firebaseFirestore.collection("Aisles").doc(aisleName).collection(groupName).get().then((coll) =>{
+                    coll.forEach((doc) =>{
+                        items.push(doc.data()["name"])
+                    })
                 })
-            }).catch(function(error){
-                console.log(error)
-            }).then(e =>{
-                 // this gives a error because its returning before the execution but it gives the correct results somehow?
             })
         })
-    }).then(e =>{
-        res.send(items)
-    })
+        // for some reason firebase does an async call on firestore functions
+        setTimeout(function(){res.send(items)}, 2000)
+    }
 })
 
 app.get('/search_items', (req,res)=>{
