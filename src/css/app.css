@@ -1,0 +1,269 @@
+.home-header {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #625a51;
+    font-size: 36px;
+}
+
+.contact-header {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #625a51;
+    font-size: 36px;
+}
+
+.modal-content {
+    margin-top: 200px;
+}
+
+#cart-summary-box {
+    position: absolute;
+    width: 22%;
+    height: 70%;
+    right: 6%;
+    line-height: 24px;
+    font-size: 15px;
+    padding: 15px 5px 20px 5px;
+}
+
+#cart-summary-box-style {
+    position: relative;
+    background-color: #F6F6F6;
+    padding: 15px 15px 20px 15px;
+}
+
+#cart-box {
+    position: absolute;
+    width: 66%;
+    height: 70%;
+    left: 6%;
+    line-height: 24px;
+    font-size: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 20px;
+}
+
+.quantity-box {
+    position: relative;
+    border: solid 1px #595959;
+}
+
+.col-lg-6 {
+    max-width: 25%;
+    margin-right: -25px;
+}
+
+.input-group>.form-control:not(:last-child) {
+    margin-right: -3px;
+}
+
+#go-button {
+    border: 1px solid #ced4da;
+    margin-right: 10px;
+}
+
+.account-box {
+    border: 1px solid #ced4da;
+    border-radius: 15px;
+    padding: 15px;
+    width: 84%;
+}
+
+.account-heading {
+    font-size: 24px;
+}
+
+#fieldQues {
+    height: 100px;
+}
+
+.page-footer {
+    background-color: #37474F;
+    color: white;
+    margin-top: 50px;
+    bottom: -250px;
+    width: 100%;
+}
+
+#footer-content {
+    margin-left: 28%;
+}
+
+* {box-sizing: border-box}
+body {font-family: "Lato", sans-serif;}
+
+/* Style the tab */
+.tab {
+    float: left;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    width: 30%;
+}
+
+.sales-p{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.sales-scrollMenuHeader{
+    margin-bottom: 0px;
+    text-align: center;
+
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    display: block;
+    background-color: rgb(197, 28, 28);
+    color: #c1c1c1;
+    padding: 22px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    color: #ffe8ea;
+    background-color: #8e4144;
+}
+
+/* Create an active/current "tab button" class */
+.tab button.active {
+    background-color: rgb(218, 32, 32);
+    color: #ffffff;
+}
+
+/* Style the tab content */
+.tabcontent {
+    float: left;
+    padding: 0px 12px;
+    border: 1px solid #ccc;
+    width: 70%;
+    border-left: none;
+    text-align: center;
+}
+
+div.scrollmenu {
+    background-color: #F6F6F6;
+    overflow: auto;
+    white-space: nowrap;
+    align-content: center;
+    height: auto;
+}
+
+div.scrollmenu a {
+    display: inline-block;
+    color: #000000;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+    text-align: center;
+}
+div.scrollmenu a:hover{
+    color: #ffe8ea;
+    background-color: #DB1C1C;
+}
+
+.box{
+    width:100px;
+    height:180px;
+    background-color: red;
+    margin:10px;
+    display:inline-block;
+    text-align: center;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body { font-family: sans-serif; }
+
+.caption
+{
+    align-content: center;
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+.sales.row{
+    align-content: center;
+    text-align: center;
+}
+
+sales.row{
+    align-content: center;
+    text-align: center;
+}
+.glyphicon { margin-right:5px; }
+.thumbnail
+{
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    text-align: center;
+}
+.sales.thumbnail.list-group-image
+{
+    width: 50px;
+}
+
+.sales-img{
+    width: 200px;
+}
+
+.item.list-group-item
+{
+    float: none;
+    width: 100%;
+    background-color: #fff;
+}
+.item.list-group-item:nth-of-type(odd):hover,.item.list-group-item:hover
+{
+    background: #428bca;
+}
+
+.item.list-group-item .list-group-image
+{
+
+    align-content: center;
+}
+.item.list-group-item .thumbnail
+{
+    margin-bottom: 0px;
+}
+.item.list-group-item .caption
+{
+    padding: 10px;
+}
+.item.list-group-item:nth-of-type(odd)
+{
+    background: #eeeeee;
+}
+
+.item.list-group-item:before, .item.list-group-item:after
+{
+    display: inline-block;
+    content: " ";
+}
+
+.item.list-group-item img
+{
+    float: left;
+}
+.item.list-group-item:after
+{
+    clear: both;
+}
+.list-group-item-text
+{
+    margin: 0 0 11px;
+}
