@@ -1,12 +1,11 @@
 const functions = require('firebase-functions');
 const express = require('express');
-
 const bodyParser = require ('body-parser');
 const path = require('path');
 const firebase = require('firebase');
 const serviceAccount = require("./serviceAccountKey.json");
-const emailRegex = new RegExp(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/);
 
+const emailRegex = new RegExp(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/);
 const app = express();
 
 var config = {
@@ -160,7 +159,7 @@ app.post('/login_user', (req,res)=>{
 
     if(emailRegex.test(email) && password.length >= 6){
         firebaseAuth.signInWithEmailAndPassword(email, password);
-        res.send(email);
+        res.send(firebaseAuth.currentUser);
         console.log("login successed");
     } else {
         console.log("login failed");
