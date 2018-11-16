@@ -41,7 +41,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/contact.html">Contact Us</a>
             </li>
-            
+
             <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Dropdown link
@@ -67,13 +67,13 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Login:</h5>
+                        <h5 class="modal-title" id="titleModal">Login:</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
 
-                    <div class="modal-body">
+                    <div class="modal-body" id="registerModal">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-6">
@@ -84,12 +84,12 @@
                                             <label for="signUpEmail">Email address</label>
                                             <input type="email" id="signUpEmail" class="form-control" placeholder="Email address" required autofocus>
                                         </div>
-            
+
                                         <div class="form-label-group">
                                             <label for="signUpPassword">Password</label>
                                             <input type="password" id="signUpPassword" class="form-control" placeholder="Password" required>
                                         </div>
-            
+
                                         <div class="checkbox mb-3">
                                             <label>
                                                 <input type="checkbox" value="remember-me"> Remember me
@@ -98,7 +98,7 @@
                                     </form>
                                     <button class="btn btn-lg btn-secondary btn-block" type="submit" id="signUpButton">Create Account</button>
                                 </div>
-        
+
                                 <div class="col-md-6">
                                     <h1>Login:</h1>
                                     <form class="form-signin">
@@ -106,12 +106,12 @@
                                             <label for="inputEmail">Email address</label>
                                             <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                                         </div>
-            
+
                                         <div class="form-label-group">
                                             <label for="inputPassword">Password</label>
                                             <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
                                         </div>
-            
+
                                         <div class="checkbox mb-3">
                                             <label>
                                                 <input type="checkbox" value="remember-me"> Remember me
@@ -128,11 +128,11 @@
         </div>
     </div>
     <script>
-        
+
         $(document).ready(() => {
             checkUserStatus()
-            
-            function checkUserStatus(){ 
+
+            function checkUserStatus(){
                 $.ajax({
                     url: '/check_user_status',
                     type: 'Get',
@@ -152,53 +152,53 @@
                 })
             }
         });
-        
+
         $('#loginButton').click((e)=>{
             console.log($("#inputEmail"));
             let info = {
                 username: document.getElementById('inputEmail').value,
                 password: document.getElementById('inputPassword').value
             }
-        
+
             $.ajax({
                 url: '/login_user',
                 type: 'POST',
                 datatype: 'json',
                 data: info,
-                success: (data) =>{    
+                success: (data) =>{
                     document.getElementById("user").textContent = data
                     document.getElementById("logoutButton").hidden = false;
                     document.getElementById("login-button").hidden = true;
                 }
             })
-                
+
             console.log("aye");
         })
             // window.location='../index.html'
             // if logged in
-        
+
         // when the button is clicked sends an ajax request to express to retrive data
         $('#signUpButton').click((e)=>{
             let info = {
                 username: document.getElementById('signUpEmail').value,
                 password: document.getElementById('signUpPassword').value
             }
-            
+
             $.ajax({
                 url: '/register_user',
                 type: 'POST',
                 datatype: 'json',
                 data: info,
                 success: (data) =>{
-                    console.log(data) // log data to console
-                    console.log(info);
-                    location.reload();
+                    document.getElementById("user").textContent = data
+                    document.getElementById("logoutButton").hidden = false;
+                    document.getElementById("login-button").hidden = true;
                 }
             })
         })
 
         $('#logoutButton').click((e)=>{
-            
+
             console.log("Testing for logout")
 
             $.ajax({
@@ -211,7 +211,7 @@
                     location.reload();
                 }
             })
-    
+
             console.log("good");
         })
     </script>

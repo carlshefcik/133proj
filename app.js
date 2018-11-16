@@ -178,22 +178,24 @@ app.post('/register_user', (req, res) => {
     console.log('going')
     let email = req.body.username;
     let password = req.body.password;
-    let userID
+    let userID;
 
     if (emailRegex.test(email) && password.length >= 6) {
-        firebaseAuth.createUserWithEmailAndPassword(email, password).then((user) => {
-            console.log(user.uid)
-        })
-        firebaseFirestore.collection("Customer").doc(userID).set({
-            email: email,
-            lastName: "",
-            firstName: ""
+      firebaseAuth.createUserWithEmailAndPassword(email, password)
+      .then(function(data){
+        console.log("Test here: " + data.user.uid);
+        firebaseFirestore.collection("Customer").doc(data.user.uid).set({
+          email: email,
+          lastName: "",
+          firstName: ""
         })
         console.log("success");
-    } else {
+        res.send(email);
+      }).catch(function(error){
         console.log("fail");
-        return;
+      })
     }
+
 });
 
 app.post('/login_user', (req, res) => {
@@ -210,7 +212,7 @@ app.post('/login_user', (req, res) => {
             user1 = user
         })
         resolve('data')
-    })
+    });
 
     promise1.then(function (data) {
         if (user1) {
@@ -226,7 +228,7 @@ app.post('/login_user', (req, res) => {
                 return;
             }
         }
-    })
+    });
 });
 
 app.get('/logOutUser', (req, res) => {
@@ -309,5 +311,3 @@ const port = process.env.PORT || 8000;
 app.listen(port, () => {
     console.log(`server started at http://localhost:${port}/`); //boots up node.js server
 });
-
-
