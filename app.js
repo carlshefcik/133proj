@@ -54,7 +54,7 @@ app.get('/aisles_and_groups', (req,res)=>{
                 items[tmp].push(e);
             })
         });
-        res.send(items);     
+        res.send(items);
     }).catch(function(error){
         console.log(error);
     });
@@ -133,9 +133,9 @@ app.post('/add_item', (req,res) =>{
         name: itemData.Name,
         aisle: itemData.Aisle,
         group: itemData.Group,
-        quantity: itemData.Quantity, 
-        sale: itemData.Sale, 
-        salePercent: itemData.SalePercent, 
+        quantity: itemData.Quantity,
+        sale: itemData.Sale,
+        salePercent: itemData.SalePercent,
         info: itemData.Info,
         imgURL: ""
     }
@@ -149,6 +149,87 @@ app.post('/add_item', (req,res) =>{
         firebaseFirestore.collection('Aisles').doc(itemData.Aisle).collection(itemData.Group).doc(itemid).set(itemProperties)
         res.send(itemid)
     });
+
+    // Image upload snippett
+    {
+    // console.log("uploading image")
+    // // Create file metadata including the content type
+    // var metadata = { contentType: 'image/jpeg' };
+    // // Upload the file and metadata
+    // var uploadTask = firebaseStorage.ref().child("Aisles/Bakery/Bread/default.jpg").put(itemData.Image, metadata)
+
+    // // Register three observers:
+    // // 1. 'state_changed' observer, called any time the state changes
+    // // 2. Error observer, called on failure
+    // // 3. Completion observer, called on successful completion
+    // uploadTask.on('state_changed', function(snapshot){
+    //     // Observe state change events such as progress, pause, and resume
+    //     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+    //     var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    //     console.log('Upload is ' + progress + '% done');
+    //     switch (snapshot.state) {
+    //     case firebase.storage.TaskState.PAUSED: // or 'paused'
+    //         console.log('Upload is paused');
+    //         break;
+    //     case firebase.storage.TaskState.RUNNING: // or 'running'
+    //         console.log('Upload is running');
+    //         break;
+    //     }
+    // }, function(error) {
+    //     // Handle unsuccessful uploads
+    //     console.log("didnt upload")
+    // }, function() {
+    //     // Handle successful uploads on complete
+    //     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+    //     uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+    //         console.log('File available at', downloadURL);
+    //         itemProperties.imgURL = downloadURL
+    //     });
+    // });
+    }
+
+    // //add imgURL to original item document
+    // firebaseFirestore.collection('Items').doc(itemid).set({
+    //     imgURL: itemProperties.imgURL
+    // }).then(ref => {
+    //     console.log('Added changed imgurl of: ', ref.id)
+    // })
+})
+
+app.post('/add_item_2', (req,res) =>{
+    //verifies that the user is an admin
+
+
+    let itemData = req.body
+    // console.log(itemData)
+    let itemid = itemData.ItemUID
+    let itemProperties = {
+        price:itemData.Price,
+        weight:itemData.Weight,
+        name: itemData.Name,
+        aisle: itemData.Aisle,
+        group: itemData.Group,
+        quantity: itemData.Quantity,
+        sale: itemData.Sale,
+        salePercent: itemData.SalePercent,
+        info: itemData.Info,
+        imgURL: ""
+    }
+
+    // create new item in the items collection
+    firebaseFirestore.collection('Items').doc(itemid).set({
+        price:itemData.Price,
+        weight:itemData.Weight,
+        name: itemData.Name,
+        aisle: itemData.Aisle,
+        group: itemData.Group,
+        quantity: itemData.Quantity,
+        sale: itemData.Sale,
+        salePercent: itemData.SalePercent,
+        info: itemData.Info,
+        imgURL: ""
+    });
+    console.log('Added document with ID: ', itemid)
 
     // Image upload snippett
     {
@@ -217,7 +298,7 @@ app.post('/register_user', (req,res)=>{
         //alert('Either email nor password is invalid.');
         return;
     }
-    
+
 });
 
 app.post('/login_user', (req,res)=>{
@@ -236,7 +317,7 @@ app.post('/login_user', (req,res)=>{
         //alert('Either email nor password is invalid.');
         return;
     }
-    
+
 });
 
 app.get('/get_cart', (req,res)=>{
@@ -263,7 +344,7 @@ app.get('/get_inventory', (req,res)=>{
             var tmp = doc.id;
             items.push(tmp);
             //console.log(items);
-            
+
         });
         console.log(items);
         //send items before error handling
