@@ -143,46 +143,103 @@ app.post('/add_item', (req,res) =>{
 
 })
 
-app.post('/register_user', (req,res)=>{
+app.post('/register_user', (req, res) => {
+    console.log('going')
     let email = req.body.username;
     let password = req.body.password;
+    let userID;
 
-    if(emailRegex.test(email) && password.length >= 6){
-        firebaseAuth.createUserWithEmailAndPassword(email, password);
-        firebaseAuth.onAuthStateChanged(firebaseUser => {
-            var ref = firebaseFirestore.collection("Customer").doc(firebaseUser.uid);
-            ref.set({
-                email: email,
-                lastName: "",
-                firstName: ""
-            })
+    if (emailRegex.test(email) && password.length >= 6) {
+      firebaseAuth.createUserWithEmailAndPassword(email, password)
+      .then(function(data){
+        console.log("Test here: " + data.user.uid);
+        firebaseFirestore.collection("Customer").doc(data.user.uid).set({
+          email: email,
+          lastName: "",
+          firstName: ""
         })
         console.log("success");
-    } else {
+        res.send(email);
+      }).catch(function(error){
         console.log("fail");
-        //alert('Either email nor password is invalid.');
-        return;
+      })
     }
-    
+
 });
 
-app.post('/login_user', (req,res)=>{
+app.post('/login_user', (req, res) => {
+
     console.log(req.body);
     let email = req.body.username;
     console.log("here is email: " + email);
     let password = req.body.password;
     console.log("here is password: " + password);
 
-    if(emailRegex.test(email) && password.length >= 6){
-        firebaseAuth.signInWithEmailAndPassword(email, password);
-        res.send(email);
-        console.log("login successed");
-    } else {
-        console.log("login failed");
-        //alert('Either email nor password is invalid.');
-        return;
-    }
-    
+    let user1 = ""
+    let promise1 = new Promise(function (resolve, reject) {
+        firebaseAuth.onAuthStateChanged(function (user) {
+            user1 = user
+        })
+        resolve('data')
+    });
+
+    promise1.then(function (data) {
+        if (user1) {
+            console.log("User already logged in!!!")
+        } else {
+            if (emailRegex.test(email) && password.length >= 6) {
+                firebaseAuth.signInWithEmailAndPassword(email, password);
+                res.send(email);
+                console.log("login successed");
+            } else {
+                console.log("login failed");
+                //alert('Either email nor password is invalid.');
+                return;
+            }
+        }
+    });
+});
+
+app.get('/logOutUser', (req, res) => {
+
+    let user1 = ""
+    let promise1 = new Promise(function (resolve, reject) {
+        firebaseAuth.onAuthStateChanged(function (user) {
+            user1 = user
+        })
+        resolve('data')
+    })
+
+    promise1.then(function (data) {
+        if (user1) {
+            firebaseAuth.signOut();
+            console.log("Logged out succesful")
+            res.send("Logged out succesfull")
+            //res.send("Guest")
+        }
+    })
+});
+
+app.get('/check_user_status', (req, res) => {
+    console.log("I am over here!!!!")
+    let user1 = ""
+    let promise1 = new Promise(function (resolve, reject) {
+        firebaseAuth.onAuthStateChanged(function (user) {
+            user1 = user
+        })
+        resolve('data')
+    })
+
+    promise1.then(function (data) {
+        if (user1) {
+            console.log("User is logged in!!!!")
+            res.send(user1.email)
+        } else {
+            console.log("User is not logged in!!!!")
+            res.send("Guest")
+        }
+    })
+
 });
 
 app.get('/get_cart', (req,res)=>{
