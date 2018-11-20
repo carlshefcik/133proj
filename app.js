@@ -12,6 +12,7 @@ const emailRegex = new RegExp(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/
 
 var app = express();
 
+
 var config = {
     apiKey: "AIzaSyDS9owx0q_Eq96Cs2T-xD0s_cEHi4AxrEI",
     authDomain: "testing-island.firebaseapp.com",
@@ -199,37 +200,56 @@ app.post('/add_item', (req,res) =>{
 app.post('/add_item_2', (req,res) =>{
     //verifies that the user is an admin
 
+    // for (let prop in req.body){
+    //     console.log(`${prop}: ${req.body[prop]}`)
+    // }
 
-    let itemData = req.body
-    // console.log(itemData)
-    let itemid = itemData.ItemUID
-    let itemProperties = {
-        price:itemData.Price,
-        weight:itemData.Weight,
-        name: itemData.Name,
-        aisle: itemData.Aisle,
-        group: itemData.Group,
-        quantity: itemData.Quantity,
-        sale: itemData.Sale,
-        salePercent: itemData.SalePercent,
-        info: itemData.Info,
-        imgURL: ""
-    }
+    //console.log(req.body.price);
 
-    // create new item in the items collection
-    firebaseFirestore.collection('Items').doc(itemid).set({
-        price:itemData.Price,
-        weight:itemData.Weight,
-        name: itemData.Name,
-        aisle: itemData.Aisle,
-        group: itemData.Group,
-        quantity: itemData.Quantity,
-        sale: itemData.Sale,
-        salePercent: itemData.SalePercent,
-        info: itemData.Info,
-        imgURL: ""
+    firebaseFirestore.collection('Items').doc(req.body.itemid).set({
+        price: req.body.price,
+        weight: req.body.weight,
+        name: req.body.name,
+        aisle: req.body.aisle,
+        group: req.body.group,
+        quantity: req.body.quantity,
+        sale: req.body.sale,
+        salePercent: req.body.salePercent,
+        info: "",
+        imgURL: req.body.imgURL
     });
-    console.log('Added document with ID: ', itemid)
+    res.end();
+
+    // let itemData = req.body
+    // // console.log(itemData)
+    // let itemid = itemData.ItemUID
+    // let itemProperties = {
+    //     price:itemData.Price,
+    //     weight:itemData.Weight,
+    //     name: itemData.Name,
+    //     aisle: itemData.Aisle,
+    //     group: itemData.Group,
+    //     quantity: itemData.Quantity,
+    //     sale: itemData.Sale,
+    //     salePercent: itemData.SalePercent,
+    //     info: itemData.Info,
+    //     imgURL: ""
+    // }
+
+    // // create new item in the items collection
+    // firebaseFirestore.collection('Items').doc(itemid).set({
+    //     price:itemData.Price,
+    //     weight:itemData.Weight,
+    //     name: itemData.Name,
+    //     aisle: itemData.Aisle,
+    //     group: itemData.Group,
+    //     quantity: itemData.Quantity,
+    //     sale: itemData.Sale,
+    //     salePercent: itemData.SalePercent,
+    //     info: itemData.Info,
+    //     imgURL: ""
+    // });
+    // console.log('Added document with ID: ', itemid)
 
     // Image upload snippett
     {

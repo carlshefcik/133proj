@@ -91,6 +91,7 @@ $(document).ready(() => {
     })
 
     function addItem(itemData){
+        console.log(itemData);
         $.ajax({
             url: '/add_item_2',
             type: 'Post',
