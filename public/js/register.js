@@ -1,7 +1,7 @@
 $(document).ready(() => {
 
     // when the button is clicked sends an ajax request to express to retrive data
-    $('#register_user').click((e)=>{
+    $('#signUpButton').click((e)=>{
         let info = {
             username: document.getElementById('email').value,
             password: document.getElementById('password').value

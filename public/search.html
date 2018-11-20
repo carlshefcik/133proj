@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<nav id="nav-bar"></nav>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+    <!-- Datatables import -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="css/app.css" />
+
+    <!-- index js -->
+    <script src="js/index.js"></script>
+    <script src="js/search.js"></script>
+    
+
+    <style>
+        .result-img{
+            width: 100%;
+        }
+    </style>
+
+    <title>MiniSafeway</title>
+</head>
+
+<body>
+    <div class="container" style="text-align: center;">
+        <br>
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <h1><strong>Seach for an item</strong></h1>
+                    <br>
+                    <div class="row">
+                        <div class="input-group input-group-lg mb-3">
+                            <input id="search-input" type="text" class="form-control" placeholder="Enter keyword" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button id="search-btn" class="btn btn-outline-primary" type="button">Search Store</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+        
+
+        <div class="row">
+            <!-- Will automatically populate from jquery call and dynamicalyl make elemets -->
+            <div class="col">
+                <h3 id="search-name" style="text-align: left;">Results:</h3>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <table class="table" id="results-table" style="text-align: right;">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Name</th> 
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Buttons</th>
+                                </tr>
+                            </thead>
+                            <tbody id="search-results">
+                                <!-- Will be auto populated from javascript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <script>
+        //defined instance variables to be used in the script later
+        let tableData = []
+        let dataTable = $('#results-table').DataTable()
+    </script>
+</body>
+<footer id="page-footer"></footer>
+</html>

@@ -1,16 +1,13 @@
-//***********************************************************/
-// THIS IS THE OUTDATED SERVER: USE SERVER IN FUNCTIONS FOLER
-//***********************************************************/
+const functions = require('firebase-functions');
 const express = require('express');
-const bodyParser = require('body-parser');
+
+const bodyParser = require ('body-parser');
 const path = require('path');
 const firebase = require('firebase');
-const firestore = require('@firebase/firestore');
-const storage = require('@firebase/storage');
 const serviceAccount = require("./serviceAccountKey.json");
 const emailRegex = new RegExp(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/);
 
-var app = express();
+const app = express();
 
 var config = {
     apiKey: "AIzaSyDS9owx0q_Eq96Cs2T-xD0s_cEHi4AxrEI",
@@ -23,55 +20,58 @@ var config = {
 const firebaseService = firebase.initializeApp(config);
 
 var firebaseAuth = firebaseService.auth();
-var firebaseStorage = firebase.storage()
-// var firebaseDatabase = firebaseService.database();
+// var firebaseStorage = firebaseService.storage(); This is be use later
+var firebaseDatabase = firebaseService.database();
 var firebaseFirestore = firebaseService.firestore();
-const settings = { timestampsInSnapshots: true };
+const settings = {timestampsInSnapshots: true};
 firebaseFirestore.settings(settings);
-
 // var firebaseMessaging = firebaseService.messaging(); This is be use later
 
 // Body-parser middleware
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false })); //hook up with your app
+app.use(bodyParser.urlencoded({extended: false})); //hook up with your app
 
 // Set static path
-app.use(express.static(path.join(__dirname, 'public'))); //initializing the app with the directory of the app.js
+//app.use(express.static(path.join(__dirname, 'src'))); //initializing the app with the directory of the app.js
 
-app.get('/', (req, res) => {
+app.get('/', (req, res)=>{
     res.send('Hello');
 });
 
+app.get('/hi', (req,res)=>{
+    res.send("Hello World!");
+});
+
 //returns a json of element names of the aisles and the groups as corresponding arrays
-app.get('/aisles_and_groups', (req, res) => {
+app.get('/aisles_and_groups', (req,res)=>{
     let items = {}
-    firebaseFirestore.collection("Aisles").get().then((coll) => {
+    firebaseFirestore.collection("Aisles").get().then((coll)=> {
         coll.forEach((doc) => {
             var tmp = doc.id;
             items[tmp] = [];
             // adds groups to the aisles element arrays
-            doc.data()['subCollections'].forEach((e) => {
+            doc.data()['subCollections'].forEach((e)=>{
                 items[tmp].push(e);
             })
         });
-        res.send(items);
-    }).catch(function (error) {
+        res.send(items);     
+    }).catch(function(error){
         console.log(error);
     });
 })
 
-//gets the aisles and their img urls
-app.get('/load_aisles', (req, res) => {
+//gets the aisles and their ing urls
+app.get('/load_aisles', (req,res) => {
     let aisles = {}
-    firebaseFirestore.collection("Aisles").get().then((coll) => {
-        coll.forEach((doc) => {
+    firebaseFirestore.collection("Aisles").get().then((coll) =>{
+        coll.forEach((doc) =>{
             let tmp = doc.id
             aisles[tmp] = []
             aisles[tmp].push(tmp)
             aisles[tmp].push(doc.data()['imgURL'])
         })
         res.send(aisles)
-    }).catch(function (error) {
+    }).catch(function(error){
         console.log(error)
     })
 })
@@ -113,11 +113,10 @@ app.get('/get_popular', (req,res)=>{
     res.send(popular)
 })
 
+
 //adds a new item to the database
-app.post('/add_item', (req, res) => {
+app.post('/add_item', (req,res) =>{
     //verifies that the user is an admin
-
-
     let itemData = req.body
     // console.log(itemData)
     let itemid
@@ -125,9 +124,9 @@ app.post('/add_item', (req, res) => {
         name: itemData.Name,
         aisle: itemData.Aisle,
         group: itemData.Group,
-        quantity: Number(itemData.Quantity),
-        sale: Boolean(itemData.Sale),
-        salePercent: Number(itemData.SalePercent),
+        quantity: itemData.Quantity, 
+        sale: itemData.Sale, 
+        salePercent: itemData.SalePercent, 
         info: itemData.Info,
         imgURL: ""
     }
@@ -142,50 +141,6 @@ app.post('/add_item', (req, res) => {
         res.send(itemid)
     });
 
-    // Image upload snippett
-    //{
-    // console.log("uploading image")
-    // // Create file metadata including the content type
-    // var metadata = { contentType: 'image/jpeg' };
-    // // Upload the file and metadata
-    // var uploadTask = firebaseStorage.ref().child("Aisles/Bakery/Bread/default.jpg").put(itemData.Image, metadata)
-
-    // // Register three observers:
-    // // 1. 'state_changed' observer, called any time the state changes
-    // // 2. Error observer, called on failure
-    // // 3. Completion observer, called on successful completion
-    // uploadTask.on('state_changed', function(snapshot){
-    //     // Observe state change events such as progress, pause, and resume
-    //     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-    //     var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    //     console.log('Upload is ' + progress + '% done');
-    //     switch (snapshot.state) {
-    //     case firebase.storage.TaskState.PAUSED: // or 'paused'
-    //         console.log('Upload is paused');
-    //         break;
-    //     case firebase.storage.TaskState.RUNNING: // or 'running'
-    //         console.log('Upload is running');
-    //         break;
-    //     }
-    // }, function(error) {
-    //     // Handle unsuccessful uploads
-    //     console.log("didnt upload")
-    // }, function() {
-    //     // Handle successful uploads on complete
-    //     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-    //     uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-    //         console.log('File available at', downloadURL);
-    //         itemProperties.imgURL = downloadURL
-    //     });
-    // });
-    //}
-
-    // //add imgURL to original item document
-    // firebaseFirestore.collection('Items').doc(itemid).set({
-    //     imgURL: itemProperties.imgURL
-    // }).then(ref => {
-    //     console.log('Added changed imgurl of: ', ref.id)
-    // })
 })
 
 app.post('/register_user', (req, res) => {
@@ -287,41 +242,38 @@ app.get('/check_user_status', (req, res) => {
 
 });
 
-app.get('/get_cart', (req, res) => {
+app.get('/get_cart', (req,res)=>{
     console.log("test");
     var ref = firebaseFirestore.collection('Aisles').doc('Bakery').collection('Bread');
     ref.get()
-        .then((snapshot) => {
-            snapshot.forEach((doc) => {
-                console.log(doc.id, '=>', doc.data());
-            });
-        })
-        .catch((err) => {
-            console.log('Error getting documents', err);
-        });
+    .then((snapshot) => {
+      snapshot.forEach((doc) => {
+        console.log(doc.id, '=>', doc.data());
+      });
+    })
+    .catch((err) => {
+      console.log('Error getting documents', err);
+    });
 });
 
-app.get('/get_inventory', (req, res) => {
-
+app.get('/get_inventory', (req,res)=>{
     let items = [];
     //var ref_inventory = firebaseFirestore.collection('Aisles').doc("Bakery/Bread");
-
-    firebaseFirestore.collection("Aisles").get().then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
+    firebaseFirestore.collection("Aisles").get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
             var tmp = doc.id;
             items.push(tmp);
-            //console.log(items);
-
         });
         console.log(items);
         //send items before error handling
         res.send(items);
-    }).catch(function (error) {
+    }).catch(function(error){
         console.log(error);
     });
 });
 
-const port = process.env.PORT || 8000;
-app.listen(port, () => {
-    console.log(`server started at http://localhost:${port}/`); //boots up node.js server
-});
+// // Create and Deploy Your First Cloud Functions
+// // https://firebase.google.com/docs/functions/write-firebase-functions
+//
+
+exports.app = functions.https.onRequest(app);

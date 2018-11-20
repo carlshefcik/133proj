@@ -98,7 +98,6 @@
                 <hr>
             </div>
         </div>
-    </div>
         
     
         <div class="col-md-3">
@@ -143,6 +142,36 @@
     <br/><br/>
     <p id="sales"></p>
     </div> -->
+</body>
+<footer id="page-footer"></footer>
+
+
+<script type="text/javascript">
+var amount = 1;
+
+
+function decreaseAmount(){
+    if(typeof(Storage) !== "undefined")
+    {
+        if (sessionStorage.amount)
+        {sessionStorage.amount = Number(sessionStorage.amount)-1
+
+        }
+    }
+}
+
+
+function increaseAmount(){
+    if(typeof(Storage) !== "undefined")
+    {
+        if (sessionStorage.amount)
+        {sessionStorage.amount = Number(sessionStorage.amount)+1
+
+        }
+    }
+}
+
+
 
 </body>
 <footer id="page-footer"></footer>
