@@ -147,32 +147,30 @@
 
 
 <script type="text/javascript">
-var amount = 1;
+    var amount = 1;
 
 
-function decreaseAmount(){
-    if(typeof(Storage) !== "undefined")
-    {
-        if (sessionStorage.amount)
-        {sessionStorage.amount = Number(sessionStorage.amount)-1
+    function decreaseAmount(){
+        if(typeof(Storage) !== "undefined")
+        {
+            if (sessionStorage.amount)
+            {sessionStorage.amount = Number(sessionStorage.amount)-1
 
+            }
         }
     }
-}
 
 
-function increaseAmount(){
-    if(typeof(Storage) !== "undefined")
-    {
-        if (sessionStorage.amount)
-        {sessionStorage.amount = Number(sessionStorage.amount)+1
+    function increaseAmount(){
+        if(typeof(Storage) !== "undefined")
+        {
+            if (sessionStorage.amount)
+            {sessionStorage.amount = Number(sessionStorage.amount)+1
 
+            }
         }
     }
-}
-
-
-
+</script>
 </body>
 <footer id="page-footer"></footer>
 
