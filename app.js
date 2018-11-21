@@ -38,11 +38,6 @@ app.use(bodyParser.urlencoded({ extended: false })); //hook up with your app
 // Set static path
 app.use(express.static(path.join(__dirname, 'public'))); //initializing the app with the directory of the app.js
 
-
-app.get('*', function(req, res){
-    res.redirect('/404.html');
-});
-
 app.get('/', (req, res) => {
     res.send('Hello');
 });
@@ -325,6 +320,10 @@ app.get('/get_inventory', (req, res) => {
     }).catch(function (error) {
         console.log(error);
     });
+});
+
+app.get('*', function(req, res){
+    res.redirect('/404.html');
 });
 
 const port = process.env.PORT || 8000;
