@@ -38,12 +38,18 @@ app.use(bodyParser.urlencoded({ extended: false })); //hook up with your app
 // Set static path
 app.use(express.static(path.join(__dirname, 'public'))); //initializing the app with the directory of the app.js
 
+
+app.get('*', function(req, res){
+    res.redirect('/404.html');
+});
+
 app.get('/', (req, res) => {
     res.send('Hello');
 });
 
 //returns a json of element names of the aisles and the groups as corresponding arrays
 app.get('/aisles_and_groups', (req, res) => {
+
     let items = {}
     firebaseFirestore.collection("Aisles").get().then((coll) => {
         coll.forEach((doc) => {
