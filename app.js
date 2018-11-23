@@ -340,6 +340,10 @@ app.get('/get_inventory', (req, res) => {
     });
 });
 
+app.get('*', function(req, res){
+    res.redirect('/404.html');
+});
+
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
     console.log(`server started at http://localhost:${port}/`); //boots up node.js server
