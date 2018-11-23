@@ -16,13 +16,38 @@
     <!-- custom css -->
     <link rel="stylesheet" href="../css/app.css" />
 
+    <!-- Firebase modules -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase-storage.js"></script>
+
+    <script>
+    // Initialize Firebase
+    var config = {
+    apiKey: "AIzaSyDS9owx0q_Eq96Cs2T-xD0s_cEHi4AxrEI",
+    authDomain: "testing-island.firebaseapp.com",
+    databaseURL: "https://testing-island.firebaseio.com",
+    projectId: "testing-island",
+    storageBucket: "testing-island.appspot.com",
+    messagingSenderId: "1059701996270"
+    };
+    firebase.initializeApp(config);
+    </script>
+
+
     <!-- index js -->
     <script src="../js/index.js"></script>
     <script src="./group.js"></script>
-    
+
     <style>
         .dynamic-content {
             display:none;
+        }
+        
+        .item-img{
+            object-fit: cover;
+
+            width: 100%;
+            height: 150px;
         }
     </style>
 

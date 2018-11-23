@@ -1,5 +1,8 @@
+var firebaseStorage = firebase.storage()
+
+
 $(document).ready(() => {
-    
+
 
     // solution from https://jennamolby.com/how-to-display-dynamic-content-on-a-page-using-url-parameters/
     // Parse the URL parameter
@@ -43,16 +46,24 @@ function addElement(element){
     aisleNode.classList.add("col-md-3")
 
     let atag = document.createElement("a")
-    atag.href = ""
+    atag.href = "/item.html?id=" + element[1]
     aisleNode.appendChild(atag)
 
-    // let image = document.createElement("img")
-    // image.classList.add("aisle-img")
-    // image.src = element[1]
-    // atag.appendChild(image)
+
+    let image = document.createElement("img")
+    image.classList.add("item-img")
+    
+    let imgRef = firebaseStorage.refFromURL(element[2]);
+    imgRef.getDownloadURL().then(function(url) {
+        image.src = url
+    }).catch(function(error) {
+        console.log(error)
+    });
+
+    atag.appendChild(image)
 
     let ptext = document.createElement("p")
-    ptext.innerHTML = element
+    ptext.innerHTML = element[0]
     atag.appendChild(ptext)
 
     document.getElementById('item-list').appendChild(aisleNode)

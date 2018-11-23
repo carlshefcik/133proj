@@ -92,7 +92,8 @@ app.get('/load_items', (req,res) => {
             groups.forEach((groupName) =>{
                 firebaseFirestore.collection("Aisles").doc(aisleName).collection(groupName).get().then((coll) =>{
                     coll.forEach((doc) =>{
-                        items.push(doc.data()["name"])
+                        // put in array and then add to array
+                        items.push([doc.data()["name"], doc.id, doc.data()["imgURL"]])
                     })
                 })
             })
