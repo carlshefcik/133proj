@@ -92,7 +92,8 @@ app.get('/load_items', (req,res) => {
             groups.forEach((groupName) =>{
                 firebaseFirestore.collection("Aisles").doc(aisleName).collection(groupName).get().then((coll) =>{
                     coll.forEach((doc) =>{
-                        items.push(doc.data()["name"])
+                        // put in array and then add to array
+                        items.push([doc.data()["name"], doc.id, doc.data()["imgURL"]])
                     })
                 })
             })
@@ -100,6 +101,24 @@ app.get('/load_items', (req,res) => {
         // for some reason firebase does an async call on firestore functions
         setTimeout(function(){res.send(items)}, 2000)
     }
+})
+
+//loads items for item page
+app.get('/load_item_info', (req,res) => {
+    let itemInfo = {}
+    let itemId = Object.keys(req.query)[0]
+    console.log(itemId)
+
+    firebaseFirestore.collection("Items").doc(itemId).get().then((doc) =>{
+        if (doc.exists) {
+            // sets doc data to the item info
+            itemInfo = doc.data()
+            res.send(itemInfo)
+        } else {
+            console.log("Item doesnt exist")
+            res.send(null)
+        }
+    })
 })
 
 app.get('/get_popular', (req,res)=>{

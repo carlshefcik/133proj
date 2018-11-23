@@ -103,6 +103,24 @@ app.get('/load_items', (req,res) => {
     }
 })
 
+//loads items for item page
+app.get('/load_item_info', (req,res) => {
+    let itemInfo = {}
+    let itemId = Object.keys(req.query)[0]
+    console.log(itemId)
+
+    firebaseFirestore.collection("Items").doc(itemId).get().then((doc) =>{
+        if (doc.exists) {
+            // sets doc data to the item info
+            itemInfo = doc.data()
+            res.send(itemInfo)
+        } else {
+            console.log("Item doesnt exist")
+            res.send(null)
+        }
+    })
+})
+
 app.get('/get_popular', (req,res)=>{
     let popular = {
         "test1": ["id1", "name1", 1, "image1"],
