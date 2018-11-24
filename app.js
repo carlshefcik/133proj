@@ -116,7 +116,7 @@ app.get('/load_item_info', (req,res) => {
             res.send(itemInfo)
         } else {
             console.log("Item doesnt exist")
-            res.send(null)
+            res.redirect(404, '/404.html')
         }
     })
 })
