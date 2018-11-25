@@ -293,6 +293,15 @@ app.get('/check_user_status_1', (req, res) => {
 
 });
 
+app.post('/send_reset_email', (req, res) => {
+
+  let email = req.body.emailReset;
+  console.log(email);
+
+  firebaseAuth.sendPasswordResetEmail(email)
+
+});
+
 app.get('/get_cart', (req, res) => {
   console.log("test");
   var ref = firebaseFirestore.collection('Aisles').doc('Bakery').collection('Bread');
@@ -349,7 +358,7 @@ app.get('/add_to_cart', (req, res) =>{
                 res.send("sucess")
             }
         })
-        
+
     } else { //no user logged in so must store cart in cache
         res.status(304).send("No user logged in, store in cache")
     }
