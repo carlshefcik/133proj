@@ -34,13 +34,6 @@ function loadItems(groupName){
             console.log(data)
             data.forEach(element => {
                 addElement(element)
-///////////////////////////////////////////////////////////////
-                //everytime item is clicked, adds to array
-                element.addEventListener("click", addToHistory(element))
-
-
-
-
             });
         }
     })

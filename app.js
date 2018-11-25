@@ -29,6 +29,7 @@ var firebaseFirestore = firebaseService.firestore();
 const settings = { timestampsInSnapshots: true };
 firebaseFirestore.settings(settings);
 
+
 // var firebaseMessaging = firebaseService.messaging(); This is be use later
 
 // Body-parser middleware
@@ -132,12 +133,6 @@ app.get('/get_popular', (req,res)=>{
     res.send(popular)
 })
 
-
-
-
-
-
-
 //////////////////////////////////////////////
 //adds viewed items to array
 
@@ -148,16 +143,9 @@ app.get('/get_popular', (req,res)=>{
 
 //}
 
-
-
-
-
-
-
 //adds a new item to the database
 app.post('/add_item', (req, res) => {
     //verifies that the user is an admin
-
 
     let itemData = req.body
     // console.log(itemData)
@@ -182,51 +170,6 @@ app.post('/add_item', (req, res) => {
         firebaseFirestore.collection('Aisles').doc(itemData.Aisle).collection(itemData.Group).doc(itemid).set(itemProperties)
         res.send(itemid)
     });
-
-    // Image upload snippett
-    //{
-    // console.log("uploading image")
-    // // Create file metadata including the content type
-    // var metadata = { contentType: 'image/jpeg' };
-    // // Upload the file and metadata
-    // var uploadTask = firebaseStorage.ref().child("Aisles/Bakery/Bread/default.jpg").put(itemData.Image, metadata)
-
-    // // Register three observers:
-    // // 1. 'state_changed' observer, called any time the state changes
-    // // 2. Error observer, called on failure
-    // // 3. Completion observer, called on successful completion
-    // uploadTask.on('state_changed', function(snapshot){
-    //     // Observe state change events such as progress, pause, and resume
-    //     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-    //     var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    //     console.log('Upload is ' + progress + '% done');
-    //     switch (snapshot.state) {
-    //     case firebase.storage.TaskState.PAUSED: // or 'paused'
-    //         console.log('Upload is paused');
-    //         break;
-    //     case firebase.storage.TaskState.RUNNING: // or 'running'
-    //         console.log('Upload is running');
-    //         break;
-    //     }
-    // }, function(error) {
-    //     // Handle unsuccessful uploads
-    //     console.log("didnt upload")
-    // }, function() {
-    //     // Handle successful uploads on complete
-    //     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-    //     uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-    //         console.log('File available at', downloadURL);
-    //         itemProperties.imgURL = downloadURL
-    //     });
-    // });
-    //}
-
-    // //add imgURL to original item document
-    // firebaseFirestore.collection('Items').doc(itemid).set({
-    //     imgURL: itemProperties.imgURL
-    // }).then(ref => {
-    //     console.log('Added changed imgurl of: ', ref.id)
-    // })
 })
 
 app.post('/register_user', (req, res) => {
@@ -341,6 +284,54 @@ app.get('/get_cart', (req, res) => {
             console.log('Error getting documents', err);
         });
 });
+
+//adds given item id to the cart
+app.get('/add_to_cart', (req, res) =>{
+    //pareses data
+    let data = Object.keys(req.query)[0]
+    let itemID = req.query[data][0]
+    let itemQuantity = req.query[data][1]
+
+    // variable for the user
+    var firebaseUser = firebaseAuth.currentUser;
+
+    if(firebaseUser){ //if there is a user logged in
+        let userID = firebaseUser.uid
+        let userDB = firebaseFirestore.collection("Customer").doc(userID)
+        let cart;
+
+        //query for email
+        firebaseFirestore.collection("Customer").doc(userID).get().then((doc) =>{
+            if (doc.exists) {
+                // gets cart reference in the db
+                cart = doc.get("cart") ? doc.get("cart") : {};
+
+                if(cart[itemID]){
+                    //adds more items if the item is alread in the cart
+                    cart[itemID] += parseInt(itemQuantity, 10)
+                } else {
+                    // creates a new map element in the cart if item is not there
+                    Object.defineProperty(cart, itemID, {
+                        value: parseInt(itemQuantity, 10),
+                        writable: true,
+                        enumerable: true,
+                        configurable: true
+                    })
+                }
+
+                //updates the cart with the new cart data
+                userDB.update({
+                    cart: cart
+                })
+
+                res.send("sucess")
+            }
+        })
+        
+    } else { //no user logged in so must store cart in cache
+        res.status(304).send("No user logged in, store in cache")
+    }
+})
 
 app.get('/get_inventory', (req, res) => {
 

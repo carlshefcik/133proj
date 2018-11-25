@@ -18,6 +18,12 @@ $(document).ready(() => {
     console.log(dynamicContent)
 
     loadItem(dynamicContent)
+
+    //attaches listener to the add to cart button
+    document.getElementById('cart-add').addEventListener('click', (event)=>{
+        addToCart(dynamicContent)
+        event.preventDefault()
+    })
 })
 
 function loadItem(groupName) {
@@ -59,4 +65,28 @@ function updatePage(data) {
     }).catch(function (error) {
         console.log(error)
     });
+}
+
+//create button listeners to add to cart and cookies if not logged in
+function addToCart(id) {
+    let quantity = document.getElementById('item-quantity').value
+    let itemData = {data: [id, quantity]}
+    $.ajax({
+        url: '/add_to_cart',
+        type: 'Get',
+        datatype: 'json',
+        data: itemData,
+        statusCode: {
+            304: function () {
+                //add the item to some cookies variable
+                alert("Added Item to cart (in cookies)!")
+            }
+        },
+        success: (data) => {
+            //alert that it was added to the cart
+            if(data){
+                alert("Added Item to cart (on db)!")
+            }
+        }
+    })
 }
