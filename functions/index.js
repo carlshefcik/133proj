@@ -275,6 +275,54 @@ app.get('/get_cart', (req,res)=>{
     });
 });
 
+//adds given item id to the cart
+app.get('/add_to_cart', (req, res) =>{
+    //pareses data
+    let data = Object.keys(req.query)[0]
+    let itemID = req.query[data][0]
+    let itemQuantity = req.query[data][1]
+
+    // variable for the user
+    var firebaseUser = firebaseAuth.currentUser;
+    
+    if(firebaseUser){ //if there is a user logged in
+        let userID = firebaseUser.uid
+        let userDB = firebaseFirestore.collection("Customer").doc(userID)
+        let cart;
+
+        //query for email
+        firebaseFirestore.collection("Customer").doc(userID).get().then((doc) =>{
+            if (doc.exists) {
+                // gets cart reference in the db
+                cart = doc.get("cart") ? doc.get("cart") : {};
+
+                if(cart[itemID]){
+                    //adds more items if the item is alread in the cart
+                    cart[itemID] += parseInt(itemQuantity, 10)
+                } else {
+                    // creates a new map element in the cart if item is not there
+                    Object.defineProperty(cart, itemID, {
+                        value: parseInt(itemQuantity, 10),
+                        writable: true,
+                        enumerable: true,
+                        configurable: true
+                    })
+                }
+
+                //updates the cart with the new cart data
+                userDB.update({
+                    cart: cart
+                })
+
+                res.send("sucess")
+            }
+        })
+        
+    } else { //no user logged in so must store cart in cache
+        res.status(304).send("No user logged in, store in cache")
+    }
+})
+
 app.get('/get_inventory', (req,res)=>{
     let items = [];
     //var ref_inventory = firebaseFirestore.collection('Aisles').doc("Bakery/Bread");
@@ -289,6 +337,29 @@ app.get('/get_inventory', (req,res)=>{
     }).catch(function(error){
         console.log(error);
     });
+});
+
+app.get('/get_sales', (req,res)=>{
+
+    let sales = [];
+
+    firebaseFirestore.collection("Items").get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+
+            if (doc.get("sale") == true) {
+                sales.push(doc.get("name"));
+            }
+        });
+        console.log(sales);
+        //send items before error handling
+        res.send(sales);
+    }).catch(function(error){
+        console.log(error);
+    });
+})
+
+app.get('*', function(req, res){
+    res.redirect('/404.html');
 });
 
 // // Create and Deploy Your First Cloud Functions
