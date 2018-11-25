@@ -132,6 +132,28 @@ app.get('/get_popular', (req,res)=>{
     res.send(popular)
 })
 
+
+
+
+
+
+
+//////////////////////////////////////////////
+//adds viewed items to array
+
+//app.post('add_history', (req, req) =>{
+//	let historyList = []
+//	let itemId = Object.keys(req.query)[0]
+//	console.log(itemId)
+
+//}
+
+
+
+
+
+
+
 //adds a new item to the database
 app.post('/add_item', (req, res) => {
     //verifies that the user is an admin
