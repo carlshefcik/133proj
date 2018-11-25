@@ -126,9 +126,9 @@
 
               <hr>
 
-              <button style="position:relative; left:0%;background-color: #FF0401; border-color: transparent" onclick="">-</button>
+              <button style="position:relative; left:0%;background-color: #FF0401; border-color: transparent" onclick="decrement()">-</button>
               <input id="item-quantity" type="text" name="quantity" value="1" style="padding-left: 12%; width: 30%">
-              <button style="position:relative; right:0%;background-color: #FF0401; border-color: transparent" onclick="">+</button>
+              <button style="position:relative; right:0%;background-color: #FF0401; border-color: transparent" onclick="increment()">+</button>
               <button id="cart-add" class="btn btn-sm btn-light">Add to cart</button>
 
               <hr>
@@ -217,5 +217,15 @@
 </body>
 
 <footer id="page-footer"></footer>
+<script>
+function increment(){
+  document.getElementById('item-quantity').value++
+}
+function decrement(){
+  if(!(document.getElementById('item-quantity').value <= 1)){
+    document.getElementById('item-quantity').value--
+  }
+}
+</script>
 
 </html>
