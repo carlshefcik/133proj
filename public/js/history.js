@@ -43,6 +43,7 @@ function loadItem(groupName) {
     })
 }
 
+//trying to create a row for every 3 elements added//
 function createARow(data) {
     var row = 0
     let newRow = document.createElement("div")
@@ -64,7 +65,7 @@ function createARow(data) {
 
 }
 
-//creates an appropriate aisle element from the given aisle element
+//trying to create an element per each card
 function addElement(element) {
     let anItemImg = document.createElement("card-img-top")
 
@@ -93,7 +94,7 @@ function addElement(element) {
     let anItemPrice = document.createElement("card-text")
     anItemBody.appendChild(anItemPrice)
 
-///<<<<<<<<<<need help getting the price element/////////////////
+///<<<<<<<<<<need help getting the price element or we could completely drop this too and ONLY show img and item name?/////////////////
     let itemPrice = document.createElement("")
    // itemID.innerHTML = element[1]
     itemPrice.innerHTML = element[1].get[6]
@@ -105,6 +106,8 @@ function addElement(element) {
 
 ////////////////////////////////////////////////////
 //adds item to array of 9
+///////////////this function is called within group.js under function loadItems,
+// it is called as an eventListener click/////////
 function addToHistory(element){
     if(historyList.length == 9)
     {
