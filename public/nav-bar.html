@@ -12,7 +12,7 @@
     <span> Welcome, <span id="user">Guest</span>! </span>
     <!-- TODO have this button appear when they log in -->
     <a href="/account.html">
-        <button type="button" class="btn btn-outline-secondary">Account</button>
+        <button type="button" class="btn btn-outline-secondary" id="accountButton">Account</button>
     </a>
     <button class="btn btn-outline-secondary" id="login-button" type="button" data-toggle="modal" data-target="#loginModal">Login</button>
     <button class="btn btn-outline-secondary" id="logoutButton" type="button">Logout</button>
@@ -130,6 +130,7 @@
     <script>
 
         $(document).ready(() => {
+
             checkUserStatus()
 
             function checkUserStatus(){
@@ -141,10 +142,12 @@
                         console.log("test for data here!!!!" + data);
                         if(data != "Guest"){
                             document.getElementById("user").textContent = data
+                            document.getElementById("accountButton").hidden = false;
                             document.getElementById("logoutButton").hidden = false;
                             document.getElementById("login-button").hidden = true;
                         } else if (data == "Guest") {
                             document.getElementById("user").textContent = "Guest"
+                            document.getElementById("accountButton").hidden = true;
                             document.getElementById("logoutButton").hidden = true;
                             document.getElementById("login-button").hidden = false;
                         }
@@ -167,6 +170,7 @@
                 data: info,
                 success: (data) =>{
                     document.getElementById("user").textContent = data
+                    document.getElementById("accountButton").hidden = false;
                     document.getElementById("logoutButton").hidden = false;
                     document.getElementById("login-button").hidden = true;
                 }
@@ -191,6 +195,7 @@
                 data: info,
                 success: (data) =>{
                     document.getElementById("user").textContent = data
+                    document.getElementById("accountButton").hidden = false;
                     document.getElementById("logoutButton").hidden = false;
                     document.getElementById("login-button").hidden = true;
                 }
