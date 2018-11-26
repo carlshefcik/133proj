@@ -20,11 +20,13 @@ function checkout(){
         statusCode: {
             304: function () {
                 //no one logged in so process cache
-                alert("No one logged in!")
+                alert("No one logged in! Please log in")
             }
         },
         success: (data) =>{
             //redirect to page that say order was completed and details are now on account page in order history
+            window.location.pathname = '/checkoutsuccess.html'
+
         }
     })
 
