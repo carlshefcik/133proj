@@ -1,6 +1,9 @@
 var firebaseStorage = firebase.storage()
 
 $(document).ready(() => {
+    total_cost = 0
+    cart_total_unique = 0
+
     //get cart from db or cache
     loadCart()
 })
@@ -28,6 +31,10 @@ function loadCart(){
                 console.log("draw data")
                 dataTable.rows.add(tableData).draw()
             }
+
+            document.getElementById("item-total").innerHTML = "$" + total_cost.toFixed(2)
+
+            document.getElementById("cart-quantity").innerHTML = cart_total_unique
         }
     })
 }
@@ -92,6 +99,9 @@ function processItemData(element){
     btnCol.appendChild(plusButton)
 
     itemRow.appendChild(btnCol)
+
+    total_cost += element[2] * element[3]
+    cart_total_unique++
 
     // returns the item row to be added to the data source
     return itemRow;
