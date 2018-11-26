@@ -61,7 +61,7 @@ function loadCart(){
             itemli.appendChild(total)
 
             let price = document.createElement("strong")
-            price.innerHTML = "$ " + total_cost
+            price.innerHTML = "$" + total_cost.toFixed(2)
             itemli.appendChild(price)
 
             document.getElementById("cart-items").appendChild(itemli)
@@ -96,7 +96,7 @@ function processItemData(element){
 
     let price = document.createElement("span")
     price.classList.add("text-muted")
-    price.innerHTML = "$ " + (element[2] * element[3])
+    price.innerHTML = "$" + (element[2] * element[3]).toFixed(2)
 
     total_cost += element[2] * element[3]
     cart_total_unique++
