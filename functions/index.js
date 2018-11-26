@@ -99,7 +99,7 @@ app.get('/load_items', (req,res) => {
             })
         })
         // for some reason firebase does an async call on firestore functions
-        setTimeout(function(){res.send(items)}, 2000)
+        setTimeout(function(){res.send(items)}, 500)
     }
 })
 
@@ -274,6 +274,41 @@ app.get('/get_cart', (req,res)=>{
       console.log('Error getting documents', err);
     });
 });
+
+//loads the cart items if there are items, returns error otherwise
+app.get('/load_cart', (req, res) => {
+    // variable for the user
+    var firebaseUser = firebaseAuth.currentUser;
+    let cartItem = {}
+  
+    if(firebaseUser){
+      let userID = firebaseUser.uid
+      // let userDB = firebaseFirestore.collection("Customer").doc(userID)
+      let cartInfo
+  
+      firebaseFirestore.collection("Customer").doc(userID).get().then((doc) =>{
+        cartInfo = doc.get("cart")
+        console.log(cartInfo)
+  
+        Object.keys(cartInfo).forEach((key) => {
+          console.log(key)
+  
+          firebaseFirestore.collection("Items").doc(key).get().then((doc) =>{
+            Object.defineProperty(cartItem, doc.id, {
+              value: [doc.get('name'), doc.get('imgURL'), doc.get('price'), cartInfo[key]],
+              writable: true,
+              enumerable: true,
+              configurable: true
+            })
+          })
+        })
+  
+        setTimeout(function(){res.send(cartItem)}, 500)
+      })
+    } else { //no user logged in so must store cart in cache
+      res.status(304).send("No user logged in, store in cache")
+    }
+  });
 
 //adds given item id to the cart
 app.get('/add_to_cart', (req, res) =>{

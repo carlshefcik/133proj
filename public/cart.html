@@ -13,11 +13,53 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
+
+    <!-- Datatables import -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+
     <!-- custom css -->
     <link rel="stylesheet" href="css/app.css" />
 
+     <!-- Firebase modules -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase-storage.js"></script>
+
+    <script>
+        // Initialize Firebase
+        var config = {
+        apiKey: "AIzaSyDS9owx0q_Eq96Cs2T-xD0s_cEHi4AxrEI",
+        authDomain: "testing-island.firebaseapp.com",
+        databaseURL: "https://testing-island.firebaseio.com",
+        projectId: "testing-island",
+        storageBucket: "testing-island.appspot.com",
+        messagingSenderId: "1059701996270"
+        };
+        firebase.initializeApp(config);
+    </script>
+
     <!-- index js -->
     <script src="js/index.js"></script>
+    <script src="js/cart.js"></script>
+
+
+    <style>
+    .red-button{
+        position:relative; 
+        left:0%;background-color: #FF0401; 
+        border-color: transparent
+    }
+    .quantity-input{
+        padding-left: 12%;
+        width: 30%
+    }
+    .item-img{
+        object-fit: scale-down;
+
+        width: 100%;
+        height: 100px;
+    }
+    </style>
 
     <title>MiniSafeway</title>
 
@@ -25,90 +67,45 @@
 
 <body>
     <hr>
-    <div style="position: relative; left: 6%">
+    <div style="position: relative; left: 1%">
         <h1>My Cart</h1>
         <!-- add the amount in cart here -->
     </div>
 
-
     <div class="container-fluid">
-        <h1>Will have to put everything in a table or something...</h1>
         <div class="row">
 
             <div class="col-md-9">
-                <div>
-                    <hr>
-                    <div class="row" style="position: relative; left: 3%">
-                        <div class="col-sm-2">Item
-                        </div>
-                        <div class="col-sm-5">
-                        </div>
-                        <div class="col-sm-2">Price
-                        </div>
-                        <div class="col-sm-2">Quantity
-                        </div>
-                    </div>
-                    <hr>
-                    </br>
-
-
-
-                    <!--Item listing 1 -->
-                    <div class="row" style="position: relative; left: 3%">
-                        <div class="col-sm-2"><img src="res\bottle_water.png" alt="ARROWHEAD Mountain Water"></br>
-                        </div>
-                        <div class="col-sm-3" style="padding-left: 5%"><b>ARROWHEAD Mountain Spring Water - 24-16.9 Fl.Oz.</b> <br>($0.01/fl.oz) </br>
-                        </div>
-                        <div class="col-sm-2">
-                        </div>
-                        <div class="col-sm-2" style="padding-left: 1%"><b>$5.59</b></br>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="quantity-box">
-                                <button style="position:relative; left:0%;background-color: #FF0401; border-color: transparent" onclick="">-</button>
-                                <input type="text" name="quantity" value="1" style="padding-left: 12%;width: 30%">
-                                <button style="position:relative; right:0%;background-color: #FF0401; border-color: transparent" onclick="">+</button>
+                <div class="row">
+                        <!-- Will automatically populate from jquery call and dynamicalyl make elemets -->
+                        <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <table class="table" id="cart-table" style="text-align: right;">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Image</th>
+                                                <th scope="col">Name</th> 
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Quantity</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="cart-items">
+                                            <!-- Will be auto populated from javascript -->
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            </br>
-                            <button style="background-color: transparent; border-color: transparent;">
-                                <img src="res\remove.png" onclick=""> Remove
-                            </button>
                         </div>
-                    </div>
-                    <hr>
-                    </br>
-
-
-
-                    <!--Listing2-->
-                    <div class="row" style="position: relative; left: 3%">
                         
-
-                        <div class="col-sm-2" name="itemPicture"><img src="res\distilled_water.png" alt="ARROWHEAD Mountain Water"></br>
-                        </div>
-                        <div class="col-sm-3" name="itemName" style="padding-left: 5%"><b>Refreshe Distilled Drinking Water - 1 Gallon </b> <br>($0.01/fl.oz) </br>
-                        </div>
-                        <div class="col-sm-2">
-                        </div>
-                        <div class="col-sm-2" name="pricing" style="padding-left: 1%"><b>$1.09</b></br>
-
-
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="quantity-box">
-                                <button style="position:relative; left:0%;background-color: #FF0401; border-color: transparent" onclick="">-</button>
-                                <input type="text" name="quantity" value="1" style="padding-left: 12%;width: 30%">
-                                <button style="position:relative; right:0%;background-color: #FF0401; border-color: transparent" onclick="">+</button>
-                            </div>
-                            </br>
-                            <button style="background-color: transparent; border-color: transparent;">
-                                <img src="res\remove.png" onclick=""> Remove
-                            </button>
-                        </div>
                     </div>
-
-                    <hr>
-                </div>
+                    
+                    <script>
+                        //defined instance variables to be used in the script later
+                        let tableData = []
+                        let dataTable = $('#cart-table').DataTable()
+                    </script>
+            
             </div>
 
 
@@ -148,33 +145,5 @@
     </div>
 
 </body>
-
 <footer id="page-footer"></footer>
-
-
-<script type="text/javascript">
-    var amount = 1;
-
-
-    function decreaseAmount() {
-        if (typeof (Storage) !== "undefined") {
-            if (sessionStorage.amount) {
-                sessionStorage.amount = Number(sessionStorage.amount) - 1
-
-            }
-        }
-    }
-
-
-    function increaseAmount() {
-        if (typeof (Storage) !== "undefined") {
-            if (sessionStorage.amount) {
-                sessionStorage.amount = Number(sessionStorage.amount) + 1
-
-            }
-        }
-    }
-</script>
-
-
 </html>
