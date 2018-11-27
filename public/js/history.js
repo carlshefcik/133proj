@@ -1,3 +1,5 @@
+var firebaseStorage = firebase.storage()
+
 $(document).ready(() => {
     loadHistory()
 })
@@ -19,9 +21,7 @@ function loadHistory(){
 
 //creates an appropriate aisle element from the given aisle element
 function addElement(element){
-
-    console.log("Testing for element: " + element);
-    console.log("Testing for element[0]: " + element[0]);
+    console.log(element)
 
     let historyNode = document.createElement("div")
     historyNode.classList.add("col-sm-6")
@@ -29,16 +29,24 @@ function addElement(element){
 
     let atag = document.createElement("a")
 
-    atag.href = "/item.html?id="+element;
+    atag.href = "/item.html?id="+element[0];
     historyNode.appendChild(atag)
 
-    // let image = document.createElement("img")
-    // image.classList.add("aisle-img")
-    // image.src = element[1]
-    // atag.appendChild(image)
+    let image = document.createElement("img")
+    image.classList.add("item-img")
+    image.src
+
+    let imgRef = firebaseStorage.refFromURL(element[1]);
+    imgRef.getDownloadURL().then(function (url) {
+        image.src = url
+    }).catch(function (error) {
+        console.log(error)
+    });
+    atag.appendChild(image)
+
 
     let ptext = document.createElement("p")
-    ptext.innerHTML = element
+    ptext.innerHTML = element[0]
     atag.appendChild(ptext)
 
     document.getElementById('history-list').appendChild(historyNode)

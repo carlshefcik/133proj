@@ -106,34 +106,37 @@ app.get('/load_items', (req,res) => {
 
 //loads all items from requested user's uid
 app.get('/load_history', (req,res) => {
-  let items = []
-  //let aisleName = Object.keys(req.query)[0]
-  // let groups
-  // console.log(aisleName)
+  let itemsHistory = []  
+  var firebaseUser = firebaseAuth.currentUser;
   
-  getItems()
-  
-  function getItems() {
-    
-    var firebaseUser = firebaseAuth.currentUser;
-    
-    if(firebaseUser){ //if there is a user logged in
-      let userID = firebaseUser.uid
-      let userDB = firebaseFirestore.collection("Customer").doc(userID)
-      //let historyList = {};
+  if(firebaseUser){ //if there is a user logged in
+    let userID = firebaseUser.uid
+    let userDB = firebaseFirestore.collection("Customer").doc(userID)
+
+    //query for email
+    firebaseFirestore.collection("Customer").doc(userID).get().then((doc) =>{
+      let items = doc.data().history
+      console.log(items)
       
-      //query for email
-      firebaseFirestore.collection("Customer").doc(userID).get().then((doc) =>{
-        console.log(doc.data().history);
-        items = doc.data().history
-        console.log("History List: " + items)
-        res.send(items)
+      items.forEach((item) => {
+        console.log(item)
+        firebaseFirestore.collection("Items").doc(item).get().then((doc) =>{
+          console.log(doc.data())
+          let tempItem = [
+            doc.data().name,
+            doc.data().imgURL
+          ]
+          itemsHistory.push(tempItem)
+        })
       })
       
-    } else { //no user logged in so must store cart in cache
-      res.status(304).send("No user logged in, store in cache")
-    } 
-  }
+      setTimeout(function(){res.send(itemsHistory)}, 500)
+    })
+    
+  } else { //no user logged in so must store cart in cache
+    res.status(304).send("No user logged in, store in cache")
+  } 
+  
 })
 
 //loads items for item page

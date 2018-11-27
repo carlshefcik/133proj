@@ -73,24 +73,12 @@ function updatePage(data) {
 
 function addToHistory(id) {
     console.log("Test addToHis: " + id);
-    // let quantity = document.getElementById('item-quantity').value
-    // let itemData = {data: [id, quantity]}
     $.ajax({
         url: '/add_to_history',
         type: 'Get',
         datatype: 'json',
         data: id,
-        // statusCode: {
-        //     // 304: function () {
-        //     //     //add the item to some cookies variable
-        //     //     alert("Error")
-        //     // }
-        // },
         success: (data) => {
-            // //alert that it was added to the cart
-            // if(data){
-            //     alert("Added Item to history (on db)!")
-            // }
         }
     })
 }
