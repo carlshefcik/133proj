@@ -17,7 +17,7 @@ $(document).ready(() => {
 	}
 	// Give the parameter a variable name
     var dynamicContent = getParameterByName('aisle');
-    console.log(dynamicContent)
+    console.log("Test for dynamicContent: " + dynamicContent)
 
     document.getElementById('group-name').innerHTML = "Items for "+ dynamicContent + " aisle:"
 

@@ -83,9 +83,9 @@ app.get('/load_items', (req,res) => {
   let aisleName = Object.keys(req.query)[0]
   let groups
   console.log(aisleName)
-
+  
   getItems()
-
+  
   function getItems() {
     firebaseFirestore.collection("Aisles").doc(aisleName).get().then((doc) =>{
       groups = doc.data()["subCollections"]
@@ -104,12 +104,47 @@ app.get('/load_items', (req,res) => {
   }
 })
 
+//loads all items from requested user's uid
+app.get('/load_history', (req,res) => {
+  let itemsHistory = []  
+  var firebaseUser = firebaseAuth.currentUser;
+  
+  if(firebaseUser){ //if there is a user logged in
+    let userID = firebaseUser.uid
+    let userDB = firebaseFirestore.collection("Customer").doc(userID)
+
+    //query for email
+    firebaseFirestore.collection("Customer").doc(userID).get().then((doc) =>{
+      let items = doc.data().history
+      console.log(items)
+      
+      items.forEach((item) => {
+        console.log(item)
+        firebaseFirestore.collection("Items").doc(item).get().then((doc) =>{
+          console.log(doc.data())
+          let tempItem = [
+            doc.data().name,
+            doc.data().imgURL
+          ]
+          itemsHistory.push(tempItem)
+        })
+      })
+      
+      setTimeout(function(){res.send(itemsHistory)}, 500)
+    })
+    
+  } else { //no user logged in so must store cart in cache
+    res.status(304).send("No user logged in, store in cache")
+  } 
+  
+})
+
 //loads items for item page
 app.get('/load_item_info', (req,res) => {
   let itemInfo = {}
   let itemId = Object.keys(req.query)[0]
   console.log(itemId)
-
+  
   firebaseFirestore.collection("Items").doc(itemId).get().then((doc) =>{
     if (doc.exists) {
       // sets doc data to the item info
@@ -145,31 +180,31 @@ app.get('/get_popular', (req,res)=>{
 
 //adds a new item to the database
 app.post('/add_item', (req, res) => {
-    //verifies that the user is an admin
-
-    let itemData = req.body
-    // console.log(itemData)
-    let itemid
-    let itemProperties = {
-        name: itemData.Name,
-        aisle: itemData.Aisle,
-        group: itemData.Group,
-        quantity: Number(itemData.Quantity),
-        sale: Boolean(itemData.Sale),
-        salePercent: Number(itemData.SalePercent),
-        info: itemData.Info,
-        imgURL: ""
-    }
-
-    // create new item in the items collection
-    firebaseFirestore.collection('Items').add(itemProperties).then(ref => {
-        console.log('Added document with ID: ', ref.id)
-        itemid = ref.id
-
-        //create new item in the correct aisle collection with a uid store isle address and uid for item page
-        firebaseFirestore.collection('Aisles').doc(itemData.Aisle).collection(itemData.Group).doc(itemid).set(itemProperties)
-        res.send(itemid)
-    });
+  //verifies that the user is an admin
+  
+  let itemData = req.body
+  // console.log(itemData)
+  let itemid
+  let itemProperties = {
+    name: itemData.Name,
+    aisle: itemData.Aisle,
+    group: itemData.Group,
+    quantity: Number(itemData.Quantity),
+    sale: Boolean(itemData.Sale),
+    salePercent: Number(itemData.SalePercent),
+    info: itemData.Info,
+    imgURL: ""
+  }
+  
+  // create new item in the items collection
+  firebaseFirestore.collection('Items').add(itemProperties).then(ref => {
+    console.log('Added document with ID: ', ref.id)
+    itemid = ref.id
+    
+    //create new item in the correct aisle collection with a uid store isle address and uid for item page
+    firebaseFirestore.collection('Aisles').doc(itemData.Aisle).collection(itemData.Group).doc(itemid).set(itemProperties)
+    res.send(itemid)
+  });
 })
 
 app.post('/register_user', (req, res) => {
@@ -177,7 +212,7 @@ app.post('/register_user', (req, res) => {
   let email = req.body.username;
   let password = req.body.password;
   let userID;
-
+  
   if (emailRegex.test(email) && password.length >= 6) {
     firebaseAuth.createUserWithEmailAndPassword(email, password)
     .then(function(data){
@@ -193,17 +228,17 @@ app.post('/register_user', (req, res) => {
       console.log("fail");
     })
   }
-
+  
 });
 
 app.post('/login_user', (req, res) => {
-
+  
   console.log(req.body);
   let email = req.body.username;
   console.log("here is email: " + email);
   let password = req.body.password;
   console.log("here is password: " + password);
-
+  
   let user1 = ""
   let promise1 = new Promise(function (resolve, reject) {
     firebaseAuth.onAuthStateChanged(function (user) {
@@ -211,7 +246,7 @@ app.post('/login_user', (req, res) => {
     })
     resolve('data')
   });
-
+  
   promise1.then(function (data) {
     if (user1) {
       console.log("User already logged in!!!")
@@ -230,7 +265,7 @@ app.post('/login_user', (req, res) => {
 });
 
 app.get('/logOutUser', (req, res) => {
-
+  
   let user1 = ""
   let promise1 = new Promise(function (resolve, reject) {
     firebaseAuth.onAuthStateChanged(function (user) {
@@ -238,7 +273,7 @@ app.get('/logOutUser', (req, res) => {
     })
     resolve('data')
   })
-
+  
   promise1.then(function (data) {
     if (user1) {
       firebaseAuth.signOut();
@@ -258,7 +293,7 @@ app.get('/check_user_status', (req, res) => {
     })
     resolve('data')
   })
-
+  
   promise1.then(function (data) {
     if (user1) {
       console.log("User is logged in!!!!")
@@ -268,7 +303,7 @@ app.get('/check_user_status', (req, res) => {
       res.send("Guest")
     }
   })
-
+  
 });
 
 app.get('/check_user_status_1', (req, res) => {
@@ -280,7 +315,7 @@ app.get('/check_user_status_1', (req, res) => {
     })
     resolve('data')
   })
-
+  
   promise1.then(function (data) {
     if (user1) {
       console.log("User is logged in!!!!")
@@ -290,16 +325,16 @@ app.get('/check_user_status_1', (req, res) => {
       res.send("Guest")
     }
   })
-
+  
 });
 
 app.post('/send_reset_email', (req, res) => {
-
+  
   let email = req.body.emailReset;
   console.log(email);
-
+  
   firebaseAuth.sendPasswordResetEmail(email)
-
+  
 });
 
 //loads the cart items if there are items, returns error otherwise
@@ -307,19 +342,19 @@ app.get('/load_cart', (req, res) => {
   // variable for the user
   var firebaseUser = firebaseAuth.currentUser;
   let cartItem = {}
-
+  
   if(firebaseUser){
     let userID = firebaseUser.uid
     // let userDB = firebaseFirestore.collection("Customer").doc(userID)
     let cartInfo
-
+    
     firebaseFirestore.collection("Customer").doc(userID).get().then((doc) =>{
       cartInfo = doc.get("cart")
       console.log(cartInfo)
-
+      
       Object.keys(cartInfo).forEach((key) => {
         console.log(key)
-
+        
         firebaseFirestore.collection("Items").doc(key).get().then((doc) =>{
           Object.defineProperty(cartItem, doc.id, {
             value: [doc.get('name'), doc.get('imgURL'), doc.get('price'), cartInfo[key]],
@@ -329,7 +364,7 @@ app.get('/load_cart', (req, res) => {
           })
         })
       })
-
+      
       setTimeout(function(){res.send(cartItem)}, 500)
     })
   } else { //no user logged in so must store cart in cache
@@ -337,65 +372,104 @@ app.get('/load_cart', (req, res) => {
   }
 });
 
+app.get('/add_to_history', (req, res) =>{
+  //pareses data
+  let itemID = Object.keys(req.query)[0]
+  // let itemQuantity = req.query[data][1]
+  
+  // variable for the user
+  var firebaseUser = firebaseAuth.currentUser;
+  
+  if(firebaseUser){ //if there is a user logged in
+    let userID = firebaseUser.uid
+    let userDB = firebaseFirestore.collection("Customer").doc(userID)
+    let history;
+    
+    //query for email
+    firebaseFirestore.collection("Customer").doc(userID).get().then((doc) =>{
+      if (doc.exists) {
+        // gets cart reference in the db
+        history = doc.get("history") ? doc.get("history") : {};
+        
+        for(const itr in history){
+          if(history[itr] == itemID){
+            console.log("found");
+          } else {
+            console.log("not found");
+            userDB.update({
+              history: firebase.firestore.FieldValue.arrayUnion(itemID)
+            });
+          }
+        }
+        
+        res.send("sucess")
+      }
+    })
+    
+  } else { //no user logged in so must store cart in cache
+    res.status(304).send("No user logged in, store in cache")
+  }
+})
+
 //adds given item id to the cart
 app.get('/add_to_cart', (req, res) =>{
-    //pareses data
-    let data = Object.keys(req.query)[0]
-    let itemID = req.query[data][0]
-    let itemQuantity = req.query[data][1]
-
-    // variable for the user
-    var firebaseUser = firebaseAuth.currentUser;
-
-    if(firebaseUser){ //if there is a user logged in
-        let userID = firebaseUser.uid
-        let userDB = firebaseFirestore.collection("Customer").doc(userID)
-        let cart;
-
-        //query for email
-        firebaseFirestore.collection("Customer").doc(userID).get().then((doc) =>{
-            if (doc.exists) {
-                // gets cart reference in the db
-                cart = doc.get("cart") ? doc.get("cart") : {};
-
-                if(cart[itemID]){
-                    //adds more items if the item is alread in the cart
-                    cart[itemID] += parseInt(itemQuantity, 10)
-                } else {
-                    // creates a new map element in the cart if item is not there
-                    Object.defineProperty(cart, itemID, {
-                        value: parseInt(itemQuantity, 10),
-                        writable: true,
-                        enumerable: true,
-                        configurable: true
-                    })
-                }
-
-                //updates the cart with the new cart data
-                userDB.update({
-                    cart: cart
-                })
-
-                res.send("sucess")
-            }
+  //pareses data
+  let data = Object.keys(req.query)[0]
+  let itemID = req.query[data][0]
+  let itemQuantity = req.query[data][1]
+  
+  // variable for the user
+  var firebaseUser = firebaseAuth.currentUser;
+  
+  if(firebaseUser){ //if there is a user logged in
+    let userID = firebaseUser.uid
+    let userDB = firebaseFirestore.collection("Customer").doc(userID)
+    let cart;
+    
+    //query for email
+    firebaseFirestore.collection("Customer").doc(userID).get().then((doc) =>{
+      if (doc.exists) {
+        // gets cart reference in the db
+        cart = doc.get("cart") ? doc.get("cart") : {};
+        
+        if(cart[itemID]){
+          //adds more items if the item is alread in the cart
+          cart[itemID] += parseInt(itemQuantity, 10)
+        } else {
+          // creates a new map element in the cart if item is not there
+          Object.defineProperty(cart, itemID, {
+            value: parseInt(itemQuantity, 10),
+            writable: true,
+            enumerable: true,
+            configurable: true
+          })
+        }
+        
+        //updates the cart with the new cart data
+        userDB.update({
+          cart: cart
         })
-
-    } else { //no user logged in so must store cart in cache
-        res.status(304).send("No user logged in, store in cache")
-    }
+        
+        res.send("sucess")
+      }
+    })
+    
+  } else { //no user logged in so must store cart in cache
+    res.status(304).send("No user logged in, store in cache")
+  }
 })
 
 app.get('/get_inventory', (req, res) => {
-
+  
   let items = [];
   //var ref_inventory = firebaseFirestore.collection('Aisles').doc("Bakery/Bread");
-
+  
   firebaseFirestore.collection("Aisles").get().then(function (querySnapshot) {
     querySnapshot.forEach(function (doc) {
       var tmp = doc.id;
       items.push(tmp);
       //console.log(items);
-
+      
     });
     console.log(items);
     //send items before error handling
@@ -406,12 +480,12 @@ app.get('/get_inventory', (req, res) => {
 });
 
 app.get('/get_sales', (req,res)=>{
-
+  
   let sales = [];
-
+  
   firebaseFirestore.collection("Items").get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
-
+      
       if (doc.get("sale") == true) {
         sales.push(doc.get("name"));
       }
@@ -425,35 +499,35 @@ app.get('/get_sales', (req,res)=>{
 })
 
 app.post('/update_user_info', (req,res)=>{
-
+  
   firebaseQuery = firebaseFirestore.collection("Customer").doc(req.body.uid);
-
+  
   if(req.body.firstName != ""){
     firebaseQuery.update({
       firstName: req.body.firstName
     })
   }
-
+  
   if(req.body.lastName != ""){
     firebaseQuery.update({
       lastName: req.body.lastName
     })
   }
-
+  
   if(req.body.phone != ""){
     firebaseQuery.update({
       phone: req.body.phone
     })
   }
-
+  
   if(req.body.address != ""){
     firebaseQuery.update({
       address: req.body.address
     })
   }
-
+  
   res.send("Success")
-
+  
 })
 
 app.get('*', function(req, res){

@@ -2,6 +2,8 @@ var firebaseStorage = firebase.storage()
 
 $(document).ready(() => {
 
+    var uid;
+
     // solution from https://jennamolby.com/how-to-display-dynamic-content-on-a-page-using-url-parameters/
     // Parse the URL parameter
     function getParameterByName(name, url) {
@@ -18,6 +20,8 @@ $(document).ready(() => {
     console.log(dynamicContent)
 
     loadItem(dynamicContent)
+
+    addToHistory(dynamicContent)
 
     //attaches listener to the add to cart button
     document.getElementById('cart-add').addEventListener('click', (event)=>{
@@ -65,6 +69,18 @@ function updatePage(data) {
     }).catch(function (error) {
         console.log(error)
     });
+}
+
+function addToHistory(id) {
+    console.log("Test addToHis: " + id);
+    $.ajax({
+        url: '/add_to_history',
+        type: 'Get',
+        datatype: 'json',
+        data: id,
+        success: (data) => {
+        }
+    })
 }
 
 //create button listeners to add to cart and cookies if not logged in
