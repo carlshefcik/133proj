@@ -15,22 +15,54 @@
     <!-- custom css -->
     <link rel="stylesheet" href="css/app.css" />
 
+    <!-- Firebase modules -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase-storage.js"></script>
+
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDS9owx0q_Eq96Cs2T-xD0s_cEHi4AxrEI",
+            authDomain: "testing-island.firebaseapp.com",
+            databaseURL: "https://testing-island.firebaseio.com",
+            projectId: "testing-island",
+            storageBucket: "testing-island.appspot.com",
+            messagingSenderId: "1059701996270"
+        };
+        firebase.initializeApp(config);
+    </script>
+
     <!-- index js -->
     <script src="js/index.js"></script>
     <script src="js/sales.js"></script>
+
+    <style>
+        .item-img{
+            object-fit: scale-down;
+
+            width: 100%;
+            height: 150px;
+        }
+    </style>
 
     <title>MiniSafeway</title>
 </head>
 <body>
 
-<div class="row">
-    <div class="col-md-12">
-        <h1 style="color: #645A50;">
-            <div class="home-header">
-                <strong>Browse Sales</strong>
-                <p id="getsales"></p>
-            </div>
-        </h1>
+<div class="container" style="text-align: center;">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 style="color: #645A50; margin-top: -30px; margin-bottom: 30px">
+                <div class="home-header">
+                    <br>
+                    <strong>Browse Sales</strong>
+                </div>
+            </h1>
+        </div>
+    </div>
+
+    <div class="row" id="sales-list">
+        <!-- Will automatically populate from jquery call and dynamically make elements -->
     </div>
 </div>
 
