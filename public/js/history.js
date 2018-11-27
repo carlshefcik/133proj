@@ -4,23 +4,21 @@ $(document).ready(() => {
     loadHistory()
 })
 
-function loadHistory(){
+function loadHistory() {
     $.ajax({
         url: '/load_history',
         type: 'Get',
         datatype: 'json',
-        success: (data) =>{
-
+        success: (data) => {
             for (var property in data) {
                 addElement(data[property])
             }
-
         }
     })
 }
 
 //creates an appropriate aisle element from the given aisle element
-function addElement(element){
+function addElement(element) {
     console.log(element)
 
     let historyNode = document.createElement("div")
@@ -29,7 +27,7 @@ function addElement(element){
 
     let atag = document.createElement("a")
 
-    atag.href = "/item.html?id="+element[2];
+    atag.href = "/item.html?id=" + element[2];
     historyNode.appendChild(atag)
 
     let image = document.createElement("img")
@@ -43,7 +41,6 @@ function addElement(element){
         console.log(error)
     });
     atag.appendChild(image)
-
 
     let ptext = document.createElement("p")
     ptext.innerHTML = element[0]

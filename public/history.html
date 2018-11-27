@@ -1,25 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <nav id="nav-bar"></nav>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
     <!-- custom css -->
     <link rel="stylesheet" href="css/app.css" />
-
     <!-- Firebase modules -->
     <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase-storage.js"></script>
-
     <script>
         // Initialize Firebase
         var config = {
@@ -32,40 +27,34 @@
         };
         firebase.initializeApp(config);
     </script>
-
     <!-- index js -->
     <script src="js/index.js"></script>
     <script src="js/history.js"></script>
-    
     <style>
         .item-img{
             object-fit: scale-down;
-
             width: 100%;
             height: 150px;
         }
     </style>
-
     <title>MiniSafeway</title>
 </head>
-
 <body>
-    <div class="container" style="text-align: center;">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 style="color: #645A50; margin-top: -30px; margin-bottom: 30px">
-                    <div class="home-header">
-                        <br>
-                        <strong>Your History Page!</strong>
-                    </div>
-                </h1>
-            </div>
-        </div>
-
-        <div class="row" id="history-list">
-            <!-- Will automatically populate from jquery call and dynamically make elements -->
+<div class="container" style="text-align: center;">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 style="color: #645A50; margin-top: -30px; margin-bottom: 30px">
+                <div class="home-header">
+                    <br>
+                    <strong>Your History Page!</strong>
+                </div>
+            </h1>
         </div>
     </div>
+    <div class="row" id="history-list">
+        <!-- Will automatically populate from jquery call and dynamically make elements -->
+    </div>
+</div>
 </body>
 <footer id="page-footer"></footer>
 </html>

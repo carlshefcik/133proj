@@ -1,15 +1,15 @@
 var firebaseStorage = firebase.storage()
 
-$(document).ready(()=> {
+$(document).ready(() => {
     loadSales()
 })
 
-function loadSales(){
+function loadSales() {
     $.ajax({
         url: '/get_sales',
         type: 'GET',
         datatype: 'json',
-        success: (data) =>{
+        success: (data) => {
             console.log("success");
             for (var property in data) {
                 addElement(data[property])
@@ -19,7 +19,7 @@ function loadSales(){
 }
 
 //creates an appropriate aisle element from the given aisle element
-function addElement(element){
+function addElement(element) {
     console.log(element)
 
     let salesNode = document.createElement("div")
@@ -28,7 +28,7 @@ function addElement(element){
 
     let atag = document.createElement("a")
 
-    atag.href = "/item.html?id="+element[2];
+    atag.href = "/item.html?id=" + element[2];
     salesNode.appendChild(atag)
 
     let image = document.createElement("img")
