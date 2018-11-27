@@ -535,23 +535,25 @@ app.get('/get_inventory', (req, res) => {
   });
 });
 
-app.get('/get_sales', (req,res)=>{
-  
-  let sales = [];
-  
-  firebaseFirestore.collection("Items").get().then(function(querySnapshot) {
-    querySnapshot.forEach(function(doc) {
-      
-      if (doc.get("sale") == true) {
-        sales.push(doc.get("name"));
-      }
+app.get('/get_sales', (req,res)=> {
+    let sales = [];
+
+    firebaseFirestore.collection("Items").get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+            if (doc.get("sale") == true) {
+                let tempItem = [
+                    doc.get("name"),
+                    doc.get("imgURL"),
+                    doc.id
+                ]
+                sales.push(tempItem)
+            }
+        });
+        //send items before error handling
+        res.send(sales);
+    }).catch(function (error) {
+        console.log(error);
     });
-    console.log(sales);
-    //send items before error handling
-    res.send(sales);
-  }).catch(function(error){
-    console.log(error);
-  });
 })
 
 app.post('/update_user_info', (req,res)=>{
