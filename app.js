@@ -127,32 +127,13 @@ app.get('/load_history', (req,res) => {
         console.log(doc.data().history);
         items = doc.data().history
         console.log("History List: " + items)
+        res.send(items)
       })
-      res.send(items)
       
     } else { //no user logged in so must store cart in cache
       res.status(304).send("No user logged in, store in cache")
-    }
-    
-    
-    
-    
-  //   firebaseFirestore.collection("Aisles").doc(aisleName).get().then((doc) =>{
-  //     groups = doc.data()["subCollections"]
-  //   }).then((data) =>{
-  //     groups.forEach((groupName) =>{
-  //       firebaseFirestore.collection("Aisles").doc(aisleName).collection(groupName).get().then((coll) =>{
-  //         coll.forEach((doc) =>{
-  //           // put in array and then add to array
-  //           items.push([doc.data()["name"], doc.id, doc.data()["imgURL"]])
-  //         })
-  //       })
-  //     })
-  //   })
-  //   // for some reason firebase does an async call on firestore functions
-  //   setTimeout(function(){res.send(items)}, 500)
+    } 
   }
-  
 })
 
 //loads items for item page

@@ -80,17 +80,17 @@ function addToHistory(id) {
         type: 'Get',
         datatype: 'json',
         data: id,
-        statusCode: {
-            304: function () {
-                //add the item to some cookies variable
-                alert("Error")
-            }
-        },
+        // statusCode: {
+        //     // 304: function () {
+        //     //     //add the item to some cookies variable
+        //     //     alert("Error")
+        //     // }
+        // },
         success: (data) => {
-            //alert that it was added to the cart
-            if(data){
-                alert("Added Item to history (on db)!")
-            }
+            // //alert that it was added to the cart
+            // if(data){
+            //     alert("Added Item to history (on db)!")
+            // }
         }
     })
 }
