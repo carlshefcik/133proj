@@ -133,11 +133,9 @@ app.get('/load_history', (req,res) => {
       
       setTimeout(function(){res.send(itemsHistory)}, 500)
     })
-    
   } else { //no user logged in so must store cart in cache
     res.status(304).send("No user logged in, store in cache")
   } 
-  
 })
 
 //loads items for item page

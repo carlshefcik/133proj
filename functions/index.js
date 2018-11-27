@@ -103,6 +103,40 @@ app.get('/load_items', (req,res) => {
     }
 })
 
+//loads all items from requested user's uid
+app.get('/load_history', (req,res) => {
+    let itemsHistory = []  
+    var firebaseUser = firebaseAuth.currentUser;
+
+    if(firebaseUser){ //if there is a user logged in
+        let userID = firebaseUser.uid
+        let userDB = firebaseFirestore.collection("Customer").doc(userID)
+
+        //query for email
+        firebaseFirestore.collection("Customer").doc(userID).get().then((doc) =>{
+        let items = doc.data().history
+        console.log(items)
+        
+        items.forEach((item) => {
+            console.log(item)
+            firebaseFirestore.collection("Items").doc(item).get().then((doc) =>{
+            console.log(doc.data())
+            let tempItem = [
+                doc.data().name,
+                doc.data().imgURL,
+                item
+            ]
+            itemsHistory.push(tempItem)
+            })
+        })
+        
+        setTimeout(function(){res.send(itemsHistory)}, 500)
+        })
+    } else { //no user logged in so must store cart in cache
+        res.status(304).send("No user logged in, store in cache")
+    } 
+})
+
 //loads items for item page
 app.get('/load_item_info', (req,res) => {
     let itemInfo = {}
@@ -304,33 +338,80 @@ app.get('/load_cart', (req, res) => {
     let cartItem = {}
   
     if(firebaseUser){
-      let userID = firebaseUser.uid
-      // let userDB = firebaseFirestore.collection("Customer").doc(userID)
-      let cartInfo
-  
-      firebaseFirestore.collection("Customer").doc(userID).get().then((doc) =>{
-        cartInfo = doc.get("cart")
-        console.log(cartInfo)
-  
-        Object.keys(cartInfo).forEach((key) => {
-          console.log(key)
-  
-          firebaseFirestore.collection("Items").doc(key).get().then((doc) =>{
-            Object.defineProperty(cartItem, doc.id, {
-              value: [doc.get('name'), doc.get('imgURL'), doc.get('price'), cartInfo[key]],
-              writable: true,
-              enumerable: true,
-              configurable: true
+        let userID = firebaseUser.uid
+        // let userDB = firebaseFirestore.collection("Customer").doc(userID)
+        let cartInfo
+    
+        firebaseFirestore.collection("Customer").doc(userID).get().then((doc) =>{
+            cartInfo = doc.get("cart")
+            console.log(cartInfo)
+    
+            Object.keys(cartInfo).forEach((key) => {
+            console.log(key)
+    
+            firebaseFirestore.collection("Items").doc(key).get().then((doc) =>{
+                Object.defineProperty(cartItem, doc.id, {
+                value: [doc.get('name'), doc.get('imgURL'), doc.get('price'), cartInfo[key]],
+                writable: true,
+                enumerable: true,
+                configurable: true
+                })
             })
-          })
         })
-  
+    
         setTimeout(function(){res.send(cartItem)}, 500)
-      })
+        })
     } else { //no user logged in so must store cart in cache
-      res.status(304).send("No user logged in, store in cache")
+        res.status(304).send("No user logged in, store in cache")
     }
-  });
+});
+
+
+app.get('/add_to_history', (req, res) =>{
+    //pareses data
+    let itemID = Object.keys(req.query)[0]
+    // let itemQuantity = req.query[data][1]
+    
+    // variable for the user
+    var firebaseUser = firebaseAuth.currentUser;
+    
+    if(firebaseUser){ //if there is a user logged in
+        let userID = firebaseUser.uid
+        let userDB = firebaseFirestore.collection("Customer").doc(userID)
+        let history;
+        
+        //query for email
+        firebaseFirestore.collection("Customer").doc(userID).get().then((doc) =>{
+            if (doc.exists) {
+                // gets cart reference in the db
+                history = doc.get("history")
+        
+                if(!history){
+                    history = [itemID]
+                    userDB.update({
+                        history: history
+                    })
+                } else {
+                    for(const itr in history){
+                        if(history[itr] == itemID){
+                            console.log("found");
+                        } else {
+                            console.log("not found");
+                            userDB.update({
+                                history: firebase.firestore.FieldValue.arrayUnion(itemID)
+                            });
+                        }
+                    }
+                }
+        
+            res.send("sucess")
+            }
+        })
+    } else { //no user logged in so must store cart in cache
+        res.status(304).send("No user logged in, store in cache")
+    }
+})
+
 
 //adds given item id to the cart
 app.get('/add_to_cart', (req, res) =>{
