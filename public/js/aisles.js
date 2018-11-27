@@ -2,12 +2,12 @@ $(document).ready(() => {
     loadAisles()
 })
 
-function loadAisles(){
+function loadAisles() {
     $.ajax({
         url: '/load_aisles',
         type: 'Get',
         datatype: 'json',
-        success: (data) =>{
+        success: (data) => {
             for (var property in data) {
                 addElement(data[property])
             }
@@ -16,13 +16,13 @@ function loadAisles(){
 }
 
 //creates an appropriate aisle element from the given aisle element
-function addElement(element){
+function addElement(element) {
     let aisleNode = document.createElement("div")
     aisleNode.classList.add("col-sm-6")
     aisleNode.classList.add("col-md-3")
 
     let atag = document.createElement("a")
-    atag.href = "/aisles/group.html?aisle="+element[0]
+    atag.href = "/aisles/group.html?aisle=" + element[0]
     aisleNode.appendChild(atag)
 
     let image = document.createElement("img")

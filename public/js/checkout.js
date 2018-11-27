@@ -4,14 +4,13 @@ $(document).ready(() => {
     total_cost = 0
     cart_total_unique = 0
 
-    document.getElementById("checkout_button").addEventListener('click', (event) =>{
+    document.getElementById("checkout_button").addEventListener('click', (event) => {
         checkout()
         event.preventDefault()
     })
-
 })
 
-function checkout(){
+function checkout() {
     console.log("needs a new ajax function")
 
     $.ajax({
@@ -24,17 +23,16 @@ function checkout(){
                 alert("No one logged in! Please log in")
             }
         },
-        success: (data) =>{
+        success: (data) => {
             //redirect to page that say order was completed and details are now on account page in order history
-            if(data){
+            if (data) {
                 window.location.pathname = '/checkoutsuccess.html'
             }
         }
     })
-
 }
 
-function loadCart(){
+function loadCart() {
 
     $.ajax({
         url: '/load_cart',
@@ -46,9 +44,9 @@ function loadCart(){
                 alert("No one logged in!")
             }
         },
-        success: (data) =>{
+        success: (data) => {
             console.log(data)
-            if(data){
+            if (data) {
                 Object.keys(data).forEach((key) => {
                     //puts the data into the list
                     document.getElementById("cart-items").appendChild(processItemData(data[key]))
@@ -78,9 +76,9 @@ function loadCart(){
 }
 
 //creates an appropriate cart row element from the given item element
-function processItemData(element){
+function processItemData(element) {
     console.log(element)
-    
+
     let itemli = document.createElement("li")
     itemli.classList.add("list-group-item")
     itemli.classList.add("d-flex")
@@ -111,5 +109,4 @@ function processItemData(element){
 
     // returns the item row to be added to the data source
     return itemli;
-
 }

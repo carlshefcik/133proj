@@ -1,154 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <nav id="nav-bar"></nav>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-
     <!-- Datatables import -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
-
     <!-- custom css -->
     <link rel="stylesheet" href="css/app.css" />
-
-     <!-- Firebase modules -->
+    <!-- Firebase modules -->
     <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase-storage.js"></script>
-
     <script>
         // Initialize Firebase
         var config = {
-        apiKey: "AIzaSyDS9owx0q_Eq96Cs2T-xD0s_cEHi4AxrEI",
-        authDomain: "testing-island.firebaseapp.com",
-        databaseURL: "https://testing-island.firebaseio.com",
-        projectId: "testing-island",
-        storageBucket: "testing-island.appspot.com",
-        messagingSenderId: "1059701996270"
+            apiKey: "AIzaSyDS9owx0q_Eq96Cs2T-xD0s_cEHi4AxrEI",
+            authDomain: "testing-island.firebaseapp.com",
+            databaseURL: "https://testing-island.firebaseio.com",
+            projectId: "testing-island",
+            storageBucket: "testing-island.appspot.com",
+            messagingSenderId: "1059701996270"
         };
         firebase.initializeApp(config);
     </script>
-
     <!-- index js -->
     <script src="js/index.js"></script>
     <script src="js/cart.js"></script>
-
-
     <style>
-    .red-button{
-        position:relative; 
-        left:0%;background-color: #FF0401; 
-        border-color: transparent
-    }
-    .remove-button{
-        margin-top: 3px;
-        margin-right: 11%;
-    }
-    .quantity-input{
-        padding-left: 12%;
-        width: 30%
-    }
-    .item-img{
-        object-fit: scale-down;
-
-        width: 100%;
-        height: 100px;
-    }
+        .red-button{
+            position:relative;
+            left:0%;background-color: #FF0401;
+            border-color: transparent
+        }
+        .remove-button{
+            margin-top: 3px;
+            margin-right: 11%;
+        }
+        .quantity-input{
+            padding-left: 12%;
+            width: 30%
+        }
+        .item-img{
+            object-fit: scale-down;
+            width: 100%;
+            height: 100px;
+        }
     </style>
-
     <title>MiniSafeway</title>
-
 </head>
-
 <body>
-    <script>
-        let total_cost
-        let cart_total_unique
-    </script>
-
-    <hr>
-    <div style="position: relative; left: 1%">
-        <h1>My Cart</h1>
-        <!-- add the amount in cart here -->
-    </div>
-
-    <div class="container-fluid">
-        <div class="row">
-
-            <div class="col-md-9">
-                <div class="row">
-                        <!-- Will automatically populate from jquery call and dynamicalyl make elemets -->
+<script>
+    let total_cost
+    let cart_total_unique
+</script>
+<hr>
+<div style="position: relative; left: 1%">
+    <h1>My Cart</h1>
+    <!-- add the amount in cart here -->
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="row">
+                <!-- Will automatically populate from jquery call and dynamicalyl make elemets -->
+                <div class="col">
+                    <div class="row">
                         <div class="col">
-                            <div class="row">
-                                <div class="col">
-                                    <table class="table" id="cart-table" style="text-align: right;">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col" style="color:white;">Image</th>
-                                                <th scope="col">Name</th> 
-                                                <th scope="col">Price</th>
-                                                <th scope="col">Quantity</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="cart-items">
-                                            <!-- Will be auto populated from javascript -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                            <table class="table" id="cart-table" style="text-align: right;">
+                                <thead>
+                                <tr>
+                                    <th scope="col" style="color:white;">Image</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                </tr>
+                                </thead>
+                                <tbody id="cart-items">
+                                <!-- Will be auto populated from javascript -->
+                                </tbody>
+                            </table>
                         </div>
-                        
                     </div>
-                    
-                    <script>
-                        //defined instance variables to be used in the script later
-                        let tableData = []
-                        let dataTable = $('#cart-table').DataTable({
-                            searching: false,
-                            ordering:  false,
-                            paging: false
-                        })
-                    </script>
-            
-            </div>
-
-
-            <div class="col-md-3">
-                <div style="background-color: #E6E6E6; padding: 10px 10px 10px 10px;">
-                    <font color="#595959">
-                        <div>
-                            <h2><b>Cart Summary</b></h2>
-                            <hr>
-                            <div id=cartSummaryInfo>
-                                <h3><b>Items:</b></h3>
-                                <h3 id="cart-quantity">0</h3>
-                                <h3><b>Estimated Total: </b></h3>
-                                <h4 id="item-total">$</h4>
-                                <hr>
-                                <a href="checkout.html">  <button class="btn btn-secondary" style="align-items: center; background-color: #FF0401; width: 100%" >CHECKOUT</button></a>
-                                <br>
-                                <p style="font-size: 8pt;">You can review the items and costs again at the checkout screen</p>
-                            </div>
-                        </div>
-
-                    </font>
                 </div>
             </div>
-
-
+            <script>
+                //defined instance variables to be used in the script later
+                let tableData = []
+                let dataTable = $('#cart-table').DataTable({
+                    searching: false,
+                    ordering:  false,
+                    paging: false
+                })
+            </script>
         </div>
-
+        <div class="col-md-3">
+            <div style="background-color: #E6E6E6; padding: 10px 10px 10px 10px;">
+                <font color="#595959">
+                    <div>
+                        <h2><b>Cart Summary</b></h2>
+                        <hr>
+                        <div id=cartSummaryInfo>
+                            <h3><b>Items:</b></h3>
+                            <h3 id="cart-quantity">0</h3>
+                            <h3><b>Estimated Total: </b></h3>
+                            <h4 id="item-total">$</h4>
+                            <hr>
+                            <a href="checkout.html">  <button class="btn btn-secondary" style="align-items: center; background-color: #FF0401; width: 100%" >CHECKOUT</button></a>
+                            <br>
+                            <p style="font-size: 8pt;">You can review the items and costs again at the checkout screen</p>
+                        </div>
+                    </div>
+                </font>
+            </div>
+        </div>
     </div>
-
+</div>
 </body>
 <footer id="page-footer"></footer>
 </html>

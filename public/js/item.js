@@ -21,9 +21,8 @@ $(document).ready(() => {
 
     loadItem(dynamicContent)
 
-
     //attaches listener to the add to cart button
-    document.getElementById('cart-add').addEventListener('click', (event)=>{
+    document.getElementById('cart-add').addEventListener('click', (event) => {
         addToCart(dynamicContent)
         event.preventDefault()
     })
@@ -52,9 +51,9 @@ function loadItem(groupName) {
 function updatePage(data) {
     console.log(data)
 
-    document.getElementById('item-name').innerHTML = ( data['name'])
-    document.getElementById('item-wt').innerHTML += ( data['weight'] + ' lbs')
-    document.getElementById('item-price').innerHTML += ( " "+ data['price'])
+    document.getElementById('item-name').innerHTML = (data['name'])
+    document.getElementById('item-wt').innerHTML += (data['weight'] + ' lbs')
+    document.getElementById('item-price').innerHTML += (" " + data['price'])
 
     document.getElementById('item-details').innerHTML = ('Aisle: ' + data['aisle'] + '<br>')
     document.getElementById('item-details').innerHTML += ('Group: ' + data['group'] + '<br>')
@@ -78,15 +77,16 @@ function addToHistory(id) {
         type: 'Get',
         datatype: 'json',
         data: id,
-        success: (data) => {
-        }
+        success: (data) => {}
     })
 }
 
 //create button listeners to add to cart and cookies if not logged in
 function addToCart(id) {
     let quantity = document.getElementById('item-quantity').value
-    let itemData = {data: [id, quantity]}
+    let itemData = {
+        data: [id, quantity]
+    }
     $.ajax({
         url: '/add_to_cart',
         type: 'Get',
@@ -100,7 +100,7 @@ function addToCart(id) {
         },
         success: (data) => {
             //alert that it was added to the cart
-            if(data){
+            if (data) {
                 alert("Added Item to cart (on db)!")
             }
         }

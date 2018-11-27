@@ -7,7 +7,6 @@
     </div>
     <div class="col-md-2"></div>
 </div>
-
 <div style="text-align: right; margin-right: 10px; margin-bottom: 5px;">
     <span> Welcome, <span id="user">Guest</span>! </span>
     <!-- TODO have this button appear when they log in -->
@@ -17,10 +16,8 @@
     <button class="btn btn-outline-secondary" id="login-button" type="button" data-toggle="modal" data-target="#loginModal">Sign-in | Register</button>
     <button class="btn btn-outline-secondary" id="logoutButton" type="button">Logout</button>
 </div>
-
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #db1c1c;">
     <a class="navbar-brand" href="/index.html">MiniSafeway</a>
-
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -38,7 +35,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="/contact.html">Contact Us</a>
             </li>
-
             <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Dropdown link
@@ -48,18 +44,17 @@
                     <a class="dropdown-item" href="#">Another action</a>
                     <a class="dropdown-item" href="#">Something else here</a>
                 </div>
-            </li> -->
+                </li> -->
         </ul>
         <!--
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        -->
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            -->
         <form class="form-inline my-2 my-lg-0">
             <a href="/cart.html"><button class="btn btn-outline-light my-2 my-sm-0" type="button" style="color: white">View Cart</button></a>
         </form>
-
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -68,7 +63,6 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-
                     <div class="modal-body" id="registerModal">
                         <div class="container-fluid">
                             <div class="row">
@@ -79,12 +73,10 @@
                                             <label for="signUpEmail">Email address</label>
                                             <input type="email" id="signUpEmail" class="form-control" placeholder="Email address" required autofocus>
                                         </div>
-
                                         <div class="form-label-group">
                                             <label for="signUpPassword">Password</label>
                                             <input type="password" id="signUpPassword" class="form-control" placeholder="Password" required>
                                         </div>
-
                                         <div class="checkbox mb-3">
                                             <label>
                                                 <input type="checkbox" value="remember-me"> Remember me
@@ -93,7 +85,6 @@
                                     </form>
                                     <button class="btn btn-lg btn-secondary btn-block" type="submit" id="signUpButton">Create Account</button>
                                 </div>
-
                                 <div class="col-md-6 col-sm-6">
                                     <h1>Login:</h1>
                                     <form class="form-signin">
@@ -101,12 +92,10 @@
                                             <label for="inputEmail">Email address</label>
                                             <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                                         </div>
-
                                         <div class="form-label-group">
                                             <label for="inputPassword">Password</label>
                                             <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
                                         </div>
-
                                         <div class="checkbox mb-3">
                                             <label>
                                                 <input type="checkbox" value="remember-me"> Remember me
@@ -123,7 +112,6 @@
         </div>
     </div>
     <script>
-
         $(document).ready(() => {
 
             checkUserStatus()
@@ -176,8 +164,8 @@
 
             console.log("aye");
         })
-            // window.location='../index.html'
-            // if logged in
+        // window.location='../index.html'
+        // if logged in
 
         // when the button is clicked sends an ajax request to express to retrive data
         $('#signUpButton').click((e)=>{
@@ -204,7 +192,6 @@
         })
 
         $('#logoutButton').click((e)=>{
-
             console.log("Testing for logout")
 
             $.ajax({

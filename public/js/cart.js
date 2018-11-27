@@ -8,8 +8,7 @@ $(document).ready(() => {
     loadCart()
 })
 
-
-function loadCart(){
+function loadCart() {
     dataTable.clear()
     total_cost = 0
     cart_total_unique = 0
@@ -24,9 +23,9 @@ function loadCart(){
                 alert("No one logged in!")
             }
         },
-        success: (data) =>{
+        success: (data) => {
             console.log(data)
-            if(data){
+            if (data) {
                 tableData = []
                 Object.keys(data).forEach((key) => {
                     tableData.push(processItemData(data[key], key))
@@ -43,10 +42,10 @@ function loadCart(){
 }
 
 //creates an appropriate cart row element from the given item element
-function processItemData(element, id){
+function processItemData(element, id) {
     console.log(element)
     console.log(id)
-    
+
     let itemRow = document.createElement("tr")
 
     // creates img col element and has to query firebase for the img url
@@ -71,7 +70,7 @@ function processItemData(element, id){
 
     // creates price col element
     let priceCol = document.createElement("td")
-    priceCol.innerHTML = "$ "+ element[2]
+    priceCol.innerHTML = "$ " + element[2]
     itemRow.appendChild(priceCol)
 
 
@@ -81,20 +80,20 @@ function processItemData(element, id){
     let quantityTag = document.createElement("input") // quantity
     quantityTag.classList.add("quantity-input")
     quantityTag.value = element[3]
-    
+
     let minusButton = document.createElement("button") // button
     minusButton.classList.add("red-button")
     minusButton.innerHTML = "-"
-    minusButton.addEventListener('click', (event)=>{
-        if(!(quantityTag.value <= 0)){
+    minusButton.addEventListener('click', (event) => {
+        if (!(quantityTag.value <= 0)) {
             quantityTag.value--
         }
     })
-    
+
     let plusButton = document.createElement("button") // button
     plusButton.classList.add("red-button")
     plusButton.innerHTML = "+"
-    plusButton.addEventListener('click', (event)=>{
+    plusButton.addEventListener('click', (event) => {
         quantityTag.value++
     })
 
@@ -111,7 +110,7 @@ function processItemData(element, id){
     removeButton.classList.add("btn-secondary")
     removeButton.classList.add("remove-button")
     removeButton.innerHTML = "Remove"
-    removeButton.addEventListener('click', (event)=>{
+    removeButton.addEventListener('click', (event) => {
         deleteItem(id)
     })
     btnCol.appendChild(removeButton)
@@ -123,12 +122,13 @@ function processItemData(element, id){
 
     // returns the item row to be added to the data source
     return itemRow;
-
 }
 
-function deleteItem(itemID){
-    console.log("removing: "+itemID)
-    let itemData = {data: [itemID]}
+function deleteItem(itemID) {
+    console.log("removing: " + itemID)
+    let itemData = {
+        data: [itemID]
+    }
     $.ajax({
         url: '/cart_item_delete',
         type: 'Get',
@@ -140,12 +140,11 @@ function deleteItem(itemID){
                 alert("No one logged in!")
             }
         },
-        success: (data) =>{
+        success: (data) => {
             console.log(data)
-            if(data){
+            if (data) {
                 loadCart()
             }
         }
     })
-
 }
