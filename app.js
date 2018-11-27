@@ -124,7 +124,8 @@ app.get('/load_history', (req,res) => {
           console.log(doc.data())
           let tempItem = [
             doc.data().name,
-            doc.data().imgURL
+            doc.data().imgURL,
+            item
           ]
           itemsHistory.push(tempItem)
         })
@@ -389,18 +390,27 @@ app.get('/add_to_history', (req, res) =>{
     firebaseFirestore.collection("Customer").doc(userID).get().then((doc) =>{
       if (doc.exists) {
         // gets cart reference in the db
-        history = doc.get("history") ? doc.get("history") : {};
-        
-        for(const itr in history){
-          if(history[itr] == itemID){
-            console.log("found");
-          } else {
-            console.log("not found");
-            userDB.update({
-              history: firebase.firestore.FieldValue.arrayUnion(itemID)
-            });
+        history = doc.get("history")
+
+        if(!history){
+          history = [itemID]
+          userDB.update({
+            history: history
+          })
+        } else {
+          for(const itr in history){
+            if(history[itr] == itemID){
+              console.log("found");
+            } else {
+              console.log("not found");
+              userDB.update({
+                history: firebase.firestore.FieldValue.arrayUnion(itemID)
+              });
+            }
           }
         }
+        
+        
         
         res.send("sucess")
       }

@@ -29,7 +29,7 @@ function addElement(element){
 
     let atag = document.createElement("a")
 
-    atag.href = "/item.html?id="+element[0];
+    atag.href = "/item.html?id="+element[2];
     historyNode.appendChild(atag)
 
     let image = document.createElement("img")

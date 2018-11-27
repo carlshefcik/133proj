@@ -21,7 +21,6 @@ $(document).ready(() => {
 
     loadItem(dynamicContent)
 
-    addToHistory(dynamicContent)
 
     //attaches listener to the add to cart button
     document.getElementById('cart-add').addEventListener('click', (event)=>{
@@ -44,6 +43,7 @@ function loadItem(groupName) {
         },
         success: (data) => {
             updatePage(data)
+            addToHistory(dynamicContent)
         }
     })
 }
