@@ -49,6 +49,10 @@
         left:0%;background-color: #FF0401; 
         border-color: transparent
     }
+    .remove-button{
+        margin-top: 3px;
+        margin-right: 11%;
+    }
     .quantity-input{
         padding-left: 12%;
         width: 30%
@@ -89,7 +93,7 @@
                                     <table class="table" id="cart-table" style="text-align: right;">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Image</th>
+                                                <th scope="col" style="color:white;">Image</th>
                                                 <th scope="col">Name</th> 
                                                 <th scope="col">Price</th>
                                                 <th scope="col">Quantity</th>
@@ -108,7 +112,11 @@
                     <script>
                         //defined instance variables to be used in the script later
                         let tableData = []
-                        let dataTable = $('#cart-table').DataTable()
+                        let dataTable = $('#cart-table').DataTable({
+                            searching: false,
+                            ordering:  false,
+                            paging: false
+                        })
                     </script>
             
             </div>

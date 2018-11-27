@@ -90,7 +90,10 @@
     <script>
         //defined instance variables to be used in the script later
         let tableData = []
-        let dataTable = $('#results-table').DataTable()
+        let dataTable = $('#results-table').DataTable({
+            searching: false,
+            paging: false
+        })
     </script>
 </body>
 <footer id="page-footer"></footer>

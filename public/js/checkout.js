@@ -6,6 +6,7 @@ $(document).ready(() => {
 
     document.getElementById("checkout_button").addEventListener('click', (event) =>{
         checkout()
+        event.preventDefault()
     })
 
 })
@@ -25,8 +26,9 @@ function checkout(){
         },
         success: (data) =>{
             //redirect to page that say order was completed and details are now on account page in order history
-            window.location.pathname = '/checkoutsuccess.html'
-
+            if(data){
+                window.location.pathname = '/checkoutsuccess.html'
+            }
         }
     })
 
@@ -69,6 +71,8 @@ function loadCart(){
             document.getElementById("cart-items").appendChild(itemli)
 
             document.getElementById("cart-unique-items").innerHTML = cart_total_unique
+
+            document.getElementById("new-total").innerHTML = (total_cost - 5).toFixed(2)
         }
     })
 }

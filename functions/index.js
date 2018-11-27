@@ -115,12 +115,9 @@ app.get('/load_history', (req,res) => {
         //query for email
         firebaseFirestore.collection("Customer").doc(userID).get().then((doc) =>{
         let items = doc.data().history
-        console.log(items)
         
         items.forEach((item) => {
-            console.log(item)
             firebaseFirestore.collection("Items").doc(item).get().then((doc) =>{
-            console.log(doc.data())
             let tempItem = [
                 doc.data().name,
                 doc.data().imgURL,
@@ -355,7 +352,7 @@ app.get('/load_cart', (req, res) => {
                     })
                 })
             })
-        setTimeout(function(){res.send(cartItem)}, 500)
+        setTimeout(function(){res.send(cartItem)}, 200)
         })
     } else { //no user logged in so must store cart in cache
         res.status(304).send("No user logged in, store in cache")
@@ -452,6 +449,61 @@ app.get('/add_to_cart', (req, res) =>{
             }
         })
         
+    } else { //no user logged in so must store cart in cache
+        res.status(304).send("No user logged in, store in cache")
+    }
+})
+
+app.get('/cart_item_delete', (req,res) => {
+  //pareses data
+  let data = Object.keys(req.query)[0]
+  let itemID = req.query[data][0]
+  
+  // variable for the user
+  var firebaseUser = firebaseAuth.currentUser;
+  
+    if(firebaseUser){ //if there is a user logged in
+        let userID = firebaseUser.uid
+        let userDB = firebaseFirestore.collection("Customer").doc(userID)
+        let cart;
+        
+        //query for email
+        firebaseFirestore.collection("Customer").doc(userID).get().then((doc) =>{
+        if (doc.exists) {
+            // gets cart reference in the db
+            cart = doc.get("cart");
+            
+            if(cart[itemID]){
+                //adds more items if the item is alread in the cart
+                delete cart[itemID]
+            } 
+            
+            //updates the cart with the new cart data
+            userDB.update({
+                cart: cart
+            })
+            
+            res.send("sucessfully deleted item")
+        }
+    })
+    
+    } else { //no user logged in so must store cart in cache
+        res.status(304).send("No user logged in, store in cache")
+    }
+})
+
+app.get('/checkout', (req,res) => {
+    var firebaseUser = firebaseAuth.currentUser;
+  
+    if(firebaseUser){ //if there is a user logged in
+        let userID = firebaseUser.uid
+        let userDB = firebaseFirestore.collection("Customer").doc(userID)
+
+        //deletes cart map
+        userDB.update({
+            cart: firebase.firestore.FieldValue.delete()
+        })
+        res.send("success")
     } else { //no user logged in so must store cart in cache
         res.status(304).send("No user logged in, store in cache")
     }

@@ -10,6 +10,9 @@ $(document).ready(() => {
 
 
 function loadCart(){
+    dataTable.clear()
+    total_cost = 0
+    cart_total_unique = 0
 
     $.ajax({
         url: '/load_cart',
@@ -26,7 +29,7 @@ function loadCart(){
             if(data){
                 tableData = []
                 Object.keys(data).forEach((key) => {
-                    tableData.push(processItemData(data[key]))
+                    tableData.push(processItemData(data[key], key))
                 })
                 console.log("draw data")
                 dataTable.rows.add(tableData).draw()
@@ -40,8 +43,9 @@ function loadCart(){
 }
 
 //creates an appropriate cart row element from the given item element
-function processItemData(element){
+function processItemData(element, id){
     console.log(element)
+    console.log(id)
     
     let itemRow = document.createElement("tr")
 
@@ -98,6 +102,20 @@ function processItemData(element){
     btnCol.appendChild(quantityTag)
     btnCol.appendChild(plusButton)
 
+    let breakTag = document.createElement("br")
+    btnCol.appendChild(breakTag)
+
+    let removeButton = document.createElement("button") // button
+    removeButton.classList.add("btn")
+    removeButton.classList.add("btn-sm")
+    removeButton.classList.add("btn-secondary")
+    removeButton.classList.add("remove-button")
+    removeButton.innerHTML = "Remove"
+    removeButton.addEventListener('click', (event)=>{
+        deleteItem(id)
+    })
+    btnCol.appendChild(removeButton)
+
     itemRow.appendChild(btnCol)
 
     total_cost += element[2] * element[3]
@@ -105,5 +123,29 @@ function processItemData(element){
 
     // returns the item row to be added to the data source
     return itemRow;
+
+}
+
+function deleteItem(itemID){
+    console.log("removing: "+itemID)
+    let itemData = {data: [itemID]}
+    $.ajax({
+        url: '/cart_item_delete',
+        type: 'Get',
+        datatype: 'json',
+        data: itemData,
+        statusCode: {
+            304: function () {
+                //no one logged in so process cache
+                alert("No one logged in!")
+            }
+        },
+        success: (data) =>{
+            console.log(data)
+            if(data){
+                loadCart()
+            }
+        }
+    })
 
 }
