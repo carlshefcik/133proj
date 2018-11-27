@@ -134,6 +134,27 @@ app.get('/load_history', (req,res) => {
     } 
 })
 
+app.get('/get_sales', (req,res)=> {
+    let sales = [];
+
+    firebaseFirestore.collection("Items").get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+            if (doc.get("sale") == true) {
+                let tempItem = [
+                    doc.get("name"),
+                    doc.get("imgURL"),
+                    doc.id
+                ]
+                sales.push(tempItem)
+            }
+        });
+        //send items before error handling
+        res.send(sales);
+    }).catch(function (error) {
+        console.log(error);
+    });
+})
+
 //loads items for item page
 app.get('/load_item_info', (req,res) => {
     let itemInfo = {}
@@ -524,25 +545,6 @@ app.get('/get_inventory', (req,res)=>{
         console.log(error);
     });
 });
-
-app.get('/get_sales', (req,res)=>{
-
-    let sales = [];
-
-    firebaseFirestore.collection("Items").get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-
-            if (doc.get("sale") == true) {
-                sales.push(doc.get("name"));
-            }
-        });
-        console.log(sales);
-        //send items before error handling
-        res.send(sales);
-    }).catch(function(error){
-        console.log(error);
-    });
-})
 
 app.get('*', function(req, res){
     res.redirect('/404.html');
