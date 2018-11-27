@@ -16,7 +16,7 @@ $(document).ready(() => {
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
     // Give the parameter a variable name
-    let dynamicContent = getParameterByName('id');
+    dynamicContent = getParameterByName('id');
     console.log(dynamicContent)
 
     loadItem(dynamicContent)
