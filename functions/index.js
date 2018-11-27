@@ -243,23 +243,45 @@ app.get('/check_user_status', (req, res) => {
     console.log("I am over here!!!!")
     let user1 = ""
     let promise1 = new Promise(function (resolve, reject) {
-        firebaseAuth.onAuthStateChanged(function (user) {
-            user1 = user
-        })
-        resolve('data')
+      firebaseAuth.onAuthStateChanged(function (user) {
+        user1 = user
+      })
+      resolve('data')
     })
-
+  
     promise1.then(function (data) {
-        if (user1) {
-            console.log("User is logged in!!!!")
-            res.send(user1.email)
-        } else {
-            console.log("User is not logged in!!!!")
-            res.send("Guest")
-        }
+      if (user1) {
+        console.log("User is logged in!!!!")
+        res.send(user1.email)
+      } else {
+        console.log("User is not logged in!!!!")
+        res.send("Guest")
+      }
     })
-
-});
+  
+  });
+  
+  app.get('/check_user_status_1', (req, res) => {
+    console.log("I am over here!!!!")
+    let user1 = ""
+    let promise1 = new Promise(function (resolve, reject) {
+      firebaseAuth.onAuthStateChanged(function (user) {
+        user1 = user
+      })
+      resolve('data')
+    })
+  
+    promise1.then(function (data) {
+      if (user1) {
+        console.log("User is logged in!!!!")
+        res.send(user1.uid)
+      } else {
+        console.log("User is not logged in!!!!")
+        res.send("Guest")
+      }
+    })
+  
+  });
 
 app.get('/get_cart', (req,res)=>{
     console.log("test");
