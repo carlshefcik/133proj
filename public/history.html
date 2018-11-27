@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <nav id="nav-bar"></nav>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,131 +20,26 @@
     <script src="js/index.js"></script>
     <script src="js/history.js"></script>
 
-
     <title>MiniSafeway</title>
 </head>
+
 <body>
+    <div class="container" style="text-align: center;">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 style="color: #645A50;">
+                    <div class="home-header">
+                        <br>
+                        <strong>Your History Page!</strong>
+                    </div>
+                </h1>
+            </div>
+        </div>
 
-<br><br>
-<div style="padding-left: 20px; font-size: 20px">
-	<head><strong>Viewing Last 9 Items</strong></head>
-</div>
-<hr>
-<div class="row" style="padding: 50px">
-
-
-<div class="card-columns" style="padding-right: 15%; padding-left: 15%">
-
-<!---Row1--->
-
-
-<!--------Want to use history.js and JQUERY to load all the history items here----------------------------------------------------------------------------------------------------------------------------------------------------------->
-
-<div class="row">
-
-  <div id="viewHistory" class="card text-center">
-    <img id="item-img1" class="card-img-top" src="" alt="Card image cap">
-    <div class="card-body">
-      <h5 id="item-name" class="card-title"></h5>
-      <p id="item-price" class="card-text">$</p>
-          <button type="button" class="btn btn-danger btn-block" style="size: ">ADD</button>
+        <div class="row" id="history-list">
+            <!-- Will automatically populate from jquery call and dynamicalyl make elemets -->
+        </div>
     </div>
-  </div>
-
-  <div id="viewHistory" class="card text-center">
-     <img id="item-img1" class="card-img-top" src="" alt="Card image cap">
-    <div class="card-body">
-      <h5 id="item-name" class="card-title"></h5>
-      <p id="item-price" class="card-text">$</p>
-          <button type="button" class="btn btn-danger btn-block" style="size: ">ADD</button>
-    </div>
-  </div>
-
-  <div id="viewHistory" class="card text-center">
-     <img id="item-img1" class="card-img-top" src="" alt="Card image cap">
-    <div class="card-body">
-      <h5 id="item-name" class="card-title"></h5>
-      <p id="item-price" class="card-text">$</p>
-
-      <button type="button" class="btn btn-danger btn-block" style="size: ">ADD</button>
-    </div>
-  </div>
-
-</div>
-
-<!---Row 2--->
-
-<div class="row">
-
-<div id="viewHistory" class="card text-center">
-    <img id="item-img1" class="card-img-top" src="" alt="Card image cap">
-    <div class="card-body">
-      <h5 id="item-name" class="card-title"></h5>
-      <p id="item-price" class="card-text">$</p>
-          <button type="button" class="btn btn-danger btn-block" style="size: ">ADD</button>
-    </div>
-  </div>
-
-<div id="viewHistory" class="card text-center">
-    <img id="item-img1" class="card-img-top" src="" alt="Card image cap">
-    <div class="card-body">
-      <h5 id="item-name" class="card-title"></h5>
-      <p id="item-price" class="card-text">$</p>
-          <button type="button" class="btn btn-danger btn-block" style="size: ">ADD</button>
-    </div>
-  </div>
-
-<div id="viewHistory" class="card text-center">
-    <img id="item-img1" class="card-img-top" src="" alt="Card image cap">
-    <div class="card-body">
-      <h5 id="item-name" class="card-title"></h5>
-      <p id="item-price" class="card-text">$</p>
-          <button type="button" class="btn btn-danger btn-block" style="size: ">ADD</button>
-    </div>
-  </div>
-
-
-</div>
-<!---Row3--->
-<div class="row">
-
-
-<div id="viewHistory" class="card text-center">
-    <img id="item-img1" class="card-img-top" src="" alt="Card image cap">
-    <div class="card-body">
-      <h5 id="item-name" class="card-title"></h5>
-      <p id="item-price" class="card-text">$</p>
-          <button type="button" class="btn btn-danger btn-block" style="size: ">ADD</button>
-    </div>
-  </div>
-
-<div id="viewHistory" class="card text-center">
-    <img id="item-img1" class="card-img-top" src="" alt="Card image cap">
-    <div class="card-body">
-      <h5 id="item-name" class="card-title"></h5>
-      <p id="item-price" class="card-text">$</p>
-          <button type="button" class="btn btn-danger btn-block" style="size: ">ADD</button>
-    </div>
-  </div>
-
-<div id="viewHistory" class="card text-center">
-    <img id="item-img1" class="card-img-top" src="" alt="Card image cap">
-    <div class="card-body">
-      <h5 id="item-name" class="card-title"></h5>
-      <p id="item-price" class="card-text">$</p>
-          <button type="button" class="btn btn-danger btn-block" style="size: ">ADD</button>
-    </div>
-  </div>
-
-
-
-</div>
-</div>
-
-
-</div><hr>
-
-
 </body>
 <footer id="page-footer"></footer>
 </html>
