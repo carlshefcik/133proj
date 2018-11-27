@@ -344,21 +344,17 @@ app.get('/load_cart', (req, res) => {
     
         firebaseFirestore.collection("Customer").doc(userID).get().then((doc) =>{
             cartInfo = doc.get("cart")
-            console.log(cartInfo)
     
             Object.keys(cartInfo).forEach((key) => {
-            console.log(key)
-    
-            firebaseFirestore.collection("Items").doc(key).get().then((doc) =>{
-                Object.defineProperty(cartItem, doc.id, {
-                value: [doc.get('name'), doc.get('imgURL'), doc.get('price'), cartInfo[key]],
-                writable: true,
-                enumerable: true,
-                configurable: true
+                firebaseFirestore.collection("Items").doc(key).get().then((doc) =>{
+                    Object.defineProperty(cartItem, doc.id, {
+                        value: [doc.get('name'), doc.get('imgURL'), doc.get('price'), cartInfo[key]],
+                        writable: true,
+                        enumerable: true,
+                        configurable: true
+                    })
                 })
             })
-        })
-    
         setTimeout(function(){res.send(cartItem)}, 500)
         })
     } else { //no user logged in so must store cart in cache

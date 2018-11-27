@@ -349,10 +349,8 @@ app.get('/load_cart', (req, res) => {
     
     firebaseFirestore.collection("Customer").doc(userID).get().then((doc) =>{
       cartInfo = doc.get("cart")
-      console.log(cartInfo)
       
       Object.keys(cartInfo).forEach((key) => {
-        console.log(key)
         
         firebaseFirestore.collection("Items").doc(key).get().then((doc) =>{
           Object.defineProperty(cartItem, doc.id, {
